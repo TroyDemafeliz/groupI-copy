@@ -1,3 +1,34 @@
+<script>
+export default {
+    components: { AdminHome }
+}
+import AdminHome from './components/AdminHome.vue';
+import Dashboard from './components/Dashboard.vue';
+</script>
+
+<template>
+  <header>
+    <div>
+    <AdminHome/>
+  </div>
+  </header>
+  
+  <Dashboard/>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
@@ -45,4 +76,4 @@ header {
     flex-wrap: wrap;
   }
 }
-</style>
+</style> -->
