@@ -8,7 +8,8 @@ import AppNavbar from './components/AppNavbar.vue'
     <AppNavbar />
 
     <div class ="content">
-    <RouterView />
+        <AppNavbar />
+      <RouterView />
     </div>
 
   </div>
@@ -27,9 +28,3 @@ import AppNavbar from './components/AppNavbar.vue'
 
   <RouterView /> -->
 </template>
-
-<style scoped>
-.content {
-  margin-top: 95px;
-} 
-</style>
