@@ -1,3 +1,5 @@
+<script>
+</script>
 <template>
     <div>
       <div class="flex flex-col items-center justify-center text-center px-4 pt-20">
@@ -9,76 +11,104 @@
       <div class="container mx-auto px-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-10">
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-4.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
+
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-2.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
+
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-3.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
+
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-4.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
+
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-4.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-6.jpg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-5 (school).jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-6.jpg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-4.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-2.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-2.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
               <div class="relative group">
+                <RouterLink to = "/gallery">
                   <img class="object-cover w-full h-full rounded-lg" src="../assets/se-dummy-images/project-2.jpeg" alt="Descriptive Image">
                   <div class="absolute inset-0 rounded-lg flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                       <p class="text-white text-center text-xl md:text-2xl font-extrabold font-serif">USTP Mandaluyong<br><br>Education - 500 sq. m</p>
                   </div>
+                </RouterLink>
               </div>
           </div>
       </div>
@@ -109,16 +139,4 @@
 
 
     </div>
-
-
 </template>
-
-<style>
-/* @media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-} */
-</style>
