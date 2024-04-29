@@ -35,7 +35,12 @@
                        width: 700px;
                        height: 700px;
                   }
-                       
+                    
+
+                    template {
+                         margin: 0;
+                         padding:0 ;
+                    }
                       .signIn {
                             position: absolute;
                             top: -3px;
@@ -167,6 +172,8 @@
                             font-size: 25px;
                             color: #fff;
                             font-family: Roboto;
+                            margin: 0;
+                            padding: 0;
                        }
                          </style>
 

@@ -2,10 +2,7 @@
       <div :class="$style.AdminHome">
             <div :class="$style.homeParent">
                   <div :class="$style.home">
-                        <div :class="$style.header46" />
-                        <router-link to="/admin">
-                              <img :class="$style.n2Icon" alt="" src="./icons/CompLogo.png" />
-                        </router-link>
+                        
                         
                         <div :class="$style.header30">
                               <div :class="$style.column">
@@ -14,7 +11,7 @@
                                           <div :class="$style.loremIpsumDolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</div>
                                     </div>
                                     <div :class="$style.actions">
-                                          <router-link style="text-decoration: none; color: inherit;" to="/request-meeting">
+                                          <router-link style="text-decoration: none; color: inherit;" to="/request">
                                               <div :class="$style.styleprimarySmallfalseDa" @click="onStylePrimarySmallFalseDaClick">
                                                 <b :class="$style.button">Book Now</b>
                                           </div>  
@@ -54,9 +51,11 @@
                                           </div>
                                     </div>
                                     <div :class="$style.viewServices">
+                                     <router-link style="text-decoration: none; color: inherit;" to="/services">
                                           <div :class="$style.stylesecondarySmallfalse">
                                     <button :class="$style.button">View Services</button>
                                           </div>
+                                    </router-link>
                                     </div>
                                     <div :class="$style.actions1" />
                               </div>
@@ -73,17 +72,17 @@
                                           </div>
                                           <div :class="$style.actions2">
                                                 <div :class="$style.projectGallery">
+                                                <router-link style="text-decoration: none; color: inherit;" to="/projects">
                                                       <div :class="$style.stylesecondarySmallfalse">
                                                             <div :class="$style.button">View Project Gallery</div>
                                                       </div>
+                                                </router-link>
                                                 </div>
                                           </div>
                                     </div>
                                     <img :class="$style.placeholderImageIcon3" alt="" src="./icons/Placeholder.png" />
                               </div>
                         </div>
-                        <div :class="$style.cta7" />
-                        <div :class="$style.layout233" />
                         <div :class="$style.contact24">
                               <div :class="$style.sectionTitle2">
                                     <div :class="$style.content">
@@ -136,29 +135,7 @@
                                     </div>
                                     <div :class="$style.footer7" />
                               </div>
-                              <img :class="$style.tablereditIcon" alt="" src="tabler:edit.svg" />
-                              <div :class="$style.frame">
-                                    <div :class="$style.aboutUs">
-                                          <div :class="$style.aboutUs1">Dashboard</div>
-                                    </div>
-                                    <div :class="$style.aboutUs2">
-                                          <div :class="$style.aboutUs1">About Us</div>
-                                    </div>
-                                    <div :class="$style.projects">
-                                          <div :class="$style.aboutUs1">Projects</div>
-                                    </div>
-                                    <router-link style="text-decoration: none; color: inherit;" to="/admin-services">
-                                    <div :class="$style.projects">
-                                          <div :class="$style.services1">Services</div>
-                                    </div>
-                                    </router-link>
-                                    <router-link style="text-decoration: none; color: inherit;" to="/request-meeting">
-                                       <div :class="$style.requestMeeting">
-                                          <div :class="$style.requestMeeting1">Request Meeting</div>
-                                    </div>   
-                                    </router-link>
-                                    
-                              </div>
+                              
                         </div>
                   </div>
                   </template>
@@ -367,7 +344,7 @@
                                     padding: 12px 24px;
                               }
                               .projectGallery {
-                                    border: 1px solid #000;
+                                    
                                     display: flex;
                                     flex-direction: row;
                                     align-items: flex-start;

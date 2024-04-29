@@ -1,8 +1,8 @@
 <template>
     <div :class="$style.desktop4">
           <div :class="$style.servicesParent">
-                <div :class="$style.services">
-                      <div :class="$style.header49" />
+                
+                      
                       <div :class="$style.layout240">
                             <b :class="$style.heading">Services Provided</b>
                             <div :class="$style.row">
@@ -68,7 +68,7 @@
                                               </div>
                                               <div :class="$style.contact24">
                                                     <div :class="$style.sectionTitle">
-                                                          <div :class="$style.subheading" />
+                                                          
                                                           <div :class="$style.content12">
                                                                 <b :class="$style.heading7">Contact Us</b>
                                                                 <div :class="$style.text6">Fill out the form below to schedule a meeting with our team.</div>
@@ -160,39 +160,12 @@
                                                     <!-- <img :class="$style.saveRectangleIcon" alt="" src="./icons/Placeholder.png"ds /> -->
                                               </div>
                                         </div>
-                                        <router-link style="text-decoration: none; color: inherit;" to="/admin">
-                                            <img :class="$style.n3Icon" alt="" src="./icons/CompLogo.png" @click="onN3ImageClick" />
-                                        </router-link>
                                         
-                                        <div :class="$style.frame">
-                                            <div :class="$style.aboutUs">
-                                                <router-link style="text-decoration: none; color: inherit;" to="/#">
-                                                        <div :class="$style.aboutUs1">Dashboard</div>
-                                                    </router-link>
-                                            </div>
-                                            <div :class="$style.aboutUs2">
-                                                <router-link style="text-decoration: none; color: inherit;" to="/#">
-                                                        <div :class="$style.aboutUs1">About Us</div>
-                                                
-                                            </router-link></div>
-                                            <div :class="$style.projects">
-                                                <router-link style="text-decoration: none; color: inherit;" to="/#">
-                                                        <div :class="$style.aboutUs1">Projects</div>
-                                                
-                                            </router-link></div>
                                             
-                                            <div :class="$style.services2">
-                                                <router-link style="text-decoration: none; color: inherit;" to="/admin-services">
-                                                        <div :class="$style.aboutUs1">Services</div>
-                                                
-                                            </router-link></div>
-                                            
-                                              <div :class="$style.requestMeeting">
-                                                    <div :class="$style.requestMeeting1" @click="onRequestMeetingTextClick">Request Meeting</div>
-                                              </div>
-                                        </div>
-                                  </div>
-                            </div>
+                                             
+                                    </div>
+                                
+                            
                             </template>
                             <script lang="ts">
                                   import { defineComponent } from 'vue'
