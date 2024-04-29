@@ -1,5 +1,3 @@
-<script>
-</script>
 <template>
     <div>
       <div class="flex flex-col items-center justify-center text-center px-4 pt-20">

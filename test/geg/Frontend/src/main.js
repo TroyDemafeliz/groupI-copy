@@ -1,5 +1,5 @@
 import './assets/main.css'
-
+import 'flowbite/dist/flowbite.min.js';
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
