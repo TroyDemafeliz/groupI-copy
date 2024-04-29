@@ -6,6 +6,7 @@ import ServicesView from '../components/AdminServices.vue'
 import RequestMeetingView from '../components/RequestMeeting.vue'
 import DashboardView from '../views/DashboardView.vue'
 import ProjectsGallery from '../projects/ProjectsGallery.vue'
+import Login from '../components/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/gallery',
       name: 'gallery',
       component: ProjectsGallery
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
