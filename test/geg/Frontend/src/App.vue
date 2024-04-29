@@ -1,6 +1,7 @@
 <script setup>
 // import { RouterLink, RouterView } from 'vue-router'
 import AppNavbar from './components/AppNavbar.vue'
+import AppFooter from './components/Footer.vue'
 </script>
 
 <template>
@@ -11,4 +12,7 @@ import AppNavbar from './components/AppNavbar.vue'
     </div> -->
 <RouterView />
   </div>
+  <footer>
+    <AppFooter />
+  </footer>
 </template>
