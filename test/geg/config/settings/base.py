@@ -2,12 +2,15 @@
 """Base settings to build other settings files upon."""
 
 from pathlib import Path
+import os
 
 import environ
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # geg/
 APPS_DIR = BASE_DIR / "geg"
+MEDIA_URL='/frontend/src/assets/se-dummy-images/'
+MEDIA_ROOT=os.path.join(BASE_DIR,"frontend/src/assets/se-dummy-images")
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -69,7 +72,10 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "rest_framework",
+    "corsheaders",
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
@@ -89,7 +95,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "geg.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "geg.contrib.sites.migrations", "users": "geg.users.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -129,6 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

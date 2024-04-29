@@ -4,6 +4,7 @@ from .base import INSTALLED_APPS
 from .base import MIDDLEWARE
 from .base import env
 
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug

@@ -2,8 +2,8 @@
 
 from django.utils.translation import gettext_lazy as _
 
-from backend.users.forms import UserAdminCreationForm
-from backend.users.models import User
+from geg.users.forms import UserAdminCreationForm
+from geg.users.models import User
 
 
 class TestUserAdminCreationForm:

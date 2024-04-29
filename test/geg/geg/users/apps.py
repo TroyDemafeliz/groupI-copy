@@ -10,4 +10,4 @@ class UsersConfig(AppConfig):
 
     def ready(self):
         with contextlib.suppress(ImportError):
-            import backend.users.signals  # noqa: F401
+            import geg.users.signals  # noqa: F401

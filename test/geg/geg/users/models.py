@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
+from django.db.models import *
+from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
 
 class User(AbstractUser):
     """
@@ -24,3 +24,12 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+    
+    
+class Meeting(Model):
+    meetingId = AutoField(primary_key=True)
+    meetingEmail = CharField(max_length=50)
+    meetingName = CharField(max_length=50)
+    meetingPhone =models.IntegerField()
+    meetingDate = DateTimeField()
+    meetingMode = TextField()

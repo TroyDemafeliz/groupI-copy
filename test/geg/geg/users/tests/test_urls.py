@@ -1,7 +1,7 @@
 from django.urls import resolve
 from django.urls import reverse
 
-from backend.users.models import User
+from geg.users.models import User
 
 
 def test_detail(user: User):
