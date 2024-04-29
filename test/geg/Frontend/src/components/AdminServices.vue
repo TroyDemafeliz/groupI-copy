@@ -66,57 +66,7 @@
                                                           </div>
                                                     </div>
                                               </div>
-                                              <div :class="$style.contact24">
-                                                    <div :class="$style.sectionTitle">
-                                                          
-                                                          <div :class="$style.content12">
-                                                                <b :class="$style.heading7">Contact Us</b>
-                                                                <div :class="$style.text6">Fill out the form below to schedule a meeting with our team.</div>
-                                                          </div>
-                                                    </div>
-                                                    <div :class="$style.row2">
-                                                          <div :class="$style.content13">
-                                                                <img :class="$style.iconEnvelope" alt="" src="./icons/envelope.png" />
-                                                                <div :class="$style.contactInfo">
-                                                                      <div :class="$style.content1">
-                                                                            <b :class="$style.heading8">Email</b>
-                                                                            <div :class="$style.text7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                      </div>
-                                                                      <div :class="$style.link">hello@gmail.com</div>
-                                                                </div>
-                                                          </div>
-                                                          <div :class="$style.content13">
-                                                                <img :class="$style.iconEnvelope" alt="" src="./icons/message-detail.png" />
-                                                                <div :class="$style.contactInfo">
-                                                                      <div :class="$style.content1">
-                                                                            <b :class="$style.heading8">Live chat</b>
-                                                                            <div :class="$style.text7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                      </div>
-                                                                      <div :class="$style.link">Start new chat</div>
-                                                                </div>
-                                                          </div>
-                                                          <div :class="$style.content13">
-                                                                <img :class="$style.iconEnvelope" alt="" src="./icons/phone.png" />
-                                                                <div :class="$style.contactInfo">
-                                                                      <div :class="$style.content1">
-                                                                            <b :class="$style.heading8">Phone</b>
-                                                                            <div :class="$style.text7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                      </div>
-                                                                      <div :class="$style.link">+1 (555) 000-0000</div>
-                                                                </div>
-                                                          </div>
-                                                          <div :class="$style.content13">
-                                                                <img :class="$style.iconEnvelope" alt="" src="./icons/map.png" />
-                                                                <div :class="$style.contactInfo">
-                                                                      <div :class="$style.content1">
-                                                                            <b :class="$style.heading8">Office</b>
-                                                                            <div :class="$style.text7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                      </div>
-                                                                      <div :class="$style.link">123 Sample St, Sydney NSW 2000 AU</div>
-                                                                </div>
-                                                          </div>
-                                                    </div>
-                                              </div>
+                                              
                                             <div :class="$style.editFrame">
                                               <div :class="$style.editText">
                                                         <div :class="$style.editServiceDetails">Edit Service Details</div>

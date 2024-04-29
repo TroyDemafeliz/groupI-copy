@@ -83,57 +83,7 @@
                                     <img :class="$style.placeholderImageIcon3" alt="" src="./icons/Placeholder.png" />
                               </div>
                         </div>
-                        <div :class="$style.contact24">
-                              <div :class="$style.sectionTitle2">
-                                    <div :class="$style.content">
-                                          <b :class="$style.heading">Contact Us</b>
-                                          <div :class="$style.text5">We're here to answer any questions you may have.</div>
-                                          </div>
-                                    </div>
-                                    <div :class="$style.row1">
-                                          <div :class="$style.content6">
-                                                <img :class="$style.iconEnvelope" alt="" src="./icons/envelope.png" />
-                                                <div :class="$style.contactInfo">
-                                                      <div :class="$style.content10">
-                                                            <b :class="$style.heading1">Email</b>
-                                                            <div :class="$style.text1">Send us an email and we'll get back to you.</div>
-                                                            </div>
-                                                            <div :class="$style.link">gegbcs@gmail.com</div>
-                                                      </div>
-                                                </div>
-                                                <div :class="$style.content6">
-                                                      <img :class="$style.iconEnvelope" alt="" src="./icons/message-detail.png" />
-                                                      <div :class="$style.contactInfo">
-                                                            <div :class="$style.content10">
-                                                                  <b :class="$style.heading1">Facebook</b>
-                                                                  <div :class="$style.text1">Chat with our team in real-time for immediate assistance.</div>
-                                                            </div>
-                                                            <div :class="$style.link">Facebook Link</div>
-                                                      </div>
-                                                </div>
-                                                <div :class="$style.content6">
-                                                      <img :class="$style.iconEnvelope" alt="" src="./icons/phone.png" />
-                                                      <div :class="$style.contactInfo">
-                                                            <div :class="$style.content10">
-                                                                  <b :class="$style.heading1">Phone</b>
-                                                                  <div :class="$style.text1">Give us a call and speak with our friendly team.</div>
-                                                            </div>
-                                                            <div :class="$style.link">0966 320 6811</div>
-                                                      </div>
-                                                </div>
-                                                <div :class="$style.content6">
-                                                      <img :class="$style.iconEnvelope" alt="" src="./icons/map.png" />
-                                                      <div :class="$style.contactInfo">
-                                                            <div :class="$style.content10">
-                                                                  <b :class="$style.heading1">Office</b>
-                                                                  <div :class="$style.text1">Visit our office for a face-to-face consultation.</div>
-                                                            </div>
-                                                            <div :class="$style.link">Zone 2 Canitoan, Cagayan de Oro, Philippines</div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div :class="$style.footer7" />
+                        
                               </div>
                               
                         </div>

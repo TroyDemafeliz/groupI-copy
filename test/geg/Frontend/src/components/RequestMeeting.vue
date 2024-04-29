@@ -74,57 +74,7 @@
                                                           </div>
                                                           </div>
                                                           </div>
-                                                          <div :class="$style.contact24">
-                                                                <div :class="$style.sectionTitle">
-                                    
-                                                                      <div :class="$style.content3">
-                                                                            <b :class="$style.shortHeadingHere">Contact Us</b>
-                                                                            <div :class="$style.text">Fill out the form below to schedule a meeting with our team.</div>
-                                                                      </div>
-                                                                </div>
-                                                                <div :class="$style.row">
-                                                                      <div :class="$style.content4">
-                                                                            <img :class="$style.iconEnvelope" alt="" src="./icons/envelope.png" />
-                                                                            <div :class="$style.contactInfo">
-                                                                                  <div :class="$style.content5">
-                                                                                        <b :class="$style.heading1">Email</b>
-                                                                                        <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                                  </div>
-                                                                                  <div :class="$style.link">hello@relume.io</div>
-                                                                            </div>
-                                                                      </div>
-                                                                      <div :class="$style.content4">
-                                                                            <img :class="$style.iconEnvelope" alt="" src="./icons/message-detail.png" />
-                                                                            <div :class="$style.contactInfo">
-                                                                                  <div :class="$style.content5">
-                                                                                        <b :class="$style.heading1">Live chat</b>
-                                                                                        <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                                  </div>
-                                                                                  <div :class="$style.link">Start new chat</div>
-                                                                            </div>
-                                                                      </div>
-                                                                      <div :class="$style.content4">
-                                                                            <img :class="$style.iconEnvelope" alt="" src="./icons/phone.png" />
-                                                                            <div :class="$style.contactInfo">
-                                                                                  <div :class="$style.content5">
-                                                                                        <b :class="$style.heading1">Phone</b>
-                                                                                        <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                                  </div>
-                                                                                  <div :class="$style.link">+1 (555) 000-0000</div>
-                                                                            </div>
-                                                                      </div>
-                                                                      <div :class="$style.content4">
-                                                                            <img :class="$style.iconEnvelope" alt="" src="./icons/map.png" />
-                                                                            <div :class="$style.contactInfo">
-                                                                                  <div :class="$style.content5">
-                                                                                        <b :class="$style.heading1">Office</b>
-                                                                                        <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.</div>
-                                                                                  </div>
-                                                                                  <div :class="$style.link">123 Sample St, Sydney NSW 2000 AU</div>
-                                                                            </div>
-                                                                      </div>
-                                                                </div>
-                                                          </div>
+                                                          
                                                           </div>
                                                          
                                                           </div>
