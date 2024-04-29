@@ -4,11 +4,6 @@
                 <div :class="$style.meetingRequestParent">
                       <div :class="$style.meetingRequest">
                             <div :class="$style.meetingRequest1">
-                                  <div :class="$style.navbar7">
-                                        <div :class="$style.content">
-                                              <div :class="$style.content1" />
-                                        </div>
-                                  </div>
                                   <div :class="$style.header64">
                                         <div :class="$style.container">
                                               <b :class="$style.shortHeadingHere">Request a meeting</b>
@@ -131,25 +126,8 @@
                                                                 </div>
                                                           </div>
                                                           </div>
-                                                          <div :class="$style.frame">
-                                                                <div :class="$style.aboutUs">
-                                                                      <div :class="$style.aboutUs1">Dashboard</div>
-                                                                </div>
-                                                                <div :class="$style.aboutUs2">About Us</div>
-                                                                <div :class="$style.projects">
-                                                                      <div :class="$style.aboutUs1">Projects</div>
-                                                                </div>
-                                                                <div :class="$style.projects">
-                                                                      <div :class="$style.services1">Services</div>
-                                                                </div>
-                                                                <div :class="$style.requestMeeting">
-                                                                      <div :class="$style.requestMeeting1">Request Meeting</div>
-                                                                </div>
+                                                         
                                                           </div>
-                                                          </div>
-                                                          <router-link to="/admin">
-                                                           <img :class="$style.n3Icon" alt="" src="./icons/CompLogo.png" @click="onN3ImageClick" /> 
-                                                          </router-link>
                                                           
                                                           </div>
                                                           </div>
@@ -560,28 +538,8 @@
                                                                             align-items: flex-start;
                                                                             justify-content: flex-start;
                                                                       }
-                                                                      .aboutUs1 {
-                                                                            position: absolute;
-                                                                            height: 100%;
-                                                                            width: 100%;
-                                                                            top: 0%;
-                                                                            left: 0%;
-                                                                            line-height: 150%;
-                                                                            display: inline-block;
-                                                                      }
-                                                                      .aboutUs {
-                                                                            width: 121px;
-                                                                            position: relative;
-                                                                            height: 35px;
-                                                                      }
-                                                                      .aboutUs2 {
-                                                                            width: 106px;
-                                                                            position: relative;
-                                                                            line-height: 150%;
-                                                                            display: inline-block;
-                                                                            height: 35px;
-                                                                            flex-shrink: 0;
-                                                                      }
+                                                                     
+                                                                      
                                                                       .projects {
                                                                             width: 92px;
                                                                             position: relative;
@@ -632,17 +590,7 @@
                                                                             height: 2139px;
                                                                             z-index: 0;
                                                                       }
-                                                                      .n3Icon {
-                                                                            width: 608px;
-                                                                            position: absolute;
-                                                                            margin: 0 !important;
-                                                                            top: 0px;
-                                                                            left: 0px;
-                                                                            height: 136.4px;
-                                                                            object-fit: cover;
-                                                                            cursor: pointer;
-                                                                            z-index: 1;
-                                                                      }
+                                                                     
                                                                       .meetingRequestParent {
                                                                             background-color: #fff;
                                                                             overflow: hidden;
