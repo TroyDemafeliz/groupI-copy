@@ -8,7 +8,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
 from pytest_django.asserts import assertRedirects
 
-from geg.users.models import User
+from backend.users.models import User
 
 
 class TestUserAdmin:
@@ -48,7 +48,7 @@ class TestUserAdmin:
     def _force_allauth(self, settings):
         settings.DJANGO_ADMIN_FORCE_ALLAUTH = True
         # Reload the admin module to apply the setting change
-        import geg.users.admin as users_admin
+        import backend.users.admin as users_admin
 
         with contextlib.suppress(admin.sites.AlreadyRegistered):
             reload(users_admin)

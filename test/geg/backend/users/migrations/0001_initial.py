@@ -4,7 +4,7 @@ import django.utils.timezone
 from django.db import migrations
 from django.db import models
 
-import geg.users.models
+import backend.users.models
 
 
 class Migration(migrations.Migration):

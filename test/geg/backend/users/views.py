@@ -9,10 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from django.core.files.storage import default_storage
-from geg.users.models import User, Meeting
+from backend.users.models import User, Meeting
 
 
-from geg.users.serializers import MeetingSerializer
+from backend.users.serializers import MeetingSerializer
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User

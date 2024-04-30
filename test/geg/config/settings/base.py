@@ -7,8 +7,8 @@ import os
 import environ
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# geg/
-APPS_DIR = BASE_DIR / "geg"
+# backend/
+APPS_DIR = BASE_DIR / "backend"
 MEDIA_URL='/frontend/src/assets/se-dummy-images/'
 MEDIA_ROOT=os.path.join(BASE_DIR,"frontend/src/assets/se-dummy-images")
 env = environ.Env()
@@ -86,7 +86,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "geg.users",
+    "backend.users",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -95,7 +95,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "geg.contrib.sites.migrations", "users": "geg.users.migrations"}
+MIGRATION_MODULES = {"sites": "backend.contrib.sites.migrations", "users": "backend.users.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -191,7 +191,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "geg.users.context_processors.allauth_settings",
+                "backend.users.context_processors.allauth_settings",
             ],
         },
     },
@@ -274,13 +274,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_ADAPTER = "geg.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "backend.users.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
-ACCOUNT_FORMS = {"signup": "geg.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "backend.users.forms.UserSignupForm"}
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_ADAPTER = "geg.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "backend.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_FORMS = {"signup": "geg.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "backend.users.forms.UserSocialSignupForm"}
 
 
 # Your stuff...

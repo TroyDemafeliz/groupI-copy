@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from geg.users.models import Meeting
+from backend.users.models import Meeting
 
 class MeetingSerializer(serializers.ModelSerializer):
     class Meta:
