@@ -142,7 +142,7 @@ export default defineComponent({
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            gap: 24px;
+            
       }
       .header64 {
             width: 100vw;

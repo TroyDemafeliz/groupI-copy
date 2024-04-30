@@ -55,7 +55,7 @@
                       
                       
                       export default defineComponent({
-                            name: "Contact"})</script><style module>.heading {
+                            name: "FooterContact"})</script><style module>.heading {
                             align-self: stretch;
                             position: relative;
                             line-height: 120%;
