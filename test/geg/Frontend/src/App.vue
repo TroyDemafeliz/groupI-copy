@@ -9,7 +9,7 @@ const route = useRoute()
 <template>
   <div>
     <AppNavbar v-if="!route.meta.hideNavbar" />
-    <div class ="pb-0 sm:pt-20 md:pt-24">
+    <div :class="route.meta.customClass ? 'pb-0 sm:pt-20 md:pt-24' : ''">
       <RouterView />
     </div>
     <AppFooter v-if="!route.meta.hideFooter" />

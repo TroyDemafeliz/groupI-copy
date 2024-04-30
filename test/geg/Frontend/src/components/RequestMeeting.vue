@@ -410,6 +410,7 @@ export default defineComponent({
             justify-content: flex-start;
             gap: 16px;
       }
+
       .iconEnvelope {
             width: 48px;
             position: relative;
