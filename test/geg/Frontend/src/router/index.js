@@ -39,7 +39,8 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashboardView
+      component: DashboardView,
+      meta: { hideNavbar: false, hideFooter: true }
     },
     {
       path: '/gallery',
@@ -49,7 +50,8 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
     }
   ]
 })

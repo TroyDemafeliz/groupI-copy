@@ -25,7 +25,7 @@
                   
                   
                   export default defineComponent({
-                       name: "Desktop"})</script><style module>.loginGroupChild {
+                       name: "AdminLogin"})</script><style module>.loginGroupChild {
                        position: absolute;
                        top: calc(50% - 350px);
                        left: calc(50% - 350px);
