@@ -12,10 +12,6 @@ const isAdminRoute = computed(() => {
   return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
 })
 
-const isCustomerRoute = computed(() => {
-  return router.currentRoute.value.matched.some(record => record.path.includes('/login'))
-})
-
 </script>
 
 <template>
