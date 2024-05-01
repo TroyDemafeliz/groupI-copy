@@ -2,7 +2,7 @@
 {
     "name": "geg_dev",
     "dockerComposeFile": [
-        "../local.yml"
+        "../docker-compose.yml"
     ],
     "init": true,
     "mounts": [
