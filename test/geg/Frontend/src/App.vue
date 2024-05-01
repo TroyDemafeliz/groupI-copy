@@ -12,6 +12,10 @@ const isAdminRoute = computed(() => {
   return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
 })
 
+const isCustomerRoute = computed(() => {
+  return router.currentRoute.value.matched.some(record => record.path.includes('/login'))
+})
+
 </script>
 
 <template>
@@ -21,6 +25,6 @@ const isAdminRoute = computed(() => {
     <div class ="pb-20 sm:pt-20 md:pt-24">
       <RouterView />
     </div>
-    <AppFooter v-if="!route.meta.hideFooter" />
+    <AppFooter v-if="!isAdminRoute" />
   </div>
 </template>

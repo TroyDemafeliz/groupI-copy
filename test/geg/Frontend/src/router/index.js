@@ -48,13 +48,13 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: { hideNavbar: true, hideFooter: true, customClass: false }
+      meta: {customClass: true }
     },
-    // {
-    //   path: '/admin-dashboard',
-    //   name: 'dashboard',
-    //   component: DashboardView
-    // },
+    {
+      path: '/admin-dashboard',
+      name: 'dashboard',
+      component: adminBookingsView
+    },
     {
       path: '/admin-bookings',
       name: 'admin-bookings',
