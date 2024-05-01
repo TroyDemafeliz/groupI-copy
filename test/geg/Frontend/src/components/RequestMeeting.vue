@@ -1,9 +1,9 @@
 <template>
 <form class="max-w-md mx-auto mt-40 mb-40">
       <form class="max-w-md mx-auto">
-      <div class="text-center">
-            <h1>Request Meeting</h1>
-            <p>Welcome the our meeting request page. We look forward to discussing your construction needs</p>
+      <div class="">
+            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-600">Request Meeting</span></h1>
+            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 mb-10 mt-5">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
       </div>
       
       <div class="grid md:grid-cols-2 md:gap-6">
