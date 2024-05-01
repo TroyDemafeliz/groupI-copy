@@ -1,5 +1,4 @@
 <script setup>
-import { useRoute } from 'vue-router'
 import AppNavbar from './components/AppNavbar.vue'
 import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
@@ -13,7 +12,6 @@ const isAdminRoute = computed(() => {
   return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
 })
 
-const route = useRoute()
 </script>
 
 <template>
