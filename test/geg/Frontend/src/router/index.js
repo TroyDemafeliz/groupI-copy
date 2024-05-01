@@ -9,6 +9,7 @@ import ProjectsGallery from '../projects/ProjectsGallery.vue'
 import adminBookingsView from '../admin-views/adminBookingsView.vue'
 import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
+import Login from '../components/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +43,12 @@ const router = createRouter({
       path: '/gallery',
       name: 'gallery',
       component: ProjectsGallery
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
     },
     // {
     //   path: '/admin-dashboard',
