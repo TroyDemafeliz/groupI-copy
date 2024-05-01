@@ -1,7 +1,7 @@
 <template>
 <form class="max-w-md mx-auto mt-40 mb-40">
       <form class="max-w-md mx-auto">
-      <div class="text-denter">
+      <div class="text-center">
             <h1>Request Meeting</h1>
             <p>Welcome the our meeting request page. We look forward to discussing your construction needs</p>
       </div>
