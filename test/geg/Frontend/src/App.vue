@@ -2,7 +2,7 @@
 import AppNavbar from './components/AppNavbar.vue'
 import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
-import { computed, watch } from 'vue';
+import { computed, watch, ref } from 'vue';
 import AppFooter from './components/Footer.vue'
 
 const route = useRoute()
@@ -11,6 +11,15 @@ const router = useRouter()
 const isAdminRoute = computed(() => {
   return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
 })
+
+const previousRoute = ref('');
+
+watch(() => route.path, (currentPath, oldPath) => {
+  if (previousRoute.value === '/') {
+    window.scrollTo(0, 0);
+  }
+  previousRoute.value = currentPath;
+}, { immediate: true });
 
 </script>
 
