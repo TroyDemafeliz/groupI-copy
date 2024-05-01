@@ -27,6 +27,6 @@ if __name__ == "__main__":
     # This allows easy placement of apps within the interior
     # geg directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "geg"))
+    sys.path.append(str(current_path / "backend"))
 
     execute_from_command_line(sys.argv)
