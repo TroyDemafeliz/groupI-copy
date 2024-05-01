@@ -1,0 +1,48 @@
+version: "3"
+
+volumes:
+  geg_local_postgres_data: {}
+  geg_local_postgres_data_backups: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: geg_local_django
+    container_name: geg_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: geg_production_postgres
+    container_name: geg_local_postgres
+    volumes:
+      - geg_local_postgres_data:/var/lib/postgresql/data
+      - geg_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+  frontend:
+    container_name: frontend
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: myproj_frontend_image
+    depends_on:
+      - django
+    volumes:
+      - ./frontend/nginx:/etc/nginx/conf.d
+    ports:
+      - 81:80
