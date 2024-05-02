@@ -1,9 +1,9 @@
 <template>
-<div id="Header">
+<div id="Home">
         
-      <div id="header" class="pt-20 mb-10 justify-center text-center"> 
+      <div id="header" class="pt-20 mb-10 h-screen justify-center text-center flex flex-col items-center"> 
             <h1 class="mb-4 mx-auto text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-5xl lg:text-6xl dark:text-white">GEG Builders and Construction Supplies</h1>
-                  <p class="mb-6 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+                  <p class="mb-6 text-lg font-bold text-white lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
                         <div>
                               <div class="mt-10 mb-4"  @click="onStylePrimarySmallFalseDaClick">
                                     <router-link  to="/request">
@@ -92,3 +92,11 @@
 
 </div>            
 </template>
+
+<style>
+      #header {
+            background-image: url('../components/icons/GEGpic.png');
+            background-size: 100% 100%;
+
+      }
+</style>
