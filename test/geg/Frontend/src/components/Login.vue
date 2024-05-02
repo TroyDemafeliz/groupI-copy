@@ -3,7 +3,7 @@
         <div :class="$style.loginGroup">
              <div :class="$style.loginGroupChild" />
              <div :class="$style.signinFrame">
-                  <router-link to="/admin">
+                  <router-link to="/home">
                     <button type="button" :class="$style.signIn">SIGN IN</button>
                     <div :class="$style.signinbox" />
                   </router-link>
@@ -177,4 +177,3 @@
                        }
                          </style>
 
-                         

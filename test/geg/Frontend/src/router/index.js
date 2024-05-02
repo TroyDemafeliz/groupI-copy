@@ -13,6 +13,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: Login,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
+    },
+    {
+      path: '/home',
       name: 'home',
       component: HomeView
     },
@@ -47,12 +53,6 @@ const router = createRouter({
       name: 'gallery',
       component: ProjectsGallery
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { hideNavbar: true, hideFooter: true, customClass: false }
-    }
   ]
 })
 

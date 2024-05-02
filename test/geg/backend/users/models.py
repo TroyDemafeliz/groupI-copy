@@ -26,10 +26,14 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
     
     
-class Meeting(Model):
-    meetingId = AutoField(primary_key=True)
-    meetingEmail = CharField(max_length=50)
-    meetingName = CharField(max_length=50)
-    meetingPhone =models.IntegerField()
-    meetingDate = DateTimeField()
-    meetingMode = TextField()
+class Booking(models.Model):
+    Id = AutoField(primary_key=True)
+    Email = EmailField()
+    Name = CharField(max_length=50)
+    Phone = models.IntegerField()
+    Date = DateTimeField(auto_now_add=True)
+    Mode = TextField()
+    
+    def __str__(self):
+        return self.bookingEmail
+

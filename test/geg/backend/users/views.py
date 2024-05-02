@@ -9,11 +9,14 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from django.core.files.storage import default_storage
-from backend.users.models import User, Meeting
+from .models import User,Booking
 
+from django.shortcuts import render
+from rest_framework import generics
+from .serializers import UserSerializer, BookingSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from backend.users.serializers import MeetingSerializer
-
+#These are for the backend server
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = "username"
@@ -39,7 +42,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 user_update_view = UserUpdateView.as_view()
 
-
+#for User Creation
 class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
@@ -49,28 +52,23 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 user_redirect_view = UserRedirectView.as_view()
 
-@csrf_exempt
-def MeetingApi(request,id=0):
-    if request.method=='GET':
-        meeting = Meeting.objects.all()
-        meeting_serializer=MeetingSerializer(meeting,many=True)
-        return JsonResponse(meeting_serializer.data,safe=False)
-    elif request.method=='POST':
-        meeting_data=JSONParser().parse(request)
-        meeting_serializer=MeetingSerializer(data=meeting_data)
-        if meeting_serializer.is_valid():
-            meeting_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Failed to Add",safe=False)
-    elif request.method=='PUT':
-        meeting_data=JSONParser().parse(request)
-        meeting=Meeting.objects.get(meetingId=meeting_data['meetingId'])
-        meeting_serializer=MeetingSerializer(meeting,data=meeting_data)
-        if meeting_serializer.is_valid():
-            meeting_serializer.save()
-            return JsonResponse("Updated Successfully",safe=False)
-        return JsonResponse("Failed to Update")
-    elif request.method=='DELETE':
-        meeting=Meeting.objects.get(meetingId=id)
-        meeting.delete()
-        return JsonResponse("Deleted Successfully",safe=False)
+#Create Booking
+class DisplayBooking(generics.ListAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+    
+class UpdateBooking(generics.UpdateAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+
+class DeleteBooking(generics.DestroyAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+
+class CreateUserView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]

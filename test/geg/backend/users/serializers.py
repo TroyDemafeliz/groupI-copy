@@ -1,7 +1,19 @@
 from rest_framework import serializers
-from backend.users.models import Meeting
+from backend.users.models import Booking
+from .models import User
 
-class MeetingSerializer(serializers.ModelSerializer):
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Meeting
-        fields=('meetingId','meetingEmail', 'meetingName', 'meetingPhone', 'meetingDate','meetingMode')
+        model=Booking
+        fields=('Id','Email', 'Name', 'Phone', 'Date','Mode')
+        
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id",  "username", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        print(validated_data)
+        user = User.objects.create_user(**validated_data)
+        return user
