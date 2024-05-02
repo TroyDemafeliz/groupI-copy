@@ -11,6 +11,7 @@ import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
+import adminAddService from '../admin-views/adminAddService.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,9 +73,14 @@ const router = createRouter({
       component: adminServicesView
     },
     {
-      path: '/admin-edit-service',
+      path: '/admin-services-edit',
       name: 'admin-edit-service',
       component: adminEditService
+    },
+    {
+      path: '/admin-services-add',
+      name: 'admin-add-service',
+      component: adminAddService
     }
   ]
 })
