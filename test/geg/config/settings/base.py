@@ -94,8 +94,9 @@ DJANGO_APPS = [
     "rest_framework",
     "corsheaders",
 ]
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",

@@ -1,4 +1,18 @@
 <script>
+
+import router from '@/router';
+import { defineComponent } from 'vue';
+export default defineComponent({
+  data(){
+    return{};
+  },
+  methods:{
+    Logout() {
+  localStorage.clear()
+  return router.push('/')
+  }
+}
+})
 </script>
 <template>
 <nav class="h-20 fixed top-0 left-0 z-50 w-full bg-white border-b-2 dark:border-black">
@@ -37,7 +51,7 @@
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                 </li>
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" onclick="Logout">Sign out</a>
                 </li>
               </ul>
             </div>

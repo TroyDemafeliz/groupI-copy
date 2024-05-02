@@ -11,6 +11,7 @@ import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -50,12 +51,6 @@ const router = createRouter({
       name: 'gallery',
       component: ProjectsGallery
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { hideNavbar: true, hideFooter: true, customClass: false }
-    },
     // {
     //   path: '/admin-dashboard',
     //   name: 'dashboard',
@@ -78,5 +73,4 @@ const router = createRouter({
     },
   ]
 })
-
 export default router
