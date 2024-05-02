@@ -5,17 +5,17 @@
                     
                     
                     <div :class="$style.header30">
-                          <div :class="$style.column">
-                                <div :class="$style.content">
-                                      <b :class="$style.mediumLengthHero">GEG Builders and Construction Supplies</b>
-                                      <div :class="$style.loremIpsumDolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</div>
-                                </div>
-                                <div :class="$style.actions">
-                                      <router-link style="text-decoration: none; color: inherit;" to="/request">
-                                          <div :class="$style.styleprimarySmallfalseDa" @click="onStylePrimarySmallFalseDaClick">
-                                            <b :class="$style.button">Book Now</b>
-                                      </div>  
-                                      </router-link>
+                          <div id="Header">
+                                
+                              <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">GEG Builders and Construction Supplies</h1>
+                              <p class="mb-6 text-lg font-normal text-white lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+
+                                <div>
+                                      <div  @click="onStylePrimarySmallFalseDaClick">
+                                           <router-link  to="/request">
+                                                <b class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-lg rounded-lg text-sm px-10 py-5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Book Now</b>
+                                            </router-link>
+                                    </div>  
                                 </div>
                           </div>
                     </div>
@@ -27,29 +27,25 @@
                                 </div>
                           </div>
                           <div :class="$style.content2">
-                                <div :class="$style.row">
-                                      <div :class="$style.column1">
-                                            <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
-                                            <div :class="$style.content">
-                                                  <b :class="$style.heading1">Service 1</b>
-                                                  <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
-                                            </div>
-                                      </div>
-                                      <div :class="$style.column1">
-                                            <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
-                                            <div :class="$style.content">
-                                                  <b :class="$style.heading1">Service 2</b>
-                                                  <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
-                                            </div>
-                                      </div>
-                                      <div :class="$style.column1">
-                                            <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
-                                            <div :class="$style.content">
-                                                  <b :class="$style.heading1">Service 3</b>
-                                                  <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
-                                            </div>
-                                      </div>
-                                </div>
+                                
+
+                                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <a href="#">
+                                          <img class="rounded-t-lg" :src="Placeholder" alt="" />
+                                    </a>
+                                    <div class="p-5">
+                                          <a href="#">
+                                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                                          </a>
+                                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                         
+                                    </div>
+
+                                    
+
+                                    
+                              </div>
+
                                 <div :class="$style.viewServices">
                                  <router-link style="text-decoration: none; color: inherit;" to="/services">
                                       <div :class="$style.stylesecondarySmallfalse">
@@ -90,15 +86,25 @@
               </div>
               </template>
               <script lang="ts">
-                    import { defineComponent } from 'vue'
-                    
-                    
-                    export default defineComponent({
-                          name: "Desktop",
-                          methods: {
-                                onStylePrimarySmallFalseDaClick() {
-                                      // Add your code here
-                                }}})</script><style module>.header46 {
+              import { defineComponent } from 'vue'
+              import Placeholder from '../components/icons/Placeholder.png'
+              
+              export default defineComponent({
+                  name: "Desktop",
+                  data() {
+                      return {
+                          Placeholder,
+                      };
+                  },
+                  methods: {
+                      onStylePrimarySmallFalseDaClick() {
+                          // Add your code here
+                      }
+                  }
+              });
+              </script>
+                                
+                        <style module>.header46 {
                           width: 100vw;
                           background-color: #fff;
                           height: 369px;
