@@ -10,6 +10,7 @@ import adminBookingsView from '../admin-views/adminBookingsView.vue'
 import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
+import adminEditService from '../admin-views/adminEditService.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,6 +71,11 @@ const router = createRouter({
       name: 'admin-services',
       component: adminServicesView
     },
+    {
+      path: '/admin-edit-service',
+      name: 'admin-edit-service',
+      component: adminEditService
+    }
   ]
 })
 
