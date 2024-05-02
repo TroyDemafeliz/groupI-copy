@@ -64,25 +64,25 @@
                   
       
             </div>
-            <div class="mt-4 mb-4"  @click="onStylePrimarySmallFalseDaClick">
+            <div class="mt-8 mb-8"  @click="onStylePrimarySmallFalseDaClick">
                               <router-link  to="/services">
                               <b class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-lg rounded-lg text-sm px-10 py-5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">View Services</b>
                               </router-link>
             </div>  
             
       </div>
-      <div id="project" class="mt-10 mb-10 justify-center items-center">
-            <h1 class="mb-4 mx-auto text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-4xl lg:text-5xl dark:text-white">Our Latest Project</h1>
-            <div class="flex flex-col space-x-20 justify-between">
+      <div id="project" class="mt-20 mb-10 justify-center w-full md:w-3/4 mx-auto">
+            <h1 class="text-4xl text-left inline-flex mb-4 font-extrabold leading-none tracking-tight text-red-geg md:text-4xl lg:text-5xl dark:text-white">Our Latest Project</h1>
+            <div class="inline-flex space-x-10 justify-center mb-6">
                   
-                  <p class=" text-left rtl:text-right text-gray-500 dark:text-gray-400 w-1/2">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support and operations teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
+                  <p class="indent-8 text-left rtl:text-right text-gray-500 dark:text-gray-400 w-full md:w-1/2">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support and operations teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
 
                   <img class="h-auto max-w-lg rounded-lg" src="../assets/se-dummy-images/project-1.png" alt="image description">
 
 
 
             </div>
-            <div class="text-center mt-4"  @click="onStylePrimarySmallFalseDaClick">
+            <div class="text-left mt-4"  @click="onStylePrimarySmallFalseDaClick">
                                           <router-link  to="/projects">
                                           <b class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-lg rounded-lg text-sm px-10 py-5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">View Project Gallery</b>
                                           </router-link>
