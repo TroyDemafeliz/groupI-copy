@@ -1,13 +1,13 @@
 <template>
-     <div id="upper" class="bg-gray-500 h-1/4">
+     <div id="upper" class="bg-gray-500 h-1/4 overflow-auto">
           <div>
                <img src="./icons/CompLogoBGREMOVE.png" alt="" class="mx-auto h-30">
           </div>
      </div>
-     <div id="login-form" class="bg-blue-geg h-screen flex items-center justify-center">
+     <div id="login-form" class="bg-blue-geg h-screen flex items-center justify-center overflow-auto">
 
 
-<form class="max-w-2xl mx-auto bg-indigo-200 rounded-lg px-20 py-10 flex flex-col">
+<form class="max-w-2xl mx-auto bg-indigo-200 rounded-lg px-20 py-10 flex flex-col overflow-auto">
 
      <h1 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">LOGIN</h1>
   <div class="mb-5">
