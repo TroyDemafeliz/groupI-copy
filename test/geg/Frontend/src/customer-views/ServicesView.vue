@@ -3,7 +3,10 @@
 
 <template>
     <div class = "pt-20 px-10 flex flex-col items-center justify-center text-center">
-        <h1 class="mb-20 text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-5xl lg:text-6xl dark:text-white pt-10">Services</h1>
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-5xl lg:text-6xl dark:text-white">Services</h1>
+        <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 max-w-prose">
+          Browse through our available services.
+        </p>
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5 mt-10">
                   <div v-for="(item, index) in items" :key="index"
                         class="max-w-sm bg-white border-gray-200 border rounded-lg">

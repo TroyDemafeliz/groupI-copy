@@ -10,6 +10,8 @@ import adminBookingsView from '../admin-views/adminBookingsView.vue'
 import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
+import adminEditService from '../admin-views/adminEditService.vue'
+import adminAddService from '../admin-views/adminAddService.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,13 +50,13 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: { hideNavbar: true, hideFooter: true, customClass: false }
+      meta: {customClass: true }
     },
-    // {
-    //   path: '/admin-dashboard',
-    //   name: 'dashboard',
-    //   component: DashboardView
-    // },
+    {
+      path: '/admin-dashboard',
+      name: 'dashboard',
+      component: adminBookingsView
+    },
     {
       path: '/admin-bookings',
       name: 'admin-bookings',
@@ -70,6 +72,17 @@ const router = createRouter({
       name: 'admin-services',
       component: adminServicesView
     },
+    {
+      path: '/admin-services-edit',
+      name: 'admin-edit-service',
+      component: adminEditService,
+      props: true
+    },
+    {
+      path: '/admin-services-add',
+      name: 'admin-add-service',
+      component: adminAddService
+    }
   ]
 })
 
