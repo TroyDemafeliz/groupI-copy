@@ -28,13 +28,13 @@ class User(AbstractUser):
     
 class Booking(models.Model):
     Id = AutoField(primary_key=True)
-    Email = EmailField()
+    Email = EmailField(default="timothy@gmail.com", max_length=30)
     Name = CharField(max_length=50)
-    Phone = models.IntegerField()
-    Company = CharField()
-    Date = TextField()
-    Mode = TextField()
-    plan = ImageField()
+    Phone = models.IntegerField(default="09324142132", max_length=11)
+    Company = CharField(default="GEG Company", max_length=20)
+    Date = TextField(default="", max_length=20)
+    Mode = TextField(default="Online", max_length=20)
+    plan = ImageField(default="plan.jpg", upload_to="plan/")
     
     def __str__(self):
         return self.bookingEmail

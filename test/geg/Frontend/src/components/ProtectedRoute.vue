@@ -50,7 +50,7 @@ function ProtectedRoute({ children }) {
         }
     };
     auth()
-    return isAuthorized.value ? children : router.push('/');
+    return isAuthorized.value ? children : router.push('/login');
 }
 
 export default ProtectedRoute;
