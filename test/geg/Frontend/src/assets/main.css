@@ -14,6 +14,11 @@
 .text-red-geg {
   color: #a60202;
 }
+
+.blue-geg {
+  color: #03032B
+}
+
 .md\:hover\:text-red-geg:hover {
   --tw-text-opacity: 1;
   color: #a60202;
