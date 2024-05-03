@@ -15,15 +15,15 @@
                                  <div class="grid grid-cols-6 gap-6">
                                        <div class="col-span-6 sm:col-span-6">
                                           <label for="picture" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Picture</label>
-                                          <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                          <input @change="onFileChange" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="service-picture" type="file">
                                        </div>
                                        <div class="col-span-6 sm:col-span-6">
                                           <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                          <input type="text" name="title" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Construction service" required>
+                                          <input type="text" name="title" id="title" v-model="service.title" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Construction service" required>
                                        </div>
                                        <div class="col-span-6 sm:col-span-6">
                                           <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                          <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Short description..."></textarea>
+                                          <textarea id="description" rows="4" v-model="service.description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Short description..."></textarea>
                                        </div>
                                  </div>
                               </div>
@@ -35,11 +35,11 @@
                   
                   <div>
                         <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                              <img class="rounded-t-lg" src="../assets/se-dummy-images/project-4.jpeg" alt="" />
+                              <img class="rounded-t-lg" :src="service.imageSrc" alt=""/>
 
                               <div class="p-5">
-                              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Service 1</h5>
-                              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">This is a service</p>
+                              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ service.title }}</h5>
+                              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ service.description }}</p>
                            </div>
                         </div>
                   </div>
@@ -48,3 +48,27 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      service: {
+        title: "Service 1",
+        description: "This is a service",
+        imageSrc: "../assets/se-dummy-images/project-4.jpeg"
+      }
+    };
+  },
+  methods: {
+    onFileChange(e) {
+      const file = e.target.files[0];
+      if (file && file.type.match('image.*')) {
+        this.service.imageSrc = URL.createObjectURL(file);  
+      } else {
+         this.service.imageSrc = '../assets/se-dummy-images/project-4.jpeg';
+      }
+    }
+  }
+};
+
+</script>
