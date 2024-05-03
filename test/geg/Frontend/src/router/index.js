@@ -18,7 +18,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: Login,
       meta: { hideNavbar: true, hideFooter: true, customClass: false }
@@ -52,13 +52,6 @@ const router = createRouter({
       path: '/gallery',
       name: 'gallery',
       component: ProjectsGallery
-    },
-
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { hideNavbar: true, hideFooter: true, customClass: false }
     },
     {
       path: '/admin-dashboard',

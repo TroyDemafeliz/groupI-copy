@@ -10,8 +10,17 @@ const route = useRoute()
 const router = useRouter()
 
 const isAdminRoute = computed(() => {
-  return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
+  return route.path.includes('/admin')
 })
+
+const showNavAndFooter = computed(() => {
+  const path = route.path
+  return !path.includes('/admin') && path !== '/login'
+})
+
+const isNotLoginPage = computed(() => {
+  return route.path !== '/login';
+});
 
 const previousRoute = ref('');
 
@@ -22,18 +31,21 @@ watch(() => route.path, (currentPath, oldPath) => {
   previousRoute.value = currentPath;
 }, { immediate: true });
 
+const contentClasses = computed(() => {
+  return isNotLoginPage.value ? 'pb-20 sm:pt-20 md:pt-24' : '';
+});
+
 </script>
 
 <template>
   <div>
     <ProtectedRoute v-if="isAdminRoute"/>
 
-    <AppNavbar v-if="!isAdminRoute && !$route.meta.hideNavbar"/>
+    <AppNavbar v-if="showNavAndFooter" />
     <DashboardView v-if="isAdminRoute" />
-    <!-- <Login v-if="!$route.meta.hideNavbar"/> -->
-    <!-- <div class ="pb-20 sm:pt-20 md:pt-24"> -->
+    <div :class="contentClasses">
       <RouterView />
     </div>
-  <!-- </div> -->
-  <AppFooter v-if="!isAdminRoute && !$route.meta.hideFooter"/>
+    <AppFooter v-if="showNavAndFooter" />
+  </div>
 </template>
