@@ -1,19 +1,3 @@
-<script>
-
-import router from '@/router';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  data(){
-    return{};
-  },
-  methods:{
-    Logout() {
-  localStorage.clear()
-  return router.push('/')
-  }
-}
-})
-</script>
 <template>
 <nav class="h-20 fixed top-0 left-0 z-50 w-full bg-white border-b-2 dark:border-black">
   <div class="lg:px-5 lg:pl-3">
@@ -99,6 +83,7 @@ export default defineComponent({
 <script>
   import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import router from '@/router';
 export default{
     setup() {
     const route = useRoute();
@@ -111,5 +96,14 @@ export default{
       isAdminProjectsActive,
     };
   },
+  data(){
+    return{};
+  },
+  methods:{
+    Logout() {
+  localStorage.clear()
+  return router.push('/')
+  }
+}
 } 
 </script>
