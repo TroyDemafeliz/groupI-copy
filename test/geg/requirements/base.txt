@@ -14,3 +14,10 @@ django-allauth[mfa]==0.62.1  # https://github.com/pennersr/django-allauth
 django-crispy-forms==2.1  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==2024.2  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.4.0  # https://github.com/jazzband/django-redis
+djangorestframework>=3.0.0
+djangorestframework-simplejwt
+django-cors-headers>=4.0.0
+python-dotenv
+PyJWT
+pytz
+sqlparse

@@ -13,11 +13,18 @@ import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: Login,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
+    },
+    {
+      path: '/home',
       name: 'home',
       component: HomeView
     },
@@ -46,6 +53,7 @@ const router = createRouter({
       name: 'gallery',
       component: ProjectsGallery
     },
+
     {
       path: '/login',
       name: 'login',
@@ -88,3 +96,4 @@ const router = createRouter({
 
 
 export default router 
+

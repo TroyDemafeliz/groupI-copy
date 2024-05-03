@@ -5,10 +5,18 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from django.core.files.storage import default_storage
+from .models import User,Booking
 
-from backend.users.models import User
+from django.shortcuts import render
+from rest_framework import generics
+from .serializers import UserSerializer, BookingSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
-
+#These are for the backend server
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = "username"
@@ -34,7 +42,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 user_update_view = UserUpdateView.as_view()
 
-
+#for User Creation
 class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
@@ -43,3 +51,29 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+#Create Booking
+class CreateBooking(generics.CreateAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    queryset = Booking.objects.all()
+    
+class DisplayBooking(generics.ListAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+    
+class UpdateBooking(generics.UpdateAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+
+class DeleteBooking(generics.DestroyAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Booking.objects.all()
+
+class CreateUserView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]

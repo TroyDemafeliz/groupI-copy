@@ -3,16 +3,28 @@
         <div :class="$style.loginGroup">
              <div :class="$style.loginGroupChild" />
              <div :class="$style.signinFrame">
-                  <router-link to="/admin">
-                    <button type="button" :class="$style.signIn">SIGN IN</button>
+                    <button type="button" v-on:click="handleSubmit" :class="$style.signIn" >SIGN IN</button>
                     <div :class="$style.signinbox" />
-                  </router-link>
              </div>
              <b :class="$style.login">LOGIN</b>
              <div :class="$style.emailAddress">Email Address</div>
              <div :class="$style.password">Password</div>
-             <div :class="$style.emailfill"><input :class="$style.emailInput"></div>
-             <div :class="$style.passfill"><input :class="$style.passInput"></div>
+             <div :class="$style.emailfill">
+               <input :class="$style.emailInput" 
+               v-model="username"
+               type="text"
+               placeholder="Username"
+               maxlength="30"
+               @keyup.enter="handleSubmit"
+               />
+               </div>
+             <div :class="$style.passfill">
+               <input :class="$style.passInput" 
+               v-model="password"
+               type="password"
+               placeholder="Password"
+               @keyup.enter="handleSubmit"
+               /></div>
              <img :class="$style.showpassIcon" alt="" src="./icons/ShowPass.png" />
         </div>
         
@@ -22,21 +34,46 @@
              </template>
              <script lang="ts">
                   import { defineComponent } from 'vue'
-                  
+                  import api from '@/api';
+                  import router from '@/router';
+                  import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
+                     
                   
                   export default defineComponent({
-                       name: "AdminLogin"})</script><style module>.loginGroupChild {
+                       name: "AdminLogin",
+                       data(){
+                         return{
+                              username: "",
+                              password: "",
+                         };
+                       },
+                       methods:{
+                         async handleSubmit() {
+                         try {
+                              const res = await api.post("/backend/token/", { username: this.username, password:this.password })
+                              localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                              localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                              router.push("/admin-bookings")
+
+                         } catch (error) {
+                         alert(error)
+                         }
+                         }
+                       }
+                      
+     })
+                    </script><style module>.loginGroupChild {
                        position: absolute;
                        top: calc(50% - 350px);
                        left: calc(50% - 350px);
                        backdrop-filter: blur(25px);
                        border-radius: 25px;
-                       background-color: rgba(223, 224, 242, 0.2);
+                       background-color: rgba(75, 75, 81, 0.2);
                        width: 700px;
                        height: 700px;
                   }
                     
-
+                 
                     template {
                          margin: 0;
                          padding:0 ;
@@ -177,4 +214,3 @@
                        }
                          </style>
 
-                         

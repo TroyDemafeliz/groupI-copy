@@ -1,4 +1,3 @@
-
 # Build stage using Node.js
 FROM node:lts-alpine as build
 
