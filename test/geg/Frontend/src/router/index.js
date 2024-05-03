@@ -24,7 +24,7 @@ const router = createRouter({
       meta: { hideNavbar: true, hideFooter: true, customClass: false }
     },
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: HomeView
     },
@@ -58,7 +58,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: {customClass: true }
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
     },
     {
       path: '/admin-dashboard',

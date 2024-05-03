@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed, watch, ref } from 'vue';
 import AppFooter from './components/Footer.vue'
 import ProtectedRoute from './components/ProtectedRoute.vue';
+import Login from './components/Login.vue';
 const route = useRoute()
 const router = useRouter()
 
@@ -26,11 +27,13 @@ watch(() => route.path, (currentPath, oldPath) => {
 <template>
   <div>
     <ProtectedRoute v-if="isAdminRoute"/>
+
     <AppNavbar v-if="!isAdminRoute" />
     <DashboardView v-if="isAdminRoute" />
+    <Login v-if="!$route.meta.hideNavbar"/>
     <div class ="pb-20 sm:pt-20 md:pt-24">
       <RouterView />
     </div>
-    <AppFooter v-if="!isAdminRoute" />
+    <AppFooter v-if="!isAdminRoute"/>
   </div>
 </template>
