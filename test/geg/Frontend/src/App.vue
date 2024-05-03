@@ -28,12 +28,12 @@ watch(() => route.path, (currentPath, oldPath) => {
   <div>
     <ProtectedRoute v-if="isAdminRoute"/>
 
-    <AppNavbar v-if="!isAdminRoute" />
+    <AppNavbar v-if="!isAdminRoute && !$route.meta.hideNavbar"/>
     <DashboardView v-if="isAdminRoute" />
-    <Login v-if="!$route.meta.hideNavbar"/>
-    <div class ="pb-20 sm:pt-20 md:pt-24">
+    <!-- <Login v-if="!$route.meta.hideNavbar"/> -->
+    <!-- <div class ="pb-20 sm:pt-20 md:pt-24"> -->
       <RouterView />
     </div>
-    <AppFooter v-if="!isAdminRoute"/>
-  </div>
+  <!-- </div> -->
+  <AppFooter v-if="!isAdminRoute && !$route.meta.hideFooter"/>
 </template>

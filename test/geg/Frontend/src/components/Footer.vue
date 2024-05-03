@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto bg-blue-geg text-white h-[500px] flex flex-col justify-between">
+    <div class="mx-auto bg-blue-geg text-white h-[500px]">
         <div class="text-center py-8 indent-10">
             <div class="py-4 text-left text-white mb-10">
                 <h2 class="text-4xl font-semibold">Contact Us</h2>
