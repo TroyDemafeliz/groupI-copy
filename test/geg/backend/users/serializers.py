@@ -5,7 +5,7 @@ from .models import User
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model=Booking
-        fields=('Id','Email', 'Name', 'Phone', 'Date','Mode')
+        fields=('Id','Email', 'Name', 'Phone','Company', 'Date','Mode', 'Plan')
         
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

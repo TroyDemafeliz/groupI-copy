@@ -31,8 +31,10 @@ class Booking(models.Model):
     Email = EmailField()
     Name = CharField(max_length=50)
     Phone = models.IntegerField()
-    Date = DateTimeField(auto_now_add=True)
+    Company = CharField()
+    Date = TextField()
     Mode = TextField()
+    plan = ImageField()
     
     def __str__(self):
         return self.bookingEmail
