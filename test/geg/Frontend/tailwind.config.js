@@ -6,7 +6,11 @@ export default {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'blue-geg': '#03032B'
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin')
