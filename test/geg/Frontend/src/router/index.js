@@ -75,7 +75,8 @@ const router = createRouter({
     {
       path: '/admin-services-edit',
       name: 'admin-edit-service',
-      component: adminEditService
+      component: adminEditService,
+      props: true
     },
     {
       path: '/admin-services-add',

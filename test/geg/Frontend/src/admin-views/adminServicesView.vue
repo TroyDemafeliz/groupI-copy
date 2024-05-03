@@ -21,8 +21,8 @@
                         <a href="#" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
                             Delete Service
                         </a>
+                      </div>
                     </div>
-                </div>
             </div>
 
       </div>
@@ -30,6 +30,7 @@
 </template>
 <script>
 import image1 from '../assets/se-dummy-images/project-5 (school).jpeg'
+import image2 from '../assets/se-dummy-images/project-4.jpeg'
 export default {
   
   data() {  
@@ -43,7 +44,7 @@ export default {
         {
           title: "Service 2",
           description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
+          image: image2
         },
         {
           title: "Service 3",
@@ -53,7 +54,7 @@ export default {
         {
           title: "Service 4",
           description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
+          image: image2
         },
         {
           title: "Service 5",
@@ -63,7 +64,7 @@ export default {
         {
           title: "Service 6",
           description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
+          image: image2
         },
       ]
     };
