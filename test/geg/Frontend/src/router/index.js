@@ -12,6 +12,7 @@ import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
+import NotFound from '../router/NotFound.vue'
 
 
 const router = createRouter({
@@ -83,6 +84,12 @@ const router = createRouter({
       path: '/admin-services-add',
       name: 'admin-add-service',
       component: adminAddService
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFound,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
     }
   ]
 })
