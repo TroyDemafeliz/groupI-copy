@@ -1,9 +1,9 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
 import AppNavbar from './components/AppNavbar.vue'
 import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
-import { computed, watch } from 'vue';
+import { computed, watch, ref } from 'vue';
+import AppFooter from './components/Footer.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -11,6 +11,16 @@ const router = useRouter()
 const isAdminRoute = computed(() => {
   return router.currentRoute.value.matched.some(record => record.path.includes('/admin'))
 })
+
+const previousRoute = ref('');
+
+watch(() => route.path, (currentPath, oldPath) => {
+  if (previousRoute.value === '/') {
+    window.scrollTo(0, 0);
+  }
+  previousRoute.value = currentPath;
+}, { immediate: true });
+
 </script>
 
 <template>
@@ -20,20 +30,6 @@ const isAdminRoute = computed(() => {
     <div class ="pb-20 sm:pt-20 md:pt-24">
       <RouterView />
     </div>
-
+    <AppFooter v-if="!isAdminRoute" />
   </div>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView /> -->
 </template>
