@@ -7,7 +7,7 @@
                         <div :class="$style.header30">
                               <div :class="$style.column">
                                     <div :class="$style.content">
-                                          <b :class="$style.mediumLengthHero">GEG Builders and Construction Supplies</b>
+                                                      <b :class="$style.mediumLengthHero">GEG Builders and Construction Supplies</b>
                                           <div :class="$style.loremIpsumDolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</div>
                                     </div>
                                     <div :class="$style.actions">
@@ -29,21 +29,21 @@
                               <div :class="$style.content2">
                                     <div :class="$style.row">
                                           <div :class="$style.column1">
-                                                <img :class="$style.placeholderImageIcon" alt="" src="./icons/Placeholder.png" />
+                                                <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
                                                 <div :class="$style.content">
                                                       <b :class="$style.heading1">Service 1</b>
                                                       <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
                                                 </div>
                                           </div>
                                           <div :class="$style.column1">
-                                                <img :class="$style.placeholderImageIcon" alt="" src="./icons/Placeholder.png" />
+                                                <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
                                                 <div :class="$style.content">
                                                       <b :class="$style.heading1">Service 2</b>
                                                       <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
                                                 </div>
                                           </div>
                                           <div :class="$style.column1">
-                                                <img :class="$style.placeholderImageIcon" alt="" src="./icons/Placeholder.png" />
+                                                <img :class="$style.placeholderImageIcon" alt="" src="../components/icons/Placeholder.png" />
                                                 <div :class="$style.content">
                                                       <b :class="$style.heading1">Service 3</b>
                                                       <div :class="$style.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</div>
@@ -72,15 +72,15 @@
                                           </div>
                                           <div :class="$style.actions2">
                                                 <div :class="$style.projectGallery">
-                                                <router-link style="text-decoration: none; color: inherit;" to="/projects">
+                                                <RouterLink style="text-decoration: none; color: inherit;" to="/projects">
                                                       <div :class="$style.stylesecondarySmallfalse">
                                                             <div :class="$style.button">View Project Gallery</div>
                                                       </div>
-                                                </router-link>
+                                                </RouterLink>
                                                 </div>
                                           </div>
                                     </div>
-                                    <img :class="$style.placeholderImageIcon3" alt="" src="./icons/Placeholder.png" />
+                                    <img :class="$style.placeholderImageIcon3" alt="" src="../components/icons/Placeholder.png" />
                               </div>
                         </div>
                         
@@ -112,7 +112,7 @@
                                     height: 140.1px;
                                     object-fit: cover;
                               }
-
+    
                               router-link {
                                     text-decoration: none;
                                     color: #fff;
@@ -164,7 +164,7 @@
                                     color: #e8e9fe;
                               }
                               .column {
-
+    
                                     width: 768px;
                                     display: flex;
                                     flex-direction: column;
@@ -178,7 +178,7 @@
                                     overflow: hidden;
                                     flex-shrink: 0;
                                     display: flex;
-                                    background-image:url("./icons/GEGpic.png");
+                                    background-image:url("../components/icons/GEGpic.png");
                                     background-size: cover;
                                     flex-direction: row;
                                     align-items: center;
