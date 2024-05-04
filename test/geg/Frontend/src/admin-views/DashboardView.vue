@@ -35,7 +35,7 @@
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                 </li>
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" onclick="Logout">Sign out</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" @click="Logout">Sign out</a>
                 </li>
               </ul>
             </div>
@@ -81,14 +81,14 @@
 </aside>
 </template>
 <script>
-  import { computed } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';
 export default{
     setup() {
     const route = useRoute();
 
-    const isAdminServicesActive = computed(() => route.path.startsWith('/admin-service-edit'));
+    const isAdminServicesActive = computed(() => route.path.startsWith('/admin-service'));
     const isAdminProjectsActive = computed(() => route.path.startsWith('/admin-projects'));
 
     return {
@@ -100,9 +100,9 @@ export default{
     return{};
   },
   methods:{
-    Logout() {
+  Logout() {
   localStorage.clear()
-  return router.push('/')
+  return router.push('/login')
   }
 }
 } 
