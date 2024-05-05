@@ -1,216 +1,108 @@
 <template>
-   <div :class="$style.loginform">
-        <div :class="$style.loginGroup">
-             <div :class="$style.loginGroupChild" />
-             <div :class="$style.signinFrame">
-                    <button type="button" v-on:click="handleSubmit" :class="$style.signIn" >SIGN IN</button>
-                    <div :class="$style.signinbox" />
-             </div>
-             <b :class="$style.login">LOGIN</b>
-             <div :class="$style.emailAddress">Email Address</div>
-             <div :class="$style.password">Password</div>
-             <div :class="$style.emailfill">
-               <input :class="$style.emailInput" 
-               v-model="username"
-               type="text"
-               placeholder="Username"
-               maxlength="30"
-               @keyup.enter="handleSubmit"
-               />
+     <div id="upper" class="bg-gray-500 h-1/4 overflow-auto">
+          <div>
+               <img src="./icons/CompLogoBGREMOVE.png" alt="" class="mx-auto h-30">
+          </div>
+     </div>
+     <div id="login-form" class="bg-blue-geg h-screen flex items-center justify-center overflow-auto">
+
+
+<form class="max-w-2xl mx-auto bg-indigo-200 rounded-lg px-20 py-10 flex flex-col overflow-auto" @submit.prevent="handleSubmit">
+
+     <h1 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">LOGIN</h1>
+  <div class="mb-5">
+    <label for="username" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Username</label>
+    <input type="text" v-model="username" id="username" @keyup.enter="handleSubmit" class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="JonDoe@gmail.com" required />
+  </div>
+  <div class="mb-5">
+    <label for="password" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Password</label>
+    <input type="password" v-model="password" @keyup.enter="handleSubmit" placeholder="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+  </div>
+      <div class="flex justify-center mt-auto">
+       <button type="submit" v-on:click="handleSubmit" class="text-white bg-red mx-auto mt-10 justify-center hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+     </div>
+</form>
+
+
+     </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useAuth } from '@/auth/useAuth';
+import api from '@/api';
+import router from '@/router';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
+
+export default defineComponent({
+  name: "AdminLogin",
+  setup() {
+    const { isAuthenticated } = useAuth(); // Access the shared authentication state
+    const username = ref("");
+    const password = ref("");
+
+    const handleSubmit = async () => {
+      console.log("Attempting to log in..."); // Log initial attempt
+      try {
+        const res = await api.post("/backend/token/", { username: username.value, password: password.value });
+        localStorage.setItem(ACCESS_TOKEN, res.data.access);
+        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        isAuthenticated.value = true; // Update authentication state
+        console.log("Login successful:", isAuthenticated.value); // Log authentication status
+        console.log("Access Token:", res.data.access); // Log the access token
+        console.log("Refresh Token:", res.data.refresh); // Log the refresh token
+        router.push("/admin-bookings"); // Redirect to the admin bookings page
+      } catch (error) {
+        console.error("Login Error: ", error);
+        alert("Failed to login, please check your credentials");
+        isAuthenticated.value = false; // Ensure isAuthenticated is set to false on failure
+        console.log("Login failed:", isAuthenticated.value); // Log failed authentication status
+      }
+    };
+
+    return {
+      username,
+      password,
+      handleSubmit
+    };
+  }
+});
+</script>
+
+
+
+  <!-- <template>
+     <div :class="$style.loginform">
+          <div :class="$style.loginGroup">
+               <div :class="$style.loginGroupChild" />
+               <div :class="$style.signinFrame">
+                      <button type="button" v-on:click="handleSubmit" :class="$style.signIn" >SIGN IN</button>
+                      <div :class="$style.signinbox" />
                </div>
-             <div :class="$style.passfill">
-               <input :class="$style.passInput" 
-               v-model="password"
-               type="password"
-               placeholder="Password"
-               @keyup.enter="handleSubmit"
-               /></div>
-             <img :class="$style.showpassIcon" alt="" src="./icons/ShowPass.png" />
-        </div>
-        
-             <div :class="$style.loginformChild" />
-             <img :class="$style.n1RemovebgPreview1Icon" alt="" src="./icons/CompLogoBGREMOVE.png" />
-             </div>
-             </template>
-             <script lang="ts">
-                  import { defineComponent } from 'vue'
-                  import api from '@/api';
-                  import router from '@/router';
-                  import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
-                     
-                  
-                  export default defineComponent({
-                       name: "AdminLogin",
-                       data(){
-                         return{
-                              username: "",
-                              password: "",
-                         };
-                       },
-                       methods:{
-                         async handleSubmit() {
-                         try {
-                              const res = await api.post("/backend/token/", { username: this.username, password:this.password })
-                              localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                              localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                              router.push("/admin-bookings")
-
-                         } catch (error) {
-                         alert(error)
-                         }
-                         }
-                       }
-                      
-     })
-                    </script><style module>.loginGroupChild {
-                       position: absolute;
-                       top: calc(50% - 350px);
-                       left: calc(50% - 350px);
-                       backdrop-filter: blur(25px);
-                       border-radius: 25px;
-                       background-color: rgba(75, 75, 81, 0.2);
-                       width: 700px;
-                       height: 700px;
-                  }
-                    
-                 
-                    template {
-                         margin: 0;
-                         padding:0 ;
-                    }
-                      .signIn {
-                            position: absolute;
-                            top: -3px;
-                            left: -3px;
-                            border: 3px solid #fff;
-                            color:#fff;
-                            background-color: transparent;
-                            box-sizing: border-box;
-                            width: 146px;
-                            height: 66px;
-                       }
-
-                       .signIn:hover, .signinFrame:hover {
-                            background-color: #fff;
-                            color: #000;
-                       }
-                       .signinFrame {
-                            position: absolute;
-                            top: 552px;
-                            left: 280px;
-                            width: 140px;
-                            height: 50px;
-                            font-size: 30px;
-                       }
-                       .login {
-                            position: absolute;
-                            top: 28px;
-                            left: 299px;
-                            font-size: 35px;
-                            line-height: 150%;
-                       }
-                       .emailAddress {
-                            position: absolute;
-                            top: 144px;
-                            left: 50px;
-                            line-height: 150%;
-                            font-weight: 500;
-                       }
-                       .password {
-                            position: absolute;
-                            top: 312px;
-                            left: 50px;
-                            line-height: 150%;
-                            font-weight: 500;
-                       }
-                       .emailfill {
-                            position: absolute;
-                            top: 183px;
-                            left: 50px;
-                            border-bottom: 2px solid #000;
-                            box-sizing: border-box;
-                            width: 600px;
-                            height: 60px;
-                       }
-
-                       .emailInput, .passInput {
-                            position: absolute;
-                            top: 0px;
-                            left: 0px;
-                            width: 100%;
-                            height: 100%;
-                            background-color: transparent;
-                            border: none;
-                            font-size: 25px;
-                            color: #fff;
-                            font-family: Roboto;
-                            outline: none;
-                       }
-                       .passfill {
-                            position: absolute;
-                            top: 351px;
-                            left: 43px;
-                            border-bottom: 2px solid #000;
-                            box-sizing: border-box;
-                            width: 600px;
-                            height: 60px;
-                       }
-                       .showpassIcon {
-                            position: absolute;
-                            height: 2.57%;
-                            width: 3.57%;
-                            top: 52.29%;
-                            right: 9.86%;
-                            bottom: 45.14%;
-                            left: 86.57%;
-                            max-width: 100%;
-                            overflow: hidden;
-                            max-height: 100%;
-                       }
-                       .loginGroup {
-                            position: absolute;
-                            top: calc(50% - 312px);
-                            left: calc(50% - 349px);
-                            width: 700px;
-                            height: 700px;
-                       }
-                       .forgotPassword {
-                            position: absolute;
-                            top: 450px;
-                            left: 50px;
-                            font-size: 16px;
-                            line-height: 150%;
-                       }
-                       .loginformChild {
-                            position: absolute;
-                            top: 0px;
-                            left: 0px;
-                            background-color: rgba(223, 224, 242, 0.7);
-                            border-bottom: 5px solid #000;
-                            box-sizing: border-box;
-                            width: 100vw;
-                            height: 140px;
-                       }
-                       .n1RemovebgPreview1Icon {
-                            position: absolute;
-                            top: 15px;
-                            left: calc(50% - 303px);
-                            width: 608px;
-                            height: 109.8px;
-                            object-fit: cover;
-                       }
-                       .loginform {
-                            width: 100%;
-                            position: relative;
-                            background-color: #03032b;
-                            height: 100vh;
-                            overflow: hidden;
-                            text-align: left;
-                            font-size: 25px;
-                            color: #fff;
-                            font-family: Roboto;
-                            margin: 0;
-                            padding: 0;
-                       }
-                         </style>
-
+               <b :class="$style.login">LOGIN</b>
+               <div :class="$style.emailAddress">Email Address</div>
+               <div :class="$style.password">Password</div>
+               <div :class="$style.emailfill">
+                 <input :class="$style.emailInput" 
+                 v-model="username"
+                 type="text"
+                 placeholder="Username"
+                 maxlength="30"
+                 @keyup.enter="handleSubmit"
+                 />
+                 </div>
+               <div :class="$style.passfill">
+                 <input :class="$style.passInput" 
+                 v-model="password"
+                 type="password"
+                 placeholder="Password"
+                 @keyup.enter="handleSubmit"
+                 /></div>
+               <img :class="$style.showpassIcon" alt="" src="./icons/ShowPass.png" />
+          </div>
+          
+               <div :class="$style.loginformChild" />
+               <img :class="$style.n1RemovebgPreview1Icon" alt="" src="./icons/CompLogoBGREMOVE.png" />
+               </div>
+               </template>
+   -->
