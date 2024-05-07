@@ -7,7 +7,9 @@
      <div id="login-form" class="bg-blue-geg h-screen flex items-center justify-center overflow-auto">
 
 
-<form class="max-w-2xl mx-auto bg-indigo-200 rounded-lg px-20 py-10 flex flex-col overflow-auto">
+
+<form class="max-w-2xl mx-auto bg-indigo-200 rounded-lg px-20 py-10 flex flex-col overflow-auto" @submit.prevent="handleSubmit">
+
 
      <h1 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">LOGIN</h1>
   <div class="mb-5">
@@ -24,40 +26,54 @@
 </form>
 
 
+
      </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue';
+import { useAuth } from '@/auth/useAuth';
 import api from '@/api';
 import router from '@/router';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
-   
 
 export default defineComponent({
-     name: "AdminLogin",
-     data(){
-       return{
-            username: "",
-            password: "",
-       };
-     },
-     methods:{
-       async handleSubmit() {
-       try {
-            const res = await api.post("/backend/token/", { username: this.username, password:this.password })
-            localStorage.setItem(ACCESS_TOKEN, res.data.access);
-            localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            router.push("/admin-bookings")
+  name: "AdminLogin",
+  setup() {
+    const { isAuthenticated } = useAuth(); // Access the shared authentication state
+    const username = ref("");
+    const password = ref("");
 
-       } catch (error) {
-       alert(error)
-       }
-       },
-     }
-    
-})
-  </script>
+    const handleSubmit = async () => {
+      console.log("Attempting to log in..."); // Log initial attempt
+      try {
+        const res = await api.post("/backend/token/", { username: username.value, password: password.value });
+        localStorage.setItem(ACCESS_TOKEN, res.data.access);
+        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        isAuthenticated.value = true; // Update authentication state
+        console.log("Login successful:", isAuthenticated.value); // Log authentication status
+        console.log("Access Token:", res.data.access); // Log the access token
+        console.log("Refresh Token:", res.data.refresh); // Log the refresh token
+        router.push("/admin-bookings"); // Redirect to the admin bookings page
+      } catch (error) {
+        console.error("Login Error: ", error);
+        alert("Failed to login, please check your credentials");
+        isAuthenticated.value = false; // Ensure isAuthenticated is set to false on failure
+        console.log("Login failed:", isAuthenticated.value); // Log failed authentication status
+      }
+    };
+
+    return {
+      username,
+      password,
+      handleSubmit
+    };
+  }
+});
+</script>
+
+
+
 
   <!-- <template>
      <div :class="$style.loginform">

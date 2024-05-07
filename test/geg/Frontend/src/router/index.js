@@ -12,7 +12,9 @@ import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
+import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
+
 
 
 const router = createRouter({
@@ -57,42 +59,68 @@ const router = createRouter({
     {
       path: '/admin-dashboard',
       name: 'dashboard',
-      component: adminBookingsView
+      component: adminBookingsView,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/admin-bookings',
       name: 'admin-bookings',
-      component: adminBookingsView
+      component: adminBookingsView,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/admin-projects',
       name: 'admin-projects',
-      component: adminProjectsView
+      component: adminProjectsView,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/admin-services',
       name: 'admin-services',
-      component: adminServicesView
+      component: adminServicesView,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/admin-services-edit',
       name: 'admin-edit-service',
       component: adminEditService,
-      props: true
+      props: true,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/admin-services-add',
       name: 'admin-add-service',
-      component: adminAddService
+
+      component: adminAddService,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: NotFound,
       meta: { hideNavbar: true, hideFooter: true, customClass: false }
+
     }
   ]
 })
+
+router.beforeEach(async(to, from, next) => {
+  console.log('Routing to:', to.name, 'Authenticated:', isAuthenticated.value);
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (isAuthenticated.value === false) {
+      await useAuth().checkAuth();
+    }
+
+    if (!isAuthenticated.value) {
+      console.log('Redirect to login from:', to.name);
+      next('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 
 export default router 

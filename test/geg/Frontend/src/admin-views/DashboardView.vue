@@ -35,7 +35,8 @@
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                 </li>
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" @click="Logout">Sign out</a>
+
+                  <button type="button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" v-on:click="Logout">Sign out</button>
                 </li>
               </ul>
             </div>
@@ -84,6 +85,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';
+import { useAuth } from '@/auth/useAuth';
 export default{
     setup() {
     const route = useRoute();
