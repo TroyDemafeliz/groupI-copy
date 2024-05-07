@@ -70,7 +70,7 @@
                   </div>
             </div>
               </div>
-            <div class="g-recaptcha" data-sitekey="6LeTNNEpAAAAADf7VPRfkPe6gHimss9w6FyrNCKc"></div>
+            <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
 
             <form class="max-w-lg mx-auto">
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
