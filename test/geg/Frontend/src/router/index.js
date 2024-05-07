@@ -13,6 +13,9 @@ import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
+import NotFound from '../router/NotFound.vue'
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,8 +90,16 @@ const router = createRouter({
     {
       path: '/admin-services-add',
       name: 'admin-add-service',
+
       component: adminAddService,
       meta: { requiresAuth: true } 
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFound,
+      meta: { hideNavbar: true, hideFooter: true, customClass: false }
+
     }
   ]
 })

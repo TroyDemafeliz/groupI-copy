@@ -4,7 +4,6 @@ import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
 import { computed, watch, ref } from 'vue';
 import AppFooter from './components/Footer.vue'
-
 const route = useRoute()
 const router = useRouter()
 
