@@ -21,6 +21,7 @@
     "pinia": "^2.1.7",
     "primevue": "^3.52.0",
     "universal-cookie": "^7.1.4",
+    "v-calendar": "^3.1.2",
     "vue": "^3.4.21",
     "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.3.0"
