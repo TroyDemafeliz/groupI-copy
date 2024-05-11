@@ -110,3 +110,5 @@ class DeleteService(generics.DestroyAPIView):
     queryset = Service.objects.all()
     
 # filter functions will be below
+
+    

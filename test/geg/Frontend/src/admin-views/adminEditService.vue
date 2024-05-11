@@ -51,8 +51,8 @@
 <script>
 import { useServices } from '@/auth/Services';
 import router from '@/router';
-import { ref } from 'vue';
-export default {
+import { defineComponent, ref } from 'vue';
+export default defineComponent({
    setup(){
       const {updateService, currentService, setService} = useServices()
       const Service = currentService
@@ -61,7 +61,7 @@ export default {
       const imageSrc = ref(Service.Image)
       const id = Service.Id
 
-      const onSubmit = async (id, title, desc, imageSrc) => {
+      const onSubmit = async () => {
       updateService(id, title, desc, imageSrc)
       setService(null)
       router.push('/admin-services')
@@ -84,5 +84,5 @@ export default {
       }
     }
   }
-};
+});
 </script>
