@@ -14,8 +14,8 @@
 
                         <div class="p-5">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ Service.Title }}</h5>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ Service.description }}</p>
-                        <RouterLink to="admin-services-edit" type="button" @click.native="setService(Service)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ Service.Description }}</p>
+                        <RouterLink to="/admin-services-edit" type="button" v-on:click="setService(Service)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
                             Edit Service
                         </RouterLink>
                         <a href="#" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
@@ -29,25 +29,17 @@
     </div>
 </template>
 <script>
-import image1 from '../assets/se-dummy-images/project-5 (school).jpeg'
 import { useServices } from '@/auth/Services';
 
 export default {
 
-  onMount(){
-   this.Services = this.getServices()
-  },
   setup(){
-    const {Services, getServices, createService, updateService, deleteService, setService, currentService} = useServices()
+    const {Services, getServices, setService} = useServices()
 
     return{
       Services,
-      currentService,
       setService,
       getServices,
-      createService,
-      updateService,
-      deleteService,
     }
   },
 };

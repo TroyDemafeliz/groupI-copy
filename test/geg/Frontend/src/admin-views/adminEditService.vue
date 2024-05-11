@@ -28,7 +28,7 @@
                                  </div>
                               </div>
                         <div class="flex items-center justify-end py-5 px-10 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                           <button v-on:submit="onSubmit(id, title, desc, imageSrc)" type="submit" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+                           <button v-on:click="onSubmit" type="submit" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
                         </div>
                      </form>
                   </div>
@@ -51,18 +51,23 @@
 <script>
 import { useServices } from '@/auth/Services';
 import router from '@/router';
+import { ref } from 'vue';
 export default {
    setup(){
       const {updateService, currentService, setService} = useServices()
       const Service = currentService
-      const title = Service.Title
-      const desc = Service.Description
-      const imageSrc = Service.Image
+      const title = ref(Service.Title)
+      const desc = ref(Service.Description)
+      const imageSrc = ref(Service.Image)
       const id = Service.Id
+
+      const onSubmit = async (id, title, desc, imageSrc) => {
+      updateService(id, title, desc, imageSrc)
+      setService(null)
+      router.push('/admin-services')
+   }
    return{
-      updateService,
-      setService,
-      currentService,
+      onSubmit,
       title,
       desc,
       imageSrc,
@@ -70,12 +75,6 @@ export default {
    }
    },
   methods: {
-   onSubmit(id, Title, Description, Image){
-      this.updateService(id, Title, Description, Image)
-      this.setService(null)
-      router.push('/admin-services')
-   },
-
    onFileChange(e) {
       const file = e.target.files[0];
       if (file && file.type.match('image.*')) {
