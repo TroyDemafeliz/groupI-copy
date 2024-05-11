@@ -8,14 +8,14 @@
           </button>  
         </RouterLink>
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5">
-                    <div v-for="(item, index) in items" :key="index"
+                    <div v-for="Service in Services"
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <img class="rounded-t-lg" :src="item.image" alt="" />
+                        <img class="rounded-t-lg" :src="Service.Image" alt="" />
 
                         <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ item.title }}</h5>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ item.description }}</p>
-                        <RouterLink to="/admin-services-edit" type="button" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ Service.Title }}</h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ Service.description }}</p>
+                        <RouterLink to="admin-services-edit" type="button" @click.native="setService(Service)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
                             Edit Service
                         </RouterLink>
                         <a href="#" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
@@ -30,44 +30,25 @@
 </template>
 <script>
 import image1 from '../assets/se-dummy-images/project-5 (school).jpeg'
-import image2 from '../assets/se-dummy-images/project-4.jpeg'
+import { useServices } from '@/auth/Services';
+
 export default {
-  
-  data() {  
-    return {
-      items: [
-        {
-          title: "Service 1",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
-        },
-        {
-          title: "Service 2",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image2
-        },
-        {
-          title: "Service 3",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
-        },
-        {
-          title: "Service 4",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image2
-        },
-        {
-          title: "Service 5",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image1
-        },
-        {
-          title: "Service 6",
-          description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
-          image: image2
-        },
-      ]
-    };
-  }
+
+  onMount(){
+   this.Services = this.getServices()
+  },
+  setup(){
+    const {Services, getServices, createService, updateService, deleteService, setService, currentService} = useServices()
+
+    return{
+      Services,
+      currentService,
+      setService,
+      getServices,
+      createService,
+      updateService,
+      deleteService,
+    }
+  },
 };
 </script>
