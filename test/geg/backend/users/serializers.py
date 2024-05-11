@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.users.models import Booking
+from backend.users.models import Booking, Service, Project
 from .models import User
 
 class BookingSerializer(serializers.ModelSerializer):
@@ -17,3 +17,13 @@ class UserSerializer(serializers.ModelSerializer):
         print(validated_data)
         user = User.objects.create_user(**validated_data)
         return user
+    
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = ["Id",  "Title", "Description", "Image"]
+        
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ["Id",  "Title", "Description", "MainImage", "SubImage"]

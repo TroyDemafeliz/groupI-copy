@@ -37,3 +37,9 @@
         </div>
     </div>
 </template>
+
+
+<script>
+import { useServices } from '@/auth/Services';
+
+</script>
