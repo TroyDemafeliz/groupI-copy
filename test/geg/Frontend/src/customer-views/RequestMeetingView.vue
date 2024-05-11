@@ -52,24 +52,76 @@
                 <textarea id="message" rows="4" v-if="selectedRadio === 'others'" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
 
               </div>
-  
-              <form class="max-w-lg mx-auto">
+
+              <div>
+            <div id="appointment" class="flex flex-col">
+                  <button type="button" @click="showDatePicker = true" data-modal-target="timepicker-modal" data-modal-toggle="timepicker-modal" class="text-gray-900 mt-5 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                        <svg class="w4 h-4 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                        </svg>
+                        Schedule appointment
+                  </button>
+
+                  <VDatePicker v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
+
+                  <div class="grid grid-cols-2 gap-2 mt-2">
+                        <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
+                        <button type="button" @click="discardDate" v-if="showDatePicker" data-modal-hide="timepicker-modal" class="text-xs px-2 py-2 text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Discard</button>
+                  </div>
+            </div>
+              </div>
+            <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
+
+            <form class="max-w-lg mx-auto">
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
               <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+             
               <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Submit</button>
             </form>
             
           </div>
         </form>
   </form>
-  </template>
+</template>
+
+
 
 <script>
+import { ref } from 'vue';
+const date = ref(new Date())
+
 export default {
   data() {
     return {
       selectedRadio: null,
+      showModal: false,
+      showDatePicker: false,
+      selectedDate:null,
+      saveDate:null,
     };
+  },
+ 
+  methods: {
+    onVerify(response) {
+      console.log('Captcha response:',response);
+    },
+    saveDate() {
+      this.saveDate = this.selectedDate;
+      this.showDatePicker = false;
+      console.log('Saved date:', this.saveDate)
+    }, 
+    discardDate() {
+      this.showDatePicker = false;
+    },
+    async submitForm() {
+      const captchaValue = grecaptcha.getResponse();
+      if (!captchaValue) {
+        alert('Please verify you are not a robot');
+        return;
+      }
+
+      console.log('Selected date:', this.date)
+    }
   },
 };
 </script>
