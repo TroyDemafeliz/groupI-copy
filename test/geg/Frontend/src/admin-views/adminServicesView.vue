@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-import { useServices } from '@/auth/Services';
+import { useServices } from '../ModelApi/Services';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

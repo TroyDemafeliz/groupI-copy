@@ -271,7 +271,6 @@ tags
 dump.rdb
 
 ### Project template
-geg/media/
 
 .pytest_cache/
 .ipython/
