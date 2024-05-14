@@ -22,8 +22,13 @@ export function getServices() {
 }
 
 export function createService(Title, Description, Image) {
+    const formData = new FormData();
+    formData.append('Title', Title);
+    formData.append('Description', Description);
+    formData.append('Image', Image);
+
     api
-        .post("backend/Service/create/", { Title, Description, Image })
+        .post("backend/Service/create/", formData)
         .then((res) => {
             if (res.status === 201) alert("Service created!");
             else alert("Failed to make Service.");
@@ -31,6 +36,7 @@ export function createService(Title, Description, Image) {
         })
         .catch((err) => alert(err));
 }
+
 export function updateService(id, Title, Description, Image) {
     api
     .put(`/backend/Service/update/${id}/`, {Title, Description, Image})
