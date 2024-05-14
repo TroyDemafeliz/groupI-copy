@@ -41,9 +41,14 @@ export async function retrieveService(id){
     .catch((err) => alert(err));
 }
 
-export async function updateService(id, data) {
+export async function updateService(id, Title, Description, Image) {
+    const formData = new FormData();
+    formData.append('Title', Title);
+    formData.append('Description', Description);
+    formData.append('Image', Image);
+
     await api
-    .put(`/backend/Service/update/${id}/`, data)
+    .put(`/backend/Service/update/${id}/`, formData)
     .then((res) => {
         if (res.status === 200) alert("Service updated!");
         else alert("Failed to update Service.");
