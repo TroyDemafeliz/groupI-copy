@@ -33,7 +33,7 @@ class Booking(models.Model):
     LastName = TextField(default="Marlon")
     Phone = models.IntegerField(default="09324142132")
     Company = CharField(default="GEG Company", max_length=20)
-    Day = TextField(default="", max_length=20)
+    Day = TextField(default="04/14", max_length=20)
     Time = TextField(default="10:00AM - 11:00AM")
     Mode = TextField(default="Online", max_length=20)
     Plan = ImageField(default="plan.jpg", upload_to="plan/")
