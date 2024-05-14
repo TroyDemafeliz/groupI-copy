@@ -18,9 +18,9 @@
                         <RouterLink to="/admin-services-edit" type="button" v-on:click="setCurrent(Service)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
                             Edit Service
                         </RouterLink>
-                        <a href="#" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <button type="delete" v-on:click = "deleteCurrentService(Service.Id)" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
                             Delete Service
-                        </a>
+                        </button>
                       </div>
                     </div>
             </div>
@@ -35,14 +35,21 @@ import { defineComponent } from 'vue';
 export default defineComponent({
 
   setup(){
-    const {Services, setService} = useServices()
+    const {Services, setService, deleteService} = useServices()
     const setCurrent = (Service) => {
       setService(Service)
+    }
+
+    const deleteCurrentService = (id) => {
+      if (confirm("Are you sure you want to delete this service?")) {
+        deleteService(id);
+      }
     }
 
     return{
       Services,
       setCurrent,
+      deleteCurrentService
     }
   },
 });
