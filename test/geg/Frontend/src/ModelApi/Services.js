@@ -15,9 +15,14 @@ export async function getServices() {
     .catch((err) => alert(err));
 }
 
-export async function createService(data) {
-    await api
-        .post("backend/Service/create/", data)
+export function createService(Title, Description, Image) {
+    const formData = new FormData();
+    formData.append('Title', Title);
+    formData.append('Description', Description);
+    formData.append('Image', Image);
+
+    api
+        .post("backend/Service/create/", formData)
         .then((res) => {
             if (res.status === 201) alert("Service created!");
             else alert("Failed to make Service.");
