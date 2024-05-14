@@ -49,29 +49,21 @@
     </div>
 </template>
 <script>
-import { useServices } from '../ModelApi/Services';
+import {useService, updateService} from '../ModelApi/Services';
 import router from '@/router';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
    setup(){
-      const {updateService, currentService, setService} = useServices()
+      const {currentService} = useService(router.currentRoute.value.params.id)
+      const id = router.currentRoute.value.params
       const Service = currentService
-      const title = ref(Service.Title)
-      const desc = ref(Service.Description)
-      const imageSrc = ref(Service.Image)
-      const id = Service.Id
 
       const onSubmit = async () => {
       updateService(id, title, desc, imageSrc)
-      setService(null)
       router.push('/admin-services')
    }
    return{
-      onSubmit,
-      title,
-      desc,
-      imageSrc,
-      id
+      currentService,id,Service,title,desc,imageSrc, onSubmit
    }
    },
   methods: {

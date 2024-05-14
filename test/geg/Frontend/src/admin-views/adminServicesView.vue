@@ -15,7 +15,7 @@
                         <div class="p-5">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ Service.Title }}</h5>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ Service.Description }}</p>
-                        <RouterLink to="/admin-services-edit" type="button" v-on:click="setCurrent(Service)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
+                        <RouterLink :to="{name: 'admin-edit-service', params:{id: Service.Id}}" type="button" v-on:click.capture="setId(Service.Id)" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-grayish focus:ring-4 focus:outline-none focus:ring-blue-300 mr-2 mb-2">
                             Edit Service
                         </RouterLink>
                         <a href="#" data-modal-target="editServiceModal" data-modal-show="editServiceModal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red rounded-lg hover:bg-red focus:ring-4 focus:outline-none focus:ring-blue-300">
@@ -29,21 +29,17 @@
     </div>
 </template>
 <script>
-import { useServices } from '../ModelApi/Services';
+import { useServices} from '../ModelApi/Services';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+setup(){
+  const{Services} = useServices()
+  return{
+    Services
+}
+},
 
-  setup(){
-    const {Services, setService} = useServices()
-    const setCurrent = (Service) => {
-      setService(Service)
-    }
 
-    return{
-      Services,
-      setCurrent,
-    }
-  },
 });
 </script>

@@ -81,7 +81,7 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
-      path: '/admin-services-edit',
+      path: '/admin-services-edit/:id',
       name: 'admin-edit-service',
       component: adminEditService,
       props: true,

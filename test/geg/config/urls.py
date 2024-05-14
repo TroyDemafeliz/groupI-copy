@@ -29,17 +29,18 @@ urlpatterns = [
     path("backend/Booking/", view=views.DisplayBooking.as_view(), name='Bookings'),
     path("backend/Booking/create/", view=views.CreateBooking.as_view(), name='CreateBookings'),
     path("backend/Booking/delete/<int:pk>/", view=views.DeleteBooking.as_view(), name='DeleteBookings'),
-    path("backend/Booking/update/<int:pk>/", view=views.UpdateBooking.as_view(), name='UpdateBookings'),
+    path("backend/Booking/update/<int:pk>/", view=views.RetrieveUpdateBooking.as_view(), name='UpdateBookings'),
     
     path("backend/Project/", view=views.DisplayProject.as_view(), name='Projects'),
     path("backend/Project/create/", view=views.CreateProject.as_view(), name='CreateProjects'),
-    path("backend/Project/delete<int:pk>/", view=views.DeleteProject.as_view(), name='DeleteProjects'),
-    path("backend/Project/update/<int:pk>/", view=views.UpdateProject.as_view(), name='UpdateProjects'),
+    path("backend/Project/delete/<int:pk>/", view=views.DeleteProject.as_view(), name='DeleteProjects'),
+    path("backend/Project/update/<int:pk>/", view=views.RetrieveUpdateProject.as_view(), name='UpdateProjects'),
     
     path("backend/Service/", view=views.DisplayService.as_view(), name='Services'),
     path("backend/Service/create/", view=views.CreateService.as_view(), name='CreateServices'),
     path("backend/Service/delete/<int:pk>/", view=views.DeleteService.as_view(), name='DeleteServices'),
-    path("backend/Service/update/<int:pk>/", view=views.UpdateService.as_view(), name='UpdateServices'),
+    path("backend/Service/update/<int:pk>/", view=views.RetrieveUpdateService.as_view(), name='RetrieveUpdateServices'),
+    
     
     
     # Your stuff: custom urls includes go here
