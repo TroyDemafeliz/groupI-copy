@@ -160,9 +160,15 @@
                                  </div> 
                               </div>
                               <div class="col-span-6 sm:col-span-3">
-                                 <label for="department" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Position</label>
+                                 <label for="department" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Date</label>
                                  <div type="text" name="department" id="department" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    CEO
+                                    05/20/2024
+                                 </div>
+                              </div>
+                              <div class="col-span-6 sm:col-span-3">
+                                 <label for="department" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Time</label>
+                                 <div type="text" name="department" id="department" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
+                                    9:00 AM - 10:00 AM
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
@@ -172,9 +178,15 @@
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
-                                 <label for="current-password" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Category</label>
+                                 <label for="current-password" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Mode of Meeting</label>
                                  <div type="text" name="something" id="something" class="border-0 text-gray-900 text-sm rounded-lg block w-full p-2.5 font-extrabold">
-                                    Meeting
+                                    Online Meeting
+                                 </div>
+                              </div>
+                              <div class="col-span-6 sm:col-span-3">
+                                 <label for="current-password" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Proposed Plan</label>
+                                 <div type="file" name="something" id="something" class="border-0 text-gray-900 text-sm rounded-lg block w-full p-2.5 font-extrabold">
+                                    Online Meeting
                                  </div>
                               </div>
                         </div>
