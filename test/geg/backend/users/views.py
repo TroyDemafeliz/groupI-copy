@@ -10,6 +10,7 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from django.core.files.storage import default_storage
 from .models import User,Booking, Project, Service
+from django.shortcuts import get_object_or_404
 
 from django.shortcuts import render
 from rest_framework import generics
@@ -61,7 +62,7 @@ class CreateBooking(generics.CreateAPIView):
     serializer_class = BookingSerializer
     permission_classes = [AllowAny]
     queryset = Booking.objects.all()
-class UpdateBooking(generics.UpdateAPIView):
+class RetrieveUpdateBooking(generics.RetrieveUpdateAPIView):
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
@@ -83,7 +84,7 @@ class CreateProject(generics.CreateAPIView):
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated]
     queryset = Project.objects.all()   
-class UpdateProject(generics.UpdateAPIView):
+class RetrieveUpdateProject(generics.RetrieveUpdateAPIView):
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated]
     queryset = Project.objects.all()
@@ -100,9 +101,9 @@ class CreateService(generics.CreateAPIView):
     serializer_class = ServiceSerializer
     permission_classes = [IsAuthenticated]
     queryset = Service.objects.all()
-class UpdateService(generics.UpdateAPIView):
+class RetrieveUpdateService(generics.RetrieveUpdateAPIView):
     serializer_class = ServiceSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Service.objects.all()
 class DeleteService(generics.DestroyAPIView):
     serializer_class = ServiceSerializer
@@ -110,5 +111,4 @@ class DeleteService(generics.DestroyAPIView):
     queryset = Service.objects.all()
     
 # filter functions will be below
-
     

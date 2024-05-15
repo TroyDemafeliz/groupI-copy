@@ -1,10 +1,11 @@
 import { ref, onMounted } from 'vue';
 import api from '@/api';
 export const Bookings = ref([])
+export const currentBooking = ref()
 
 
-export function getBookings() {
-    api
+export async function getBookings() {
+    await api
     .get("/backend/Booking/")
     .then((res) => res.data)
     .then((data) => {
@@ -15,8 +16,8 @@ export function getBookings() {
     .catch((err) => alert(err));
 }
 
-export function createBooking(Email, Name, Company, Phone, Date, Mode, Plan) {
-    api
+export async function createBooking(Email, Name, Company, Phone, Date, Mode, Plan) {
+    await api
         .post("backend/Booking/create/", { Email, Name, Company, Phone, Date, Mode, Plan })
         .then((res) => {
             if (res.status === 201) alert("Booking created!");
@@ -25,9 +26,19 @@ export function createBooking(Email, Name, Company, Phone, Date, Mode, Plan) {
         })
         .catch((err) => alert(err));
 }
-export function updateBooking(Id, Email, Name, Company, Phone, Date, Mode, Plan) {
-    api
-    .put(`/backend/Booking/update/${Id}/`, {Email, Name, Company, Phone, Date, Mode, Plan})
+
+export async function retrieveBooking(id){
+    await api
+    .get(`/backend/Booking/update/${id}/`)
+    .then((res) => res.data)
+    .then((data) => {
+        currentBooking.value = data
+    })
+    .catch((err) => alert(err));
+}
+export async function updateBooking(Id, data) {
+    await api
+    .put(`/backend/Booking/update/${Id}/`, data)
     .then((res) => {
         if (res.status === 200) alert("Booking updated!");
         else alert("Failed to update Booking.");
@@ -36,8 +47,8 @@ export function updateBooking(Id, Email, Name, Company, Phone, Date, Mode, Plan)
     .catch((err) => alert(err));
 }
 
-export function deleteBooking(Id) {
-    api
+export async function deleteBooking(Id) {
+    await api
     .delete(`/backend/Booking/delete/${Id}/`)
     .then((res) => {
         if (res.status === 204) alert("Booking deleted!");
@@ -48,5 +59,10 @@ export function deleteBooking(Id) {
 }
 export const useBookings = () => {
     onMounted(getBookings)
+    return { Bookings, createBooking, updateBooking, deleteBooking, };
+};
+
+export const useBooking = () => {
+    onMounted(retrieveBooking)
     return { Bookings, getBookings, createBooking, updateBooking, deleteBooking, };
 };
