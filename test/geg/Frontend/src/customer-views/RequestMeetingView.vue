@@ -1,6 +1,6 @@
 <template>
   <form class="max-w-5xl mx-auto mt-10 mb-20">
-        <form class="max-w-2xl mx-auto" @submit.prevent="onSubmit">
+        <form class="max-w-2xl mx-auto" @submit.prevent="submitForm">
         <div class="">
               <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl whitespace-nowrap"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-600">Request Meeting</span></h1>
               <p class="text-lg font-normal text-black lg:text-xl dark:text-black mb-10 mt-5">Welcome to our meeting request page. We look forward to discussing your construction needs</p>
@@ -91,13 +91,6 @@
 import { ref } from 'vue';
 const date = ref(new Date())
 
-const first_name = document.getElementById("first_name");
-const last_name = document.getElementById("last_name");
-const email = document.getElementById("email");
-const phone = document.getElementById("phone");
-const company = document.getElementById("company");
-
-
 export default {
   data() {
     return {
@@ -106,6 +99,13 @@ export default {
       showDatePicker: false,
       selectedDate:null,
       saveDate:null,
+      FirstName: '',
+      LastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      selectedRadio: '',
+      selectedDate: '',
     };
   },
  
@@ -122,13 +122,20 @@ export default {
       this.showDatePicker = false;
     },
     async submitForm() {
+      console.log('Form Submitted');
       const captchaValue = grecaptcha.getResponse();
       if (!captchaValue) {
         alert('Please verify you are not a robot');
         return;
       }
 
-      console.log('Selected date:', this.date)
+      console.log('First Name:', this.FirstName);
+      console.log('Last Name:', this.LastName);
+      console.log('Email:', this.email);
+      console.log('Phone:', this.phone);
+      console.log('Company:', this.company);
+      console.log('Selected Radio:', this.selectedRadio);
+      console.log('Selected Date:', this.selectedDate);
     }
   },
 };
