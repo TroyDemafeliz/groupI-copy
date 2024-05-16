@@ -277,3 +277,4 @@ dump.rdb
 .env
 .envs/*
 !.envs/.local/
+.backend/users/migrations/*
