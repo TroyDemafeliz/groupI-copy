@@ -16,6 +16,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "@unhead/vue": "^1.9.9",
+    "@vuepic/vue-datepicker": "^8.6.0",
     "axios": "^1.6.8",
     "flowbite": "^2.3.0",
     "jwt-decode": "^4.0.0",

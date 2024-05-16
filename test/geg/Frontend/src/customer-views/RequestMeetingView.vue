@@ -71,6 +71,7 @@
                   </div>
             </div>
               </div>
+
             <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
 
             <!-- <form class="max-w-lg mx-auto"> -->
@@ -89,6 +90,8 @@
 
 <script>
 import { ref } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 const date = ref(new Date())
 
 export default {
@@ -98,7 +101,7 @@ export default {
       showModal: false,
       showDatePicker: false,
       selectedDate:null,
-      saveDate:null,
+      savedDate:null,
       FirstName: '',
       LastName: '',
       email: '',
@@ -114,9 +117,9 @@ export default {
       console.log('Captcha response:',response);
     },
     saveDate() {
-      this.saveDate = this.selectedDate;
+      this.savedDate = this.selectedDate;
       this.showDatePicker = false;
-      console.log('Saved date:', this.saveDate)
+      console.log('Saved date:', this.savedDate)
     }, 
     discardDate() {
       this.showDatePicker = false;
