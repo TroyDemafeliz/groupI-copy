@@ -194,9 +194,39 @@ export default {
 
    setup(){
       const { Bookings } = useBookings()
+      
       return{
-         Bookings,
+         Bookings
+      }
+   },
+   data(){
+      return{
+         rows: [
+        {
+          time: '10:00 AM - 11:00 AM',
+          meeting: 'Google Meet',
+          date: 'Apr 14',
+          day: 'WED',
+          status: 'Upcoming',
+          company: 'GEG Company',
+        },
+        {
+          time: '10:00 AM - 11:00 AM',
+          meeting: 'Google Meet',
+          date: 'Apr 15',
+          day: 'THU',
+          status: 'Upcoming',
+          company: 'GEG Company',
+        },
+        // Add more rows as needed
+      ]
       }
    }
 };
+// time: '10:00 AM - 11:00 AM',
+// meeting: 'Google Meet',
+// date: 'Apr 14',
+// day: 'WED',
+// status: 'Upcoming',
+// company: 'GEG Company', 
 </script>
