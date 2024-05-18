@@ -4,8 +4,6 @@ import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
 import { computed, watch, ref } from 'vue';
 import AppFooter from './components/Footer.vue'
-import ProtectedRoute from './components/ProtectedRoute.vue';
-import Login from './components/Login.vue';
 const route = useRoute()
 const router = useRouter()
 
@@ -39,8 +37,6 @@ const contentClasses = computed(() => {
 
 <template>
   <div>
-    <ProtectedRoute v-if="isAdminRoute"/>
-
     <AppNavbar v-if="showNavAndFooter" />
     <DashboardView v-if="isAdminRoute" />
     <div :class="contentClasses">

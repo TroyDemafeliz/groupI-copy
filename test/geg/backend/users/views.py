@@ -9,11 +9,12 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from django.core.files.storage import default_storage
-from .models import User,Booking
+from .models import User,Booking, Project, Service
+from django.shortcuts import get_object_or_404
 
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import UserSerializer, BookingSerializer
+from .serializers import UserSerializer, BookingSerializer, ProjectSerializer, ServiceSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 #These are for the backend server
@@ -53,21 +54,18 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 user_redirect_view = UserRedirectView.as_view()
 
 #Create Booking
-class CreateBooking(generics.CreateAPIView):
-    serializer_class = BookingSerializer
-    permission_classes = [AllowAny]
-    queryset = Booking.objects.all()
-    
 class DisplayBooking(generics.ListAPIView):
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
-    
-class UpdateBooking(generics.UpdateAPIView):
+class CreateBooking(generics.CreateAPIView):
+    serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
+    queryset = Booking.objects.all()
+class RetrieveUpdateBooking(generics.RetrieveUpdateAPIView):
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
-
 class DeleteBooking(generics.DestroyAPIView):
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
@@ -77,3 +75,40 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+      
+class DisplayProject(generics.ListAPIView):
+    serializer_class = ProjectSerializer
+    permission_classes = [AllowAny]
+    queryset = Project.objects.all()
+class CreateProject(generics.CreateAPIView):
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Project.objects.all()   
+class RetrieveUpdateProject(generics.RetrieveUpdateAPIView):
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Project.objects.all()
+class DeleteProject(generics.DestroyAPIView):
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Project.objects.all()
+    
+class DisplayService(generics.ListAPIView):
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    queryset = Service.objects.all()
+class CreateService(generics.CreateAPIView):
+    serializer_class = ServiceSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Service.objects.all()
+class RetrieveUpdateService(generics.RetrieveUpdateAPIView):
+    serializer_class = ServiceSerializer
+    permission_classes = [AllowAny]
+    queryset = Service.objects.all()
+class DeleteService(generics.DestroyAPIView):
+    serializer_class = ServiceSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Service.objects.all()
+    
+# filter functions will be below
+    

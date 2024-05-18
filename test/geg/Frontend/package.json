@@ -23,6 +23,7 @@
     "pinia": "^2.1.7",
     "primevue": "^3.52.0",
     "universal-cookie": "^7.1.4",
+    "v-calendar": "^3.1.2",
     "vue": "^3.4.21",
     "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.3.0"
@@ -34,7 +35,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/test-utils": "^2.4.5",
     "autoprefixer": "^10.4.19",
-    "cypress": "^13.7.2",
+    "cypress": "^13.9.0",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-vue": "^9.25.0",

@@ -19,7 +19,7 @@
                   </tr>
             </thead>
             <tbody>
-               <tr v-for="(row, index) in rows" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <tr v-for="Booking in Bookings" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td class="px-6 py-4">
                      <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ row.day }} </div>
                      <div class="text-black ml-3">{{ row.date }}</div>
@@ -189,24 +189,14 @@
 </template>
 
 <script>
+import { useBookings } from '@/ModelApi/Booking';
 export default {
-  data() {
-    return {
-      rows: [
-        {
-          time: '10:00 AM - 11:00 AM',
-          meeting: 'Google Meet',
-          date: 'Apr 14',
-          day: 'WED',
-          status: 'Upcoming',
-          company: 'GEG Company',
-        },
 
-        // Add more rows as needed
-      ],
-
-
-    };
-  }
+   setup(){
+      const { Bookings } = useBookings()
+      return{
+         Bookings,
+      }
+   }
 };
 </script>

@@ -37,6 +37,7 @@
 import image1 from '../assets/se-dummy-images/project-5 (school).jpeg'
 export default {
 
+
   data() {  
     return {
       items: [
