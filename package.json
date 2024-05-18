@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@popperjs/core": "^2.11.8",
     "@unhead/vue": "^1.9.9",
     "@vuepic/vue-datepicker": "^8.5.1",

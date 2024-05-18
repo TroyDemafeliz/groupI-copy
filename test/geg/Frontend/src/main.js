@@ -8,10 +8,11 @@ import 'flowbite/dist/flowbite.min.js';
 import './assets/main.css'
 import VCalendar from 'v-calendar';
 import 'v-calendar/style.css';
-
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const app = createApp(App)
-
+app.component('VueDatePicker', VueDatePicker);
 app.use(PrimeVue);
 app.use(createPinia())
 app.use(router)
