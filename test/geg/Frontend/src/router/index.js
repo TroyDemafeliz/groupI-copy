@@ -12,6 +12,7 @@ import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
+import adminManageAccount from '../admin-views/adminManageAccount.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
 
@@ -92,6 +93,12 @@ const router = createRouter({
       name: 'admin-add-service',
 
       component: adminAddService,
+      meta: { requiresAuth: true } 
+    },
+    {
+      path: '/admin-account-settings',
+      name: 'admin-account-manage',
+      component: adminManageAccount,
       meta: { requiresAuth: true } 
     },
     {
