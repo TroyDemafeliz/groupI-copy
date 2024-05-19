@@ -89,8 +89,8 @@
 
 
 <script>
+import {createBooking} from '@/ModelApi/Booking';
 import { ref } from 'vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 const date = ref(new Date())
 
@@ -126,6 +126,7 @@ export default {
       this.showDatePicker = false;
     },
     async submitForm() {
+    
       console.log('Form Submitted');
       const captchaValue = grecaptcha.getResponse();
       if (!captchaValue) {
@@ -150,25 +151,15 @@ export default {
         selectedRadio: this.selectedRadio,
         selectedDate: this.selectedDate,
       };
-
-      try {
-        const response = await fetch('http://localhost:8000/api/create-booking/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+      createBooking(formData)
+        .then((response) => {
+          console.log('Booking created:', response);
+          alert('Booking created successfully');
+        })
+        .catch((error) => {
+          console.error('Error creating booking:', error);
+          alert('Error creating booking');
         });
-
-        if (response.ok) {
-          alert('Form submitted successfully');
-        } else {
-          alert('Failed to submit form');
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('Failed to submit form');
-      }
     }
   },
   mounted() {
