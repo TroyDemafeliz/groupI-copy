@@ -21,8 +21,8 @@
             <tbody>
                <tr v-for="Booking in Bookings" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td class="px-6 py-4">
-                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ row.day }} </div>
-                     <div class="text-black ml-3">{{ row.date }}</div>
+                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ Booking.selectedDate}} </div>
+                     <div class="text-black ml-3">{{ Booking.FirstName }}</div>
                   </td>
                   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   <div class="ps-1 pr-4">
@@ -30,13 +30,13 @@
                      <img src="../assets/se-dummy-images/location icon.png"  class="w-5 h-5 rounded-full mt-2.5">
                   </div>         
                   <div class="ps-3">
-                     <div class="text-base font-semibold mb-2">{{ row.time }}</div>
-                     <div class="font-normal text-gray-500">{{ row.meeting }}</div>
+                     <div class="text-base font-semibold mb-2">{{ Booking.selectedRadio }}</div>
+                     <div class="font-normal text-gray-500">{{ Booking.email }}</div>
                   </div>  
                   </th>
                   <td class="px-6 py-4">
                   <div class="flex items-center text-black font-light text-lg">
-                     {{ row.company }}
+                     {{ Booking.company }}
                   </div>
                   </td>
                   <td class="px-6 py-4 col-span-2">
@@ -196,7 +196,7 @@ export default {
       const { Bookings } = useBookings()
       
       return{
-         Bookings
+         Bookings: {},
       }
    },
    data(){

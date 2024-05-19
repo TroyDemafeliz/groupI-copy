@@ -72,7 +72,7 @@
             </div>
               </div>
 
-            <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
+            <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk" ref="recaptcha"></div>
 
             <!-- <form class="max-w-lg mx-auto"> -->
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
@@ -113,6 +113,7 @@ export default {
   },
  
   methods: {
+
     onVerify(response) {
       console.log('Captcha response:',response);
     },
@@ -139,7 +140,42 @@ export default {
       console.log('Company:', this.company);
       console.log('Selected Radio:', this.selectedRadio);
       console.log('Selected Date:', this.selectedDate);
+
+      const formData = {
+        FirstName: this.FirstName,
+        LastName: this.LastName,
+        email: this.email,
+        phone: this.phone,
+        company: this.company,
+        selectedRadio: this.selectedRadio,
+        selectedDate: this.selectedDate,
+      };
+
+      try {
+        const response = await fetch('http://localhost:8000/api/create-booking/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          alert('Form submitted successfully');
+        } else {
+          alert('Failed to submit form');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Failed to submit form');
+      }
     }
   },
+  mounted() {
+    if (window.grecaptcha && this.$refs.recaptcha) {
+      window.grecaptcha.render(this.$refs.recaptcha);
+    }
+  },
+
 };
 </script>
