@@ -142,6 +142,9 @@ export default {
       console.log('Selected Radio:', this.selectedRadio);
       console.log('Selected Date:', this.selectedDate);
 
+      const formattedDate = this.selectedDate.toLocaleDateString('en-US') + ' ' + this.selectedDate.toLocaleTimeString('en-US');
+      console.log('Formatted Date:', formattedDate);
+
       const formData = {
         FirstName: this.FirstName,
         LastName: this.LastName,
@@ -149,7 +152,7 @@ export default {
         phone: this.phone,
         company: this.company,
         selectedRadio: this.selectedRadio,
-        selectedDate: this.selectedDate,
+        Date: formattedDate,
       };
       createBooking(formData)
         .then((response) => {
