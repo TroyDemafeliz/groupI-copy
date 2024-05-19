@@ -1,6 +1,6 @@
 <template>
   <form class="max-w-5xl mx-auto mt-10 mb-20">
-        <form class="max-w-2xl mx-auto" @submit.prevent="submitForm">
+        <form class="max-w-2xl mx-auto" ref="form" @submit.prevent="sendEmail">
         <div class="">
               <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl whitespace-nowrap"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-600">Request Meeting</span></h1>
               <p class="text-lg font-normal text-black lg:text-xl dark:text-black mb-10 mt-5">Welcome to our meeting request page. We look forward to discussing your construction needs</p>
@@ -33,7 +33,7 @@
                     <label for="company" class="peer-focus:font-medium absolute text-sm text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
               </div>
               </div>
-              
+
               <div id="radio-options">
                 <p class="mb-5 mt-2 font-semibold">Where Should we Meet?</p>
                 <div class="flex items-center mb-4">
@@ -63,23 +63,22 @@
                         Schedule appointment
                   </button>
 
-                  <VDatePicker v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
+                  <VDatePicker id="selectedDate" v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
 
                   <div class="grid grid-cols-2 gap-2 mt-2">
                         <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
                         <button type="button" @click="discardDate" v-if="showDatePicker" data-modal-hide="timepicker-modal" class="text-xs px-2 py-2 text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Discard</button>
                   </div>
-            </div>
               </div>
+            </div>
 
+            <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">recaptcha</label>
             <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
 
-            <!-- <form class="max-w-lg mx-auto"> -->
-              <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
-              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+              <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Proposed Plan:</label>
+              <input @change="handleFileUpload" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="plan" type="file">
              
               <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Submit</button>
-            <!-- </form> -->
             
           </div>
         </form>
@@ -92,7 +91,10 @@
 import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import emailjs from '@emailjs/browser';
 const date = ref(new Date())
+// import Compress from 'compress.js';
+// import axios from 'axios';
 
 export default {
   data() {
@@ -109,37 +111,103 @@ export default {
       company: '',
       selectedRadio: '',
       selectedDate: '',
+      file: null,
+      fileName: '',
+      shortenedUrl: '',
     };
   },
  
   methods: {
-    onVerify(response) {
-      console.log('Captcha response:',response);
-    },
     saveDate() {
       this.savedDate = this.selectedDate;
       this.showDatePicker = false;
       console.log('Saved date:', this.savedDate)
     }, 
-    discardDate() {
-      this.showDatePicker = false;
+    formatDate(date) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-US', options);
     },
-    async submitForm() {
-      console.log('Form Submitted');
+    // handleFileUpload(event) {
+    //   const file = event.target.files[0];
+    //   this.fileName = file.name;
+    //   const compress = new Compress();
+    //   compress.compress([file], {
+    //     size: 0.05, // 0.05 MB = 50 KB
+    //     quality: 0.75,
+    //     maxWidth: 1920,
+    //     maxHeight: 1920,
+    //     resize: true,
+    //   }).then((compressedFiles) => {
+    //     const img = compressedFiles[0];
+    //     this.file = img.data;
+    //     this.uploadToImgur(img.data);
+    //   });
+    // },
+    // uploadToImgur(imageData) {
+    //   const formData = new FormData();
+    //   formData.append('image', imageData);
+
+    //   axios.post('https://api.imgur.com/3/image', formData, {
+    //     headers: {
+    //       Authorization: 'Client-ID 8f7322d0bbae3e3',
+    //     },
+    //   }).then(response => {
+    //     this.shortenedUrl = response.data.data.link;
+    //   }).catch(error => {
+    //     console.error('Image upload failed:', error);
+    //   });
+    // },
+    sendEmail() {
       const captchaValue = grecaptcha.getResponse();
       if (!captchaValue) {
         alert('Please verify you are not a robot');
         return;
       }
+      var params = {
+        first_name: this.FirstName,
+        last_name: this.LastName,
+        email: this.email,
+        phone: this.phone,
+        company: this.company,
+        mode: this.selectedRadio,
+        dateTime: this.formatDate(this.savedDate),
+        plan: this.shortenedUrl,
+        planName: this.fileName,
+      }
+      emailjs.send("service_lr9wqrx", "template_kpgjaqj", params, {
+          publicKey: '57QvhlgrOy8QdU-l0',
+        })
+        .then(
+          () => {
+            console.log('SUCCESS!');
+            console.log('First Name:', this.FirstName);
+            console.log('Last Name:', this.LastName);
+            console.log('Email:', this.email);
+            console.log('Phone:', this.phone);
+            console.log('Company:', this.company);
+            console.log('Selected Radio:', this.selectedRadio);
+            console.log('Selected Date:', this.formatDate(this.selectedDate));
+            alert('Email sent successfully!');
+          },
+          (error) => {
+            console.log('FAILED...', error);
+          },
+        );
+    },
 
-      console.log('First Name:', this.FirstName);
-      console.log('Last Name:', this.LastName);
-      console.log('Email:', this.email);
-      console.log('Phone:', this.phone);
-      console.log('Company:', this.company);
-      console.log('Selected Radio:', this.selectedRadio);
-      console.log('Selected Date:', this.selectedDate);
-    }
+    onVerify(response) {
+      console.log('Captcha response:',response);
+    },
+    discardDate() {
+      this.showDatePicker = false;
+    },
+    // async submitForm() {
+    //   console.log('Form Submitted');
+    //   if (!captchaValue) {
+    //     alert('Please verify you are not a robot');
+    //     return;
+    //   }
+    // }
   },
 };
 </script>
