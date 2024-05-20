@@ -142,7 +142,7 @@ export default {
       console.log('Selected Radio:', this.selectedRadio);
       console.log('Selected Date:', this.selectedDate);
 
-      const formattedDate = this.selectedDate.toLocaleDateString('en-US') + ' ' + this.selectedDate.toLocaleTimeString('en-US');
+      const formattedDate = this.selectedDate.toISOString();
       console.log('Formatted Date:', formattedDate);
 
       const formData = {
