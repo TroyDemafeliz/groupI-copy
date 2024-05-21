@@ -68,7 +68,7 @@ class RetrieveUpdateBooking(generics.RetrieveUpdateAPIView):
     queryset = Booking.objects.all()
 class DeleteBooking(generics.DestroyAPIView):
     serializer_class = BookingSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Booking.objects.all()
 
 class CreateUserView(generics.CreateAPIView):

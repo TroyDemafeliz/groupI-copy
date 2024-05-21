@@ -19,11 +19,10 @@
                   </tr>
             </thead>
             <tbody>
-               <tr v-for="Booking in Bookings" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <tr v-for="(Booking, index) in Bookings" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td class="px-6 py-4">
-                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ Booking.Date}} </div>
-                     <div class="text-black ml-3">{{ Booking.FirstName }}</div>
-                     <div class="text-black ml-3">{{ Booking.LastName }}</div>
+                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ formatDate(Booking.Date).day }}</div>
+                     <div class="text-black ml-3">{{ formatDate(Booking.Date).datePart }}</div>
                   </td>
                   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   <div class="ps-1 pr-4">
@@ -31,8 +30,8 @@
                      <img src="../assets/se-dummy-images/location icon.png"  class="w-5 h-5 rounded-full mt-2.5">
                   </div>         
                   <div class="ps-3">
-                     <div class="text-base font-semibold mb-2">{{ Booking.Mode }}</div>
-                     <div class="font-normal text-gray-500">{{ Booking.Email }}</div>
+                     <div class="text-base font-semibold mb-2">{{ formatDate(Booking.Date).time }}</div>
+                     <div class="font-normal text-gray-500">{{ Booking.Mode }}</div>
                   </div>  
                   </th>
                   <td class="px-6 py-4">
@@ -126,7 +125,7 @@
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                               View Details
                         </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewDetailsModal">
+                        <button type="button" @click="viewDetails(booking)" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewDetailsModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
@@ -135,47 +134,35 @@
                      </div>
                      <!-- Modal body -->
                      <div class="p-6 space-y-6">
-                        <div class="grid grid-cols-6 gap-6">
+                        <div class="grid grid-cols-6 gap-6" v-for="(Booking, index) in Bookings" :key="index">
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="first-name" class="block mb-2 text-sm text-gray-900 dark:text-white font-normal">First Name</label>
                                  <div type="text" name="first-name" id="first-name" class="text-gray-900 text-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    Bonnie
+                                    {{Booking.FirstName}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="last-name" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Last Name</label>
                                  <div type="text" name="last-name" id="last-name" class="text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    Clyde
+                                    {{ Booking.LastName }}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="email" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Email</label>
                                  <div type="number" name="email" id="email" class="text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    bclyde@gmail.com
+                                    {{ Booking.Email }}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="phone-number" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Phone Number</label>
                                  <div type="number" name="phone-number" id="phone-number" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    +63 935 123 4567
+                                    {{ Booking.Phone }}
                                  </div> 
-                              </div>
-                              <div class="col-span-6 sm:col-span-3">
-                                 <label for="department" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Position</label>
-                                 <div type="text" name="department" id="department" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    CEO
-                                 </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="company" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Company</label>
                                  <div type="text" name="company" id="company" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    123456
-                                 </div>
-                              </div>
-                              <div class="col-span-6 sm:col-span-3">
-                                 <label for="current-password" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Category</label>
-                                 <div type="text" name="something" id="something" class="border-0 text-gray-900 text-sm rounded-lg block w-full p-2.5 font-extrabold">
-                                    Meeting
+                                    {{ Booking.Company }}
                                  </div>
                               </div>
                         </div>
@@ -190,46 +177,45 @@
 </template>
 
 <script>
-import {getBookings, Bookings} from '../ModelApi/Booking';
+// import { formatDate } from 'v-calendar/dist/types/src/utils/date/helpers';
+import { useBookings} from '../ModelApi/Booking';
+import {getBookings} from '../ModelApi/Booking';
 import { defineComponent } from 'vue';
+import { ref } from 'vue';
 export default defineComponent({
-
+   data() {
+   return {
+      bookingsDate:'',
+      storeBookingsDate: '',
+    };
+  },
    setup(){
-    const {Bookings, setBookings} = getBookings()
-    const setCurrent = (Booking) => {
-      getBookings(Booking)
+    const formatDate = (date) => {
+      const day = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
+      const datePart = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      const time = new Date(date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+      return { day, datePart, time };
     }
+    const rows = ref([])
 
+    const {Bookings, setBooking} = useBookings()
+    const setCurrent = (Booking) => {
+      setBooking(Booking)
+    }
     return{
       Bookings,
       setCurrent,
+      formatDate
     }
   },
-   
-
-   data(){
-      return{
-         rows: [
-        {
-          time: '10:00 AM - 11:00 AM',
-          meeting: 'Google Meet',
-          date: 'Apr 14',
-          day: 'WED',
-          status: 'Upcoming',
-          company: 'GEG Company',
-        },
-        {
-          time: '10:00 AM - 11:00 AM',
-          meeting: 'Google Meet',
-          date: 'Apr 15',
-          day: 'THU',
-          status: 'Upcoming',
-          company: 'GEG Company',
-        },
-        // Add more rows as needed
-      ]
-      }
-   }
+  methods: {
+    viewDetails(booking) {
+      this.$refs.viewDetailsModal.show();
+    },
+    editUser(booking) {
+      this.$refs.editUserModal.show();
+    },
+  },
 });
 // time: '10:00 AM - 11:00 AM',
 // meeting: 'Google Meet',

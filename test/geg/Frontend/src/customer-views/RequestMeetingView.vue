@@ -154,7 +154,7 @@ export default {
       Mode = this.selectedRadio,
       Plan = this.$refs.user_avatar.files[0];
     
-      await createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
+      createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
     }
   },
   mounted() {
