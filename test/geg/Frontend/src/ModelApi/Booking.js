@@ -28,7 +28,7 @@ export async function createBooking(Email, FirstName, LastName, Company, Phone, 
     formData.append('Plan', Plan);
 
     await api
-        .post("backend/Booking/create/", {formData})
+        .post("backend/Booking/create/", formData)
         .then((res) => {
             if (res.status === 201) alert("Booking created!");
             else alert("Failed to make Booking.");

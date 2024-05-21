@@ -19,10 +19,11 @@
                   </tr>
             </thead>
             <tbody>
-               <tr v-for="Booking in Bookings" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+               <tr v-for="Booking in Bookings" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td class="px-6 py-4">
                      <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ Booking.Date}} </div>
                      <div class="text-black ml-3">{{ Booking.FirstName }}</div>
+                     <div class="text-black ml-3">{{ Booking.LastName }}</div>
                   </td>
                   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   <div class="ps-1 pr-4">
@@ -189,19 +190,21 @@
 </template>
 
 <script>
-import { getBookings, Bookings} from '@/ModelApi/Booking';
-export default {
+import {getBookings, Bookings} from '../ModelApi/Booking';
+import { defineComponent } from 'vue';
+export default defineComponent({
 
    setup(){
+    const {Bookings, setBookings} = getBookings()
+    const setCurrent = (Booking) => {
+      getBookings(Booking)
+    }
 
-      onMounted(() => {
-         getBookings();
-         });
-
-      return{
-         Bookings
-      }
-   },
+    return{
+      Bookings,
+      setCurrent,
+    }
+  },
    
 
    data(){
@@ -227,7 +230,7 @@ export default {
       ]
       }
    }
-};
+});
 // time: '10:00 AM - 11:00 AM',
 // meeting: 'Google Meet',
 // date: 'Apr 14',

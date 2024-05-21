@@ -76,7 +76,7 @@
 
             <!-- <form class="max-w-lg mx-auto"> -->
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
-              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+              <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" ref="user_avatar" id="user_avatar" type="file">
              
               <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Submit</button>
             <!-- </form> -->
@@ -145,24 +145,16 @@ export default {
       const formattedDate = this.selectedDate.toISOString();
       console.log('Formatted Date:', formattedDate);
 
-      const formData = {
-        FirstName: this.FirstName,
-        LastName: this.LastName,
-        email: this.email,
-        phone: this.phone,
-        company: this.company,
-        selectedRadio: this.selectedRadio,
-        Date: formattedDate,
-      };
-      createBooking(formData)
-        .then((response) => {
-          console.log('Booking created:', response);
-          alert('Booking created successfully');
-        })
-        .catch((error) => {
-          console.error('Error creating booking:', error);
-          alert('Error creating booking');
-        });
+      const FirstName = this.FirstName,
+      LastName = this.LastName,
+      Email = this.email,
+      Company = this.company,
+      Phone = this.phone,
+      Date = formattedDate,
+      Mode = this.selectedRadio,
+      Plan = this.$refs.user_avatar.files[0];
+    
+      await createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
     }
   },
   mounted() {
