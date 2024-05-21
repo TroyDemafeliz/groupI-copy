@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-5xl mx-auto mt-10 mb-20">
-        <form class="max-w-2xl mx-auto" ref="form" @submit.prevent="sendEmail">
+        <form class="max-w-2xl mx-auto" id="form" ref="form" @submit.prevent="sendEmail">
         <div class="">
               <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl whitespace-nowrap"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-600">Request Meeting</span></h1>
               <p class="text-lg font-normal text-black lg:text-xl dark:text-black mb-10 mt-5">Welcome to our meeting request page. We look forward to discussing your construction needs.</p>
@@ -49,8 +49,8 @@
                     <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others (Please Specify:)</label>
                 </div>
                 
-                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
-                <textarea id="message" rows="4" v-if="selectedRadio === 'others'" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
+                <label for="meetingMessage" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <textarea id="meetingMessage" rows="4" v-model="meetingMessage" v-if="selectedRadio === 'others'" ref="meetingMessageRef" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
 
               </div>
 
@@ -103,6 +103,7 @@ import axios from 'axios';
 const date = ref(new Date())
 
 export default {
+
   setup() {
     const toast = useToast();
     const activeErrors = ref([]);
@@ -149,6 +150,8 @@ export default {
       fileName: '',
       shortenedUrl: '',
       loading: false,
+      meetingMessage: '',
+      storedMessage: ''
     };
   },
  
@@ -203,6 +206,8 @@ export default {
     },
 
     async sendEmail() {
+      this.storedMessage = this.meetingMessage;
+      console.log("Stored Message:", this.storedMessage);
       this.loading = true;
       const captchaValue = grecaptcha.getResponse();
       let errorMessages = [];
@@ -220,7 +225,7 @@ export default {
       if (!this.selectedRadio) {
         errorMessages.push('Meeting preference is required.');
       }
-      if (this.selectedRadio === 'others' && !this.message) {
+      if (this.selectedRadio === 'others' && !this.storedMessage) {
         errorMessages.push('Please specify where to meet.');
       }
       if (!this.selectedDate) {
@@ -249,7 +254,7 @@ export default {
         email: this.email,
         phone: this.phone,
         company: this.company,
-        mode: this.selectedRadio,
+        mode: this.selectedRadio === 'others' ? this.storedMessage : this.selectedRadio,
         dateTime: this.formatDate(this.savedDate),
         plan: this.shortenedUrl,
       }
@@ -266,7 +271,7 @@ export default {
             console.log('Email:', this.email);
             console.log('Phone:', this.phone);
             console.log('Company:', this.company);
-            console.log('Selected Radio:', this.selectedRadio);
+            console.log('Selected Radio:', this.selectedRadio === 'others' ? this.storedMessage : this.selectedRadio);
             console.log('Selected Date:', this.formatDate(this.selectedDate));
             console.log('Proposed Plan:', this.shortenedUrl);
           },
