@@ -212,16 +212,6 @@ export default {
       const captchaValue = grecaptcha.getResponse();
       let errorMessages = [];
 
-      if (this.file) {
-        try {
-          const compressedFile = await this.compressImage(this.file);
-          await this.uploadToCloudinary(compressedFile);
-        } catch (error) {
-          console.error('Error handling file upload:', error);
-          return;
-        }
-      }
-
       if (!this.selectedRadio) {
         errorMessages.push('Meeting preference is required.');
       }
@@ -248,6 +238,16 @@ export default {
 
       this.errorsShown = [];
 
+      if (this.file) {
+        try {
+          const compressedFile = await this.compressImage(this.file);
+          await this.uploadToCloudinary(compressedFile);
+        } catch (error) {
+          console.error('Error handling file upload:', error);
+          return;
+        }
+      }
+      
       var params = {
         first_name: this.FirstName,
         last_name: this.LastName,
@@ -290,6 +290,11 @@ export default {
       this.showDatePicker = false;
       this.selectedDate = null;
     },
+    mounted() {
+    if (window.grecaptcha && this.$refs.recaptcha) {
+      window.grecaptcha.render(this.$refs.recaptcha);
+    }
+  },
   },
 };
 </script>
