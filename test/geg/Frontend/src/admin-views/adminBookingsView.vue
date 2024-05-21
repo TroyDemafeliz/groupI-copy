@@ -42,7 +42,7 @@
                   <td class="px-6 py-4 col-span-2">
                   <div class="grid grid-cols-2">
                      <div>
-                        <a href="#" type="button" data-modal-target="viewDetailsModal" data-modal-show="viewDetailsModal" class="font-medium text-black dark:text-blue-500 hover:underline">View Details</a>
+                        <a href="#" @click.prevent="viewDetails(Booking)" type="button" data-modal-target="viewDetailsModal" data-modal-show="viewDetailsModal" class="font-medium text-black dark:text-blue-500 hover:underline">View Details</a>
                         <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-black dark:text-blue-500 hover:underline"><br><br>Edit Booking</a>
                      </div>
                      <div>
@@ -125,7 +125,7 @@
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                               View Details
                         </h3>
-                        <button type="button" @click="viewDetails(booking)" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewDetailsModal">
+                        <button type="button" @click="closeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewDetailsModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
@@ -133,36 +133,36 @@
                      </button>
                      </div>
                      <!-- Modal body -->
-                     <div class="p-6 space-y-6">
-                        <div class="grid grid-cols-6 gap-6" v-for="(Booking, index) in Bookings" :key="index">
+                     <div class="p-6 space-y-6" v-if="currentBooking">
+                        <div class="grid grid-cols-6 gap-6">
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="first-name" class="block mb-2 text-sm text-gray-900 dark:text-white font-normal">First Name</label>
                                  <div type="text" name="first-name" id="first-name" class="text-gray-900 text-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    {{Booking.FirstName}}
+                                    {{currentBooking.FirstName}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="last-name" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Last Name</label>
                                  <div type="text" name="last-name" id="last-name" class="text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    {{ Booking.LastName }}
+                                    {{currentBooking.LastName}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="email" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Email</label>
                                  <div type="number" name="email" id="email" class="text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    {{ Booking.Email }}
+                                    {{currentBooking.Email}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="phone-number" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Phone Number</label>
                                  <div type="number" name="phone-number" id="phone-number" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    {{ Booking.Phone }}
+                                    {{currentBooking.Phone}}
                                  </div> 
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="company" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Company</label>
                                  <div type="text" name="company" id="company" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
-                                    {{ Booking.Company }}
+                                    {{currentBooking.Company}}
                                  </div>
                               </div>
                         </div>
@@ -187,6 +187,7 @@ export default defineComponent({
    return {
       bookingsDate:'',
       storeBookingsDate: '',
+      currentBooking: null,
     };
   },
    setup(){
@@ -210,17 +211,25 @@ export default defineComponent({
   },
   methods: {
     viewDetails(booking) {
-      this.$refs.viewDetailsModal.show();
+      this.currentBooking = booking;
+      this.showModal('viewDetailsModal');
     },
-    editUser(booking) {
-      this.$refs.editUserModal.show();
+    closeModal() {
+      this.hideModal('viewDetailsModal');
+      this.currentBooking = null;
     },
+    showModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('hidden');
+      }
+    },
+    hideModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('hidden');
+      }
   },
+   },
 });
-// time: '10:00 AM - 11:00 AM',
-// meeting: 'Google Meet',
-// date: 'Apr 14',
-// day: 'WED',
-// status: 'Upcoming',
-// company: 'GEG Company', 
 </script>
