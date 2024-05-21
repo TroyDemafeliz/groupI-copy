@@ -10,9 +10,11 @@ class BookingSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id",  "username", "password"]
-        extra_kwargs = {"password": {"write_only": True}}
-
+        fields = ["id",  "username", "password", "name"]
+      #  extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {"name": {"default": "username"} }
+        lookup_field = 'username'
+        
     def create(self, validated_data):
         print(validated_data)
         user = User.objects.create_user(**validated_data)

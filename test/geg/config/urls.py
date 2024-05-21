@@ -22,9 +22,12 @@ urlpatterns = [
     path("users/", include("backend.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     path("backend/user/register/", views.CreateUserView.as_view(), name="register"),
+    path("backend-auth/<str:username>/", views.DisplayUserView.as_view(), name="admins"),
+    path("backend-auth/update/<str:username>/", views.UpdateUserView.as_view(), name="updateAdmins"),
     path("backend/token/", TokenObtainPairView.as_view(), name="get_token"),
     path("backend/token/refresh/", TokenRefreshView.as_view(), name="refresh"),
     path("backend-auth/", include("rest_framework.urls")),
+
     
     path("backend/Booking/", view=views.DisplayBooking.as_view(), name='Bookings'),
     path("backend/Booking/create/", view=views.CreateBooking.as_view(), name='CreateBookings'),

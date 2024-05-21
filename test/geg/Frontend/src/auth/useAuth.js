@@ -3,9 +3,38 @@ import { ref, onMounted } from 'vue';
 import router from '@/router';
 import { jwtDecode } from 'jwt-decode';
 import api from '@/api';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
+import { ACCESS_TOKEN, REFRESH_TOKEN, USERNAME } from '@/token';
 
 export const isAuthenticated = ref(false);
+export const user = ref()
+
+export async function setUser(){
+  const rUser = localStorage.getItem(USERNAME)
+  await api
+  .get(`/backend-auth/${rUser}`)
+  .then((res) => res.data)
+  .then((data) => {
+      user.value = data
+      console.log(user.value)
+  })
+  .catch((err) => alert(err));
+}
+
+export async function updateUser(username, name, password) {
+  const formData = new FormData();
+  formData.append('username', username);
+  formData.append('name', name);
+  formData.append('password', password);
+
+  await api
+  .put(`backend-auth/update/${username}/`, formData)
+  .then((res) => {
+      if (res.status === 200) alert("User updated!");
+      else alert("Failed to update User.");
+  })
+  .catch((err) => alert(err));
+}
+
 
 async function refreshToken() {
   console.log("Attempting to refresh token...");
@@ -55,5 +84,10 @@ async function checkAuth() {
 
 export const useAuth = () => {
   onMounted(checkAuth);
-  return { isAuthenticated, checkAuth };
+  return { isAuthenticated, checkAuth};
 };
+
+export const useUser = () => { 
+  onMounted(setUser);
+  return{user, updateUser };
+}

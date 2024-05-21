@@ -29,13 +29,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import { useAuth } from '@/auth/useAuth';
 import api from '@/api';
 import router from '@/router';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/token';
+import { ACCESS_TOKEN, REFRESH_TOKEN, USERNAME } from '@/token';
 
-export default defineComponent({
+export default{
   name: "AdminLogin",
   setup() {
     const { isAuthenticated } = useAuth(); // Access the shared authentication state
@@ -48,6 +48,8 @@ export default defineComponent({
         const res = await api.post("/backend/token/", { username: username.value, password: password.value });
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        localStorage.setItem(USERNAME, username.value)
+
         isAuthenticated.value = true; // Update authentication state
         console.log("Login successful:", isAuthenticated.value); // Log authentication status
         console.log("Access Token:", res.data.access); // Log the access token
@@ -67,7 +69,7 @@ export default defineComponent({
       handleSubmit
     };
   }
-});
+};
 </script>
 
 

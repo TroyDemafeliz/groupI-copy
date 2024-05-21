@@ -23,13 +23,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
 
-
 user_detail_view = UserDetailView.as_view()
-
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    fields = ["name"]
+    fields = ["username","name","password"]
     success_message = _("Information successfully updated")
 
     def get_success_url(self):
@@ -71,10 +69,22 @@ class DeleteBooking(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
 
+class DisplayUserView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    lookup_field = 'username'
+                
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+class UpdateUserView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'username'
       
 class DisplayProject(generics.ListAPIView):
     serializer_class = ProjectSerializer

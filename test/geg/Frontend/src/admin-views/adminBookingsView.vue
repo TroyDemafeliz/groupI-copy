@@ -190,12 +190,12 @@
 
 <script>
 import { useBookings } from '@/ModelApi/Booking';
+import { defineComponent } from 'vue';
 export default {
 
    setup(){
-      const { Bookings } = useBookings()
       return{
-         Bookings,
+
       }
    }
 };

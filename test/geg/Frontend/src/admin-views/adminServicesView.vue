@@ -30,15 +30,11 @@
 </template>
 <script>
 import { useServices} from '../ModelApi/Services';
-import { defineComponent } from 'vue';
 
-export default defineComponent({
+export default{
 
   setup(){
-    const {Services, setService, deleteService} = useServices()
-    const setCurrent = (Service) => {
-      setService(Service)
-    }
+    const {Services, deleteService} = useServices()
 
     const deleteCurrentService = (id) => {
       if (confirm("Are you sure you want to delete this service?")) {
@@ -52,5 +48,5 @@ export default defineComponent({
       deleteCurrentService
     }
   }
-});
+};
 </script>
