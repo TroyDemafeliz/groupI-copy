@@ -4,6 +4,7 @@ import DashboardView from './admin-views/DashboardView.vue';
 import { useRoute, useRouter } from 'vue-router'
 import { computed, watch, ref } from 'vue';
 import AppFooter from './components/Footer.vue'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -23,7 +24,7 @@ const isNotLoginPage = computed(() => {
 const previousRoute = ref('');
 
 watch(() => route.path, (currentPath, oldPath) => {
-  if (previousRoute.value === '/') {
+  if (previousRoute.value.includes('/')) {
     window.scrollTo(0, 0);
   }
   previousRoute.value = currentPath;

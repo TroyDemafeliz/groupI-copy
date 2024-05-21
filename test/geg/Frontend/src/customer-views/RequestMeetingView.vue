@@ -1,9 +1,9 @@
 <template>
-  <form class="max-w-5xl mx-auto mt-10 mb-20">
+  <div class="max-w-5xl mx-auto mt-10 mb-20">
         <form class="max-w-2xl mx-auto" ref="form" @submit.prevent="sendEmail">
         <div class="">
               <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl whitespace-nowrap"><span class="text-transparent bg-clip-text bg-gradient-to-r to-red-400 from-red-600">Request Meeting</span></h1>
-              <p class="text-lg font-normal text-black lg:text-xl dark:text-black mb-10 mt-5">Welcome to our meeting request page. We look forward to discussing your construction needs</p>
+              <p class="text-lg font-normal text-black lg:text-xl dark:text-black mb-10 mt-5">Welcome to our meeting request page. We look forward to discussing your construction needs.</p>
         </div>
         <div class="border-2 border-gray-300 p-20 rounded-md">
               <div class="grid md:grid-cols-2 md:gap-6">
@@ -41,11 +41,11 @@
                     <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Face-to-Face</label>
                 </div>
                 <div class="flex items-center mb-4">
-                    <input checked id="default-radio-2" type="radio" value="online-meeting" v-model="selectedRadio" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-radio-2" type="radio" value="online-meeting" v-model="selectedRadio" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online-Meeting</label>
                 </div>
                 <div class="flex items-center mb-4">
-                    <input checked id="default-radio-3" type="radio" value="others" v-model="selectedRadio" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
+                    <input id="default-radio-3" type="radio" value="others" v-model="selectedRadio" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
                     <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others (Please Specify:)</label>
                 </div>
                 
@@ -78,26 +78,59 @@
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Proposed Plan:</label>
               <input @change="handleFileUpload" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="plan" type="file">
              
-              <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">Submit</button>
-            
+              <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">
+                <span v-if="!loading">Submit</span>
+                <span v-else>
+                  <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
+                  <span class="sr-only">Loading...</span>
+                </span>
+              </button>
           </div>
         </form>
-  </form>
+  </div>
 </template>
-
-
 
 <script>
 import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import emailjs from '@emailjs/browser';
-const date = ref(new Date())
-// import JSZip from 'jszip';
+import "vue-toastification/dist/index.css";
+import { useToast, TYPE } from "vue-toastification";
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
 
+const date = ref(new Date())
+
 export default {
+  setup() {
+    const toast = useToast();
+    const activeErrors = ref([]);
+    let timeoutIds = {};
+
+  const showToast = (message, type = 'success') => {
+    if (!activeErrors.value.includes(message)) {
+      activeErrors.value.push(message);
+      if (type === 'success') {
+        toast.success(message, { type: TYPE.SUCCESS });
+      } else if (type === 'error') {
+        toast.error(message, { type: TYPE.ERROR });
+      }
+      // Clear existing timeout for this message
+      if (timeoutIds[message]) {
+        clearTimeout(timeoutIds[message]);
+      }
+      // Set a new timeout for this message
+      timeoutIds[message] = setTimeout(() => {
+        activeErrors.value = activeErrors.value.filter((err) => err !== message);
+      }, 5000); // Set the timeout duration (in milliseconds) here
+    }
+  };
+
+    return { 
+        showToast 
+      }
+  },
   data() {
     return {
       selectedRadio: null,
@@ -115,6 +148,7 @@ export default {
       file: null,
       fileName: '',
       shortenedUrl: '',
+      loading: false,
     };
   },
  
@@ -129,18 +163,8 @@ export default {
       return date.toLocaleDateString('en-US', options);
     },
     async handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      if (file.type.startsWith('image/')) {
-        try {
-          await this.uploadToCloudinary(file);
-        } catch (error) {
-          console.error('Error handling file upload:', error);
-        }
-      } else {
-        console.error('Uploaded file is not an image.');
-      }
+          this.file = event.target.files[0];
+      if (!this.file) return;
     },
 
       async compressImage(imageFile) {
@@ -153,7 +177,9 @@ export default {
           const compressedFile = await imageCompression(imageFile, options);
           return compressedFile;
         } catch (error) {
+          this.loading = false;
           console.error('Image compression failed:', error);
+          this.showToast('File uploaded is not an image', 'error');
           throw error;
         }
       },
@@ -161,7 +187,7 @@ export default {
       async uploadToCloudinary(file) {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'k8ue6a77'); // Replace 'your_upload_preset' with your Cloudinary upload preset
+      formData.append('upload_preset', 'k8ue6a77'); 
       try {
         const response = await axios.post('https://api.cloudinary.com/v1_1/dkcgb6egn/image/upload', formData, {
           headers: {
@@ -176,12 +202,47 @@ export default {
       }
     },
 
-    sendEmail() {
+    async sendEmail() {
+      this.loading = true;
       const captchaValue = grecaptcha.getResponse();
+      let errorMessages = [];
+
+      if (this.file) {
+        try {
+          const compressedFile = await this.compressImage(this.file);
+          await this.uploadToCloudinary(compressedFile);
+        } catch (error) {
+          console.error('Error handling file upload:', error);
+          return;
+        }
+      }
+
+      if (!this.selectedRadio) {
+        errorMessages.push('Meeting preference is required.');
+      }
+      if (this.selectedRadio === 'others' && !this.message) {
+        errorMessages.push('Please specify where to meet.');
+      }
+      if (!this.selectedDate) {
+        errorMessages.push('Appointment date and time are required.');
+      }
+      if (!this.file) {
+        errorMessages.push('Please upload a proposed plan.');
+      }
       if (!captchaValue) {
-        alert('Please verify you are not a robot');
+        errorMessages.push('Please verify you are not a robot.');
+      }
+
+      if (errorMessages.length > 0) {
+        this.loading = false;
+        errorMessages.forEach((message) => {
+          this.showToast(message, 'error');
+        });
         return;
       }
+
+      this.errorsShown = [];
+
       var params = {
         first_name: this.FirstName,
         last_name: this.LastName,
@@ -197,6 +258,8 @@ export default {
         })
         .then(
           () => {
+            this.loading = false; 
+            this.showToast('Email sent successfully!', 'success');
             console.log('SUCCESS!');
             console.log('First Name:', this.FirstName);
             console.log('Last Name:', this.LastName);
@@ -206,10 +269,11 @@ export default {
             console.log('Selected Radio:', this.selectedRadio);
             console.log('Selected Date:', this.formatDate(this.selectedDate));
             console.log('Proposed Plan:', this.shortenedUrl);
-            alert('Email sent successfully!');
           },
           (error) => {
             console.log('FAILED...', error);
+            this.loading = false; 
+            this.showToast('Failed to send email. Please try again.', 'error');
           },
         );
     },
@@ -219,6 +283,7 @@ export default {
     },
     discardDate() {
       this.showDatePicker = false;
+      this.selectedDate = null;
     },
   },
 };
