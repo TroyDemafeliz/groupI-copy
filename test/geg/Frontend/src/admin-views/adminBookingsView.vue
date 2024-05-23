@@ -47,7 +47,7 @@
                      </div>
                      <div>
                         <a href="#" type="button" data-modal-show="editUserModal" class="font-medium text-black dark:text-blue-500 hover:underline">Complete Booking</a>
-                        <a href="#" type="button" data-modal-show="editUserModal" class="font-medium text-red-geg hover:underline"><br><br>Cancel Booking</a>
+                        <a href="#" type="button" @click="deleteBooking(currentBooking.Id)" data-modal-show="editUserModal" class="font-medium text-red-geg hover:underline"><br><br>Cancel Booking</a>
                      </div>
                   </div>
                   </td>
@@ -75,29 +75,46 @@
                      <div class="p-6 space-y-6" v-if="currentBooking">
                         <div class="grid grid-cols-6 gap-6">
                               <div class="col-span-6 sm:col-span-3">
-                                 <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                                 <input type="text" name="first-name" id="first-name" v-model="currentBooking.FirstName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
-                                 {{ currentBooking.FirstName }}
+                                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date/Time</label>
+                                 <div id="appointment" class="flex flex-col">
+                                       <button type="button" @click="showDatePicker = true" data-modal-target="timepicker-modal" data-modal-toggle="timepicker-modal" class="text-gray-900 mt-5 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                             <svg class="w4 h-4 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                             </svg>
+                                             Change date of appointment
+                                       </button>
+
+                                       <VDatePicker v-model="currentBooking.Date" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
+
+                                       <div class="grid grid-cols-2 gap-2 mt-2">
+                                             <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
+                                             <button type="button" @click="discardDate" v-if="showDatePicker" data-modal-hide="timepicker-modal" class="text-xs px-2 py-2 text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Discard</button>
+                                       </div>
+                                 </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
-                                 <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                                 <input type="text" name="last-name" id="last-name" v-model="currentBooking.LastName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
-                                 {{ currentBooking.LastName }}
+                                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mode</label>
+                                 <div id="radio-options">
+                                    <div class="flex items-center mb-4">
+                                       <input id="default-radio-1" type="radio" value="face-to-face" v-model="currentBooking.Mode"  name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                       <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Face-to-Face</label>
+                                    </div>
+                                    <div class="flex items-center mb-4">
+                                       <input checked id="default-radio-2" type="radio" value="online-meeting" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                       <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online-Meeting</label>
+                                    </div>
+                                    <div class="flex items-center mb-4">
+                                       <input checked id="default-radio-3" type="radio" value="others" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
+                                       <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others (Please Specify:)</label>
+                                    </div>
+                                    
+                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                                    <textarea id="message" rows="4" v-if="currentBooking.Mode === 'others'" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
+                                 </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
-                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                 <input type="email" name="email" id="email" v-model="currentBooking.Email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
-                                 {{ currentBooking.Email }}
-                              </div>
-                              <div class="col-span-6 sm:col-span-3">
-                                 <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                                 <input type="number" name="phone-number" id="phone-number" v-model="currentBooking.Phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
-                                 {{ currentBooking.Phone }}
-                              </div>
-                              <div class="col-span-6 sm:col-span-3">
-                                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                                 <input type="text" name="company" id="company" v-model="currentBooking.Company" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
-                                 {{ currentBooking.Company }}
+                                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plan</label>
+                                 <input type="file" name="company" id="company" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ref = "editedPlan" placeholder="">
                               </div>
                         </div>
                      </div>
@@ -171,47 +188,34 @@
 
 <script>
 // import { formatDate } from 'v-calendar/dist/types/src/utils/date/helpers';
-import { updateBooking } from '../ModelApi/Booking';
-import { useBookings} from '../ModelApi/Booking';
-import { useBooking} from '../ModelApi/Booking';
-import axios from 'axios';
-import { defineComponent } from 'vue';
-import { ref } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { updateBooking, deleteBooking, useBookings, useBooking } from '../ModelApi/Booking';
+import '@vuepic/vue-datepicker/dist/main.css';
+
 export default defineComponent({
-   data() {
-   return {
-      bookingsDate:'',
-      storeBookingsDate: '',
+  data() {
+    return {
       currentBooking: null,
-      bookings: [],
+      showDatePicker: false,
+      selectedDate: null,
+      selectedRadio: 'face-to-face',
     };
   },
-   setup(){
+  setup() {
     const formatDate = (date) => {
       const day = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
       const datePart = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       const time = new Date(date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
       return { day, datePart, time };
-    }
-    const rows = ref([])
+    };
 
-    const {deleteBooking} = useBooking()
-    const {Bookings, setBooking} = useBookings()
-    const setCurrent = (Booking) => {
-      setBooking(Booking)
-    }
+    const { Bookings, setBooking } = useBookings();
 
-    const deleteCurrentBooking = (id) => {
-      if (confirm("Are you sure you want to delete this booking?")) {
-        deleteService(id);
-      }
-    }
-
-    return{
+    return {
       Bookings,
-      setCurrent,
-      formatDate
-    }
+      setBooking,
+      formatDate,
+    };
   },
   methods: {
     viewDetails(booking) {
@@ -220,6 +224,7 @@ export default defineComponent({
     },
     closeModal() {
       this.hideModal('viewDetailsModal');
+      this.hideModal('editUserModal');
       this.currentBooking = null;
     },
     showModal(modalId) {
@@ -233,31 +238,51 @@ export default defineComponent({
       if (modal) {
         modal.classList.add('hidden');
       }
-  },
+    },
     editBooking(booking) {
-    this.currentBooking = booking;
-  },
-  updateBooking(booking) {
-   const Id = booking.Id;
-   const Email = booking.Email;
-   const FirstName = booking.FirstName;
-   const LastName = booking.LastName;
-   const Company = booking.Company;
-   const Phone = booking.Phone;
+      this.currentBooking = booking;
+      this.showModal('editUserModal');
+    },
+    updateBooking() {
+      const booking = this.currentBooking;
+      const { Id, Date, Mode } = booking;
+      const Plan = this.$refs.editedPlan.files[0];
 
-  updateBooking(Id, Email, FirstName, LastName, Company, Phone)
-    .then(response => {
-      console.log('Booking updated successfully:', response.data);
-    })
-    .catch(error => {
-      console.error('Error updating booking:', error);
-    });
-},
-  saveChanges() {
-    
-   this.updateBooking(this.currentBooking);
-    this.closeModal();
+      updateBooking(Id, Date, Mode, Plan)
+        .then(response => {
+          console.log('Booking updated successfully:', response.data);
+          this.closeModal();
+        })
+        .catch(error => {
+          console.error('Error updating booking:', error);
+        });
+    },
+    deleteBooking(id) {
+      if (confirm("Are you sure you want to delete this booking?")) {
+        deleteBooking(id)
+          .then(response => {
+            console.log('Booking deleted successfully:', response.data);
+            // Update the UI or remove the deleted booking from the list
+          })
+          .catch(error => {
+            console.error('Error deleting booking:', error);
+          });
+      }
+    },
+    saveChanges() {
+      this.updateBooking();
+    },
+    saveDate() {
+      if (this.currentBooking) {
+        this.currentBooking.Date = this.selectedDate;
+      }
+      this.showDatePicker = false;
+    },
+    discardDate() {
+      this.selectedDate = null;
+      this.showDatePicker = false;
+    },
   },
-   },
 });
+
 </script>

@@ -46,16 +46,16 @@ export async function retrieveBooking(id){
     })
     .catch((err) => alert(err));
 }
-export async function updateBooking(Id, Email, FirstName, LastName, Company, Phone, Date, Mode, Plan) {
+export async function updateBooking(Id, /* Email, FirstName, LastName, Company, Phone, */Date, Mode, Plan) {
     const formData = new FormData();
-    formData.append('Email', Email);
-    formData.append('FirstName', FirstName);
-    formData.append('LastName', LastName);
-    formData.append('Company', Company);
-    formData.append('Phone', Phone);
-    // formData.append('Date', Date);
+    // formData.append('Email', Email);
+    // formData.append('FirstName', FirstName);
+    // formData.append('LastName', LastName);
+    // formData.append('Company', Company);
+    // formData.append('Phone', Phone);
+    formData.append('Date', Date);
     formData.append('Mode', Mode);
-    // formData.append('Plan', Plan);
+    formData.append('Plan', Plan);
     await api
     .put(`/backend/Booking/update/${Id}/`, formData)
     .then((res) => {
