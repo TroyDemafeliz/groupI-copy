@@ -58,7 +58,7 @@
          <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                   <!-- Modal content -->
-                  <form @submit.prevent="saveChanges" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  <form id="editBooking" @submit.prevent="saveChanges" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                      <!-- Modal header -->
                      <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -77,28 +77,33 @@
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                                  <input type="text" name="first-name" id="first-name" v-model="currentBooking.FirstName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                                 {{ currentBooking.FirstName }}
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
                                  <input type="text" name="last-name" id="last-name" v-model="currentBooking.LastName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                                 {{ currentBooking.LastName }}
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                  <input type="email" name="email" id="email" v-model="currentBooking.Email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                                 {{ currentBooking.Email }}
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
                                  <input type="number" name="phone-number" id="phone-number" v-model="currentBooking.Phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                                 {{ currentBooking.Phone }}
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
                                  <input type="text" name="company" id="company" v-model="currentBooking.Company" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                                 {{ currentBooking.Company }}
                               </div>
                         </div>
                      </div>
                      <!-- Modal footer -->
                      <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
+                        <button type="submit" @click="updateBooking(currentBooking)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
                      </div>
                   </form>
             </div>
@@ -166,8 +171,10 @@
 
 <script>
 // import { formatDate } from 'v-calendar/dist/types/src/utils/date/helpers';
+import { updateBooking } from '../ModelApi/Booking';
 import { useBookings} from '../ModelApi/Booking';
-import {getBookings} from '../ModelApi/Booking';
+import { useBooking} from '../ModelApi/Booking';
+import axios from 'axios';
 import { defineComponent } from 'vue';
 import { ref } from 'vue';
 export default defineComponent({
@@ -176,6 +183,7 @@ export default defineComponent({
       bookingsDate:'',
       storeBookingsDate: '',
       currentBooking: null,
+      bookings: [],
     };
   },
    setup(){
@@ -187,10 +195,18 @@ export default defineComponent({
     }
     const rows = ref([])
 
+    const {deleteBooking} = useBooking()
     const {Bookings, setBooking} = useBookings()
     const setCurrent = (Booking) => {
       setBooking(Booking)
     }
+
+    const deleteCurrentBooking = (id) => {
+      if (confirm("Are you sure you want to delete this booking?")) {
+        deleteService(id);
+      }
+    }
+
     return{
       Bookings,
       setCurrent,
@@ -221,16 +237,25 @@ export default defineComponent({
     editBooking(booking) {
     this.currentBooking = booking;
   },
+  updateBooking(booking) {
+   const Id = booking.Id;
+   const Email = booking.Email;
+   const FirstName = booking.FirstName;
+   const LastName = booking.LastName;
+   const Company = booking.Company;
+   const Phone = booking.Phone;
+
+  updateBooking(Id, Email, FirstName, LastName, Company, Phone)
+    .then(response => {
+      console.log('Booking updated successfully:', response.data);
+    })
+    .catch(error => {
+      console.error('Error updating booking:', error);
+    });
+},
   saveChanges() {
-    // Find the booking in your data that matches currentBooking
-    const booking = this.bookings.find(b => b.id === this.currentBooking.id);
-
-    // Update the booking with the values from currentBooking
-    if (booking) {
-      Object.assign(booking, this.currentBooking);
-    }
-
-    // Close the modal
+    
+   this.updateBooking(this.currentBooking);
     this.closeModal();
   },
    },

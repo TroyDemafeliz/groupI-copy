@@ -53,9 +53,9 @@ export async function updateBooking(Id, Email, FirstName, LastName, Company, Pho
     formData.append('LastName', LastName);
     formData.append('Company', Company);
     formData.append('Phone', Phone);
-    formData.append('Date', Date);
+    // formData.append('Date', Date);
     formData.append('Mode', Mode);
-    formData.append('Plan', Plan);
+    // formData.append('Plan', Plan);
     await api
     .put(`/backend/Booking/update/${Id}/`, formData)
     .then((res) => {
