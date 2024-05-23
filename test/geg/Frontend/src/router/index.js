@@ -14,6 +14,7 @@ import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
+import AdminChangePassword from '../admin-views/adminChangePassword.vue'
 
 
 
@@ -95,6 +96,12 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
+      path: '/admin-change-password',
+      name: 'admin-change-password',
+      component: AdminChangePassword,
+      meta: { requiresAuth: true } 
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: NotFound,
@@ -124,4 +131,3 @@ router.beforeEach(async(to, from, next) => {
 
 
 export default router 
-

@@ -4,6 +4,10 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 
+from django.contrib import admin
+from .models import Booking
+from .forms import BookingForm
+
 from .forms import UserAdminChangeForm
 from .forms import UserAdminCreationForm
 from .models import User
@@ -37,3 +41,8 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
+    
+    
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    form = BookingForm

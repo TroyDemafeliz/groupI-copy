@@ -91,8 +91,8 @@
 </template>
 
 <script>
+import {createBooking} from '@/ModelApi/Booking';
 import { ref } from 'vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import emailjs from '@emailjs/browser';
 import "vue-toastification/dist/index.css";
@@ -236,6 +236,28 @@ export default {
         return;
       }
 
+      console.log('First Name:', this.FirstName);
+      console.log('Last Name:', this.LastName);
+      console.log('Email:', this.email);
+      console.log('Phone:', this.phone);
+      console.log('Company:', this.company);
+      console.log('Selected Radio:', this.selectedRadio);
+      console.log('Selected Date:', this.selectedDate);
+
+      const formattedDate = this.selectedDate.toISOString();
+      console.log('Formatted Date:', formattedDate);
+
+      const FirstName = this.FirstName,
+      LastName = this.LastName,
+      Email = this.email,
+      Company = this.company,
+      Phone = this.phone,
+      Date = formattedDate,
+      Mode = this.selectedRadio,
+      Plan = this.$refs.user_avatar.files[0];
+    
+      createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
+      
       this.errorsShown = [];
 
       if (this.file) {
@@ -294,7 +316,7 @@ export default {
     if (window.grecaptcha && this.$refs.recaptcha) {
       window.grecaptcha.render(this.$refs.recaptcha);
     }
-  },
-  },
+  }
+  }
 };
 </script>
