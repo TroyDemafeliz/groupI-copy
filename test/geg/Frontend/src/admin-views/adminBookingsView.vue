@@ -146,13 +146,13 @@
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="first-name" class="block mb-2 text-sm text-gray-900 dark:text-white font-normal">First Name</label>
                                  <div type="text" name="first-name" id="first-name" class="text-gray-900 text-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    {{currentBooking.FirstName}}
+                                    {{currentBooking.FirstName.toUpperCase()}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="last-name" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Last Name</label>
                                  <div type="text" name="last-name" id="last-name" class="text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 border-0 font-extrabold">
-                                    {{currentBooking.LastName}}
+                                    {{currentBooking.LastName.toUpperCase()}}
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
