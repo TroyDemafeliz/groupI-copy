@@ -46,8 +46,7 @@
                         <a href="#" @click.prevent="editBooking(Booking)" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-black dark:text-blue-500 hover:underline"><br><br>Edit Booking</a>
                      </div>
                      <div>
-                        <a href="#" type="button" data-modal-show="editUserModal" class="font-medium text-black dark:text-blue-500 hover:underline">Complete Booking</a>
-                        <a href="#" type="button" @click="deleteBooking(currentBooking.Id)" data-modal-show="editUserModal" class="font-medium text-red-geg hover:underline"><br><br>Cancel Booking</a>
+                        <a href="#" type="button" @click="deleteBooking(currentBooking.Id)" data-modal-show="editUserModal" class="font-medium text-red-geg hover:underline">Cancel Booking</a>
                      </div>
                   </div>
                   </td>
@@ -278,6 +277,7 @@ export default defineComponent({
     saveDate() {
       if (this.currentBooking) {
         this.currentBooking.Date = this.selectedDate;
+        console.log('Selected date:', this.currentBooking.Date);
       }
       this.showDatePicker = false;
     },
