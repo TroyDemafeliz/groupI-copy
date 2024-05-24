@@ -125,7 +125,6 @@
                   </form>
             </div>
          </div>
-
          <div id="viewDetailsModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                   <!-- Modal content -->
@@ -187,9 +186,8 @@
 </template>
 
 <script>
-// import { formatDate } from 'v-calendar/dist/types/src/utils/date/helpers';
 import { defineComponent, ref } from 'vue';
-import { updateBooking, deleteBooking, useBookings, useBooking } from '../ModelApi/Booking';
+import { updateBooking, deleteBooking, useBookings } from '../ModelApi/Booking';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 export default defineComponent({
@@ -199,6 +197,7 @@ export default defineComponent({
       showDatePicker: false,
       selectedDate: null,
       selectedRadio: 'face-to-face',
+      formattedDate: null,
     };
   },
   setup() {
@@ -240,29 +239,33 @@ export default defineComponent({
       }
     },
     editBooking(booking) {
+      console.log('Editing booking:', booking);
       this.currentBooking = booking;
       this.showModal('editUserModal');
     },
     updateBooking() {
       const booking = this.currentBooking;
-      const { Id, Date, Mode } = booking;
+      if (booking.Date) {
+        this.formattedDate = this.currentBooking.Date.toISOString();
+      }
+      const Date = this.formattedDate;
+      const { Id, Mode } = booking;
       const Plan = this.$refs.editedPlan.files[0];
 
       updateBooking(Id, Date, Mode, Plan)
-        .then(response => {
-          console.log('Booking updated successfully:', response.data);
-          this.closeModal();
-        })
-        .catch(error => {
-          console.error('Error updating booking:', error);
-        });
+         .then(response => {
+            console.log('Booking updated successfully:', response.data);
+            this.closeModal();
+         })
+         .catch(error => {
+            console.error('Error updating booking:', error);
+         });
     },
     deleteBooking(id) {
       if (confirm("Are you sure you want to delete this booking?")) {
         deleteBooking(id)
           .then(response => {
             console.log('Booking deleted successfully:', response.data);
-            // Update the UI or remove the deleted booking from the list
           })
           .catch(error => {
             console.error('Error deleting booking:', error);
@@ -282,7 +285,8 @@ export default defineComponent({
       this.selectedDate = null;
       this.showDatePicker = false;
     },
+    
   },
 });
-
 </script>
+
