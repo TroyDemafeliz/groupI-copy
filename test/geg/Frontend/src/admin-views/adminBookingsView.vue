@@ -21,8 +21,8 @@
             <tbody>
                <tr v-for="(Booking, index) in Bookings" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td class="px-6 py-4">
-                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ formatDate(Booking.Date).day }}</div>
-                     <div class="text-black ml-3">{{ formatDate(Booking.Date).datePart }}</div>
+                     <div class="my-0 py-0 text-black font-extrabold text-3xl">{{ formatDate(Booking.Date).day.toUpperCase() }}</div>
+                     <div class="text-black">{{ formatDate(Booking.Date).datePart }}</div>
                   </td>
                   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   <div class="ps-1 pr-4">
@@ -76,7 +76,7 @@
                               <div class="col-span-6 sm:col-span-3">
                                  <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date/Time</label>
                                  <div id="appointment" class="flex flex-col">
-                                       <button type="button" @click="showDatePicker = true" data-modal-target="timepicker-modal" data-modal-toggle="timepicker-modal" class="text-gray-900 mt-5 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                       <button type="button" @click="openDatePicker" data-modal-target="timepicker-modal" data-modal-toggle="timepicker-modal" class="text-gray-900 mt-5 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
                                              <svg class="w4 h-4 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                              <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
                                              </svg>
@@ -99,16 +99,16 @@
                                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Face-to-Face</label>
                                     </div>
                                     <div class="flex items-center mb-4">
-                                       <input checked id="default-radio-2" type="radio" value="online-meeting" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                       <input id="default-radio-2" type="radio" value="online-meeting" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                        <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Online-Meeting</label>
                                     </div>
                                     <div class="flex items-center mb-4">
-                                       <input checked id="default-radio-3" type="radio" value="others" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
+                                       <input id="default-radio-3" type="radio" value="others" v-model="currentBooking.Mode" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
                                        <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others (Please Specify:)</label>
                                     </div>
                                     
-                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
-                                    <textarea id="message" rows="4" v-if="currentBooking.Mode === 'others'" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
+                                    <label for="meetingMessage" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                                    <textarea id="meetingMessage" rows="4" v-model="meetingMessage" v-if="currentBooking.Mode === 'others'" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Where should we meet..."></textarea>
                                  </div>
                               </div>
                               <div class="col-span-6 sm:col-span-3">
@@ -173,6 +173,12 @@
                                     {{currentBooking.Company}}
                                  </div>
                               </div>
+                              <div class="col-span-6 sm:col-span-3">
+                                 <label for="plan" class="block mb-2 text-sm font-normal text-gray-900 dark:text-white">Company</label>
+                                 <div type="text" name="plan" id="plan" class="text-gray-900 text-sm rounded-lg block w-full p-2.5 border-0 font-extrabold">
+                                    <img :src="currentBooking.Plan" alt="Plan" class="rounded-lg w-full">
+                                 </div>
+                              </div>
                         </div>
                      </div>
                      <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -195,8 +201,11 @@ export default defineComponent({
       currentBooking: null,
       showDatePicker: false,
       selectedDate: null,
-      selectedRadio: 'face-to-face',
+      selectedRadio: '',
       formattedDate: null,
+      storedMessage: '',
+      meetingMessage: '',
+      originalDate: null,
     };
   },
   setup() {
@@ -247,12 +256,16 @@ export default defineComponent({
       if (booking.Date) {
         this.formattedDate = this.currentBooking.Date.toISOString();
       }
+      this.storedMessage = this.meetingMessage;
       const Date = this.formattedDate;
-      const { Id, Mode } = booking;
+      const { Id } = booking;
+      const Mode = (this.currentBooking.Mode === 'others' ? this.storedMessage : this.currentBooking.Mode);
       const Plan = this.$refs.editedPlan.files[0];
 
       updateBooking(Id, Date, Mode, Plan)
          .then(response => {
+            console.log(Mode)
+            console.log(this.storedMessage);
             console.log('Booking updated successfully:', response.data);
             this.closeModal();
          })
@@ -276,16 +289,21 @@ export default defineComponent({
     },
     saveDate() {
       if (this.currentBooking) {
-        this.currentBooking.Date = this.selectedDate;
         console.log('Selected date:', this.currentBooking.Date);
+        this.originalDate = null
       }
       this.showDatePicker = false;
     },
     discardDate() {
-      this.selectedDate = null;
+          if (this.originalDate) {
+      this.currentBooking.Date = this.originalDate; 
+    }
       this.showDatePicker = false;
     },
-    
+    openDatePicker() {
+    this.originalDate = this.currentBooking.Date; 
+    this.showDatePicker = true;
+  },
   },
 });
 </script>

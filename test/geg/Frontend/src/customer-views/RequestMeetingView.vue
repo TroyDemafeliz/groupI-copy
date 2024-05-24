@@ -263,7 +263,7 @@ export default {
       Company = this.company,
       Phone = this.phone,
       Date = formattedDate,
-      Mode = this.selectedRadio,
+      Mode = this.selectedRadio === 'others' ? this.storedMessage : this.selectedRadio,
       Plan = this.file;
     
       createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
@@ -322,7 +322,7 @@ export default {
       this.showDatePicker = false;
       this.selectedDate = null;
     },
-    
+
   }
 };
 </script>
