@@ -99,6 +99,7 @@ import "vue-toastification/dist/index.css";
 import { useToast, TYPE } from "vue-toastification";
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
+import { onMounted } from 'vue';
 
 const date = ref(new Date())
 
@@ -114,8 +115,10 @@ export default {
       activeErrors.value.push(message);
       if (type === 'success') {
         toast.success(message, { type: TYPE.SUCCESS });
+        console.log('Success:', message);
       } else if (type === 'error') {
         toast.error(message, { type: TYPE.ERROR });
+        console.log('Error:', message);
       }
       // Clear existing timeout for this message
       if (timeoutIds[message]) {
@@ -127,6 +130,13 @@ export default {
       }, 5000); // Set the timeout duration (in milliseconds) here
     }
   };
+    onMounted(() => {
+  if (window.grecaptcha && this.$refs.recaptcha) {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha.render(this.$refs.recaptcha);
+    });
+  }
+});
 
     return { 
         showToast 
@@ -312,11 +322,7 @@ export default {
       this.showDatePicker = false;
       this.selectedDate = null;
     },
-    mounted() {
-    if (window.grecaptcha && this.$refs.recaptcha) {
-      window.grecaptcha.render(this.$refs.recaptcha);
-    }
-  }
+    
   }
 };
 </script>
