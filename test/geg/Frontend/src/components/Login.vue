@@ -45,7 +45,7 @@ export default{
     const handleSubmit = async () => {
       console.log("Attempting to log in..."); // Log initial attempt
       try {
-        const res = await api.post("/backend/token/", { username: username.value, password: password.value });
+        const res = await api.post("/djoser/auth/jwt/create", { username: username.value, password: password.value });
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
         localStorage.setItem(USERNAME, username.value)

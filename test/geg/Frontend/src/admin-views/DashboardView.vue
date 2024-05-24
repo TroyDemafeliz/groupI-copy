@@ -17,22 +17,22 @@
           <div class="flex items-center ms-3">
               <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
               <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+              <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
               </button>
 
               <!-- Dropdown menu -->
               <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                   <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                    <div>{{name}}</div>
+                    <div> {{ name }} </div>
                     <div class="font-medium truncate">admin</div>
                   </div>
                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                     <li>
-                      <a href="#" @click="$router.push('/admin-account-settings')"  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                      <RouterLink to="admin-account-settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</RouterLink>
                     </li>
                   </ul>
                   <div class="py-2">
-                    <a href="#" @click="Logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                    <button type="button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" v-on:click="Logout">Sign out</button>
                   </div>
               </div>
           </div>
@@ -72,6 +72,14 @@
                <span class="flex-1 ms-3 whitespace-nowrap font-light">Services</span>
             </RouterLink>
          </li>
+         <li>
+            <RouterLink to="admin-users" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                  <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
+               </svg>
+               <span class="flex-1 ms-3 whitespace-nowrap font-light">Users</span>
+            </RouterLink>
+         </li>
       </ul>
    </div>
 </aside>
@@ -87,14 +95,11 @@ export default{
     setup() {
     const {user} = useUser()
     const name = user.name
-    if(user.name){
-    name = user.name
-    }else{
+    if(user.name == null){
     name = user.username
     }
     console.log(user)
     console.log(user.name)
-    const isDropdownOpen = false
     const route = useRoute();
     const isAdminServicesActive = computed(() => route.path.startsWith('/admin-service'));
     const isAdminProjectsActive = computed(() => route.path.startsWith('/admin-projects'));
@@ -133,7 +138,6 @@ const instanceOptions = {
       user,
       name,
       toggle,
-      isDropdownOpen
     };
   },
   data(){

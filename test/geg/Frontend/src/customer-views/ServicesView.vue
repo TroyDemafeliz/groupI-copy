@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
     <div class = "pt-20 px-10 flex flex-col items-center justify-center text-center">
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-5xl lg:text-6xl dark:text-white">Services</h1>

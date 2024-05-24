@@ -17,6 +17,7 @@ django-redis==5.4.0  # https://github.com/jazzband/django-redis
 djangorestframework>=3.0.0
 djangorestframework-simplejwt
 django-cors-headers>=4.0.0
+djoser
 python-dotenv
 PyJWT
 pytz

@@ -15,6 +15,7 @@ import adminAddService from '../admin-views/adminAddService.vue'
 import adminManageAccount from '../admin-views/adminManageAccount.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
+import adminUserManagement from '@/admin-views/adminUserManagement.vue'
 
 
 
@@ -73,6 +74,12 @@ const router = createRouter({
       path: '/admin-projects',
       name: 'admin-projects',
       component: adminProjectsView,
+      meta: { requiresAuth: true } 
+    },
+    {
+      path: '/admin-users',
+      name: 'admin-users',
+      component: adminUserManagement,
       meta: { requiresAuth: true } 
     },
     {

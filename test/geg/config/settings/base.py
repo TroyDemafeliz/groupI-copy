@@ -61,7 +61,13 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
-
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "auth/password/reset-password-confirmation/?uid={uid}&token={token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {'user_create': 'backend.users.serializers.UserRegistrationSerializer'},
+    "SET_PASSWORD_RETYPE": True,
+}
 
 
 # DATABASES
@@ -93,6 +99,8 @@ DJANGO_APPS = [
     "django.forms",
     "rest_framework",
     "corsheaders",
+    'djoser',
+    'rest_framework_simplejwt.token_blacklist'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
