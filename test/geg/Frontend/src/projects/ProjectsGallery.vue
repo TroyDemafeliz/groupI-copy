@@ -1,5 +1,3 @@
-<script>
-</script>
 <template>
     <div class = "pt-20 px-10 flex flex-col items-center justify-center text-center">
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-red-geg md:text-5xl lg:text-6xl dark:text-white pt-10">USTP Mandaluyong</h1>
@@ -7,32 +5,8 @@
           50 sq. m
         </p>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg" alt="">
+            <div v-for="(image, index) in images" :key="index">
+                <img class="h-auto max-w-full rounded-lg" :src="image" alt="">
             </div>
         </div>
 
@@ -61,3 +35,27 @@
         </div>
     </div>
 </template>
+
+<script>
+import image1 from '@/assets/se-dummy-images/project-5 (school).jpeg';
+
+    export default {
+  data() {
+    return {
+      images: [
+        image1,
+        image1,
+        image1,
+        image1,
+        image1,
+        image1,
+        image1,
+        image1,
+        image1,
+        // Add more image URLs as needed
+      ]
+    };
+  }
+};
+
+</script>

@@ -14,6 +14,11 @@
 .text-red-geg {
   color: #a60202;
 }
+
+.blue-geg {
+  color: #03032B
+}
+
 .md\:hover\:text-red-geg:hover {
   --tw-text-opacity: 1;
   color: #a60202;
@@ -41,3 +46,37 @@
 .ml-13 {
   margin-left: 3.5rem;
 }
+.border-b-2 {
+  border-bottom-width: 2.95px;
+  border-color: #000000;
+}
+.bg-black {
+  background-color: #000000;
+}
+.dark\:border-black:is(.dark *) {
+  --tw-border-opacity: 100%;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+.bg-red {
+  --tw-bg-opacity: 1;
+  background-color: rgba(175, 0, 0, var(--tw-bg-opacity));
+}
+.hover\:bg-red:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(200 0 0 / var(--tw-bg-opacity));
+}
+.hover\:bg-grayish:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(61, 59, 59);
+}
+.h-25 {
+  height: 6.25rem;
+}
+.hovered {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+/* .router-link-active {
+  --tw-bg-opacity: 100;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+} */

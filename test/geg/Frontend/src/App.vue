@@ -1,28 +1,48 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
 import AppNavbar from './components/AppNavbar.vue'
+import DashboardView from './admin-views/DashboardView.vue';
+import { useRoute, useRouter } from 'vue-router'
+import { computed, watch, ref } from 'vue';
+import AppFooter from './components/Footer.vue'
+
+const route = useRoute()
+const router = useRouter()
+
+const isAdminRoute = computed(() => {
+  return route.path.includes('/admin')
+})
+
+const showNavAndFooter = computed(() => {
+  const path = route.path
+  return !path.includes('/admin') && path !== '/login'
+})
+
+const isNotLoginPage = computed(() => {
+  return route.path !== '/login';
+});
+
+const previousRoute = ref('');
+
+watch(() => route.path, (currentPath, oldPath) => {
+  if (previousRoute.value.includes('/')) {
+    window.scrollTo(0, 0);
+  }
+  previousRoute.value = currentPath;
+}, { immediate: true });
+
+const contentClasses = computed(() => {
+  return isNotLoginPage.value ? 'pb-20 sm:pt-20 md:pt-24' : '';
+});
+
 </script>
 
 <template>
   <div>
-    <AppNavbar />
-    <div class ="pb-20 sm:pt-20 md:pt-24">
+    <AppNavbar v-if="showNavAndFooter" />
+    <DashboardView v-if="isAdminRoute" />
+    <div :class="contentClasses">
       <RouterView />
     </div>
-
+    <AppFooter v-if="showNavAndFooter" />
   </div>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView /> -->
 </template>

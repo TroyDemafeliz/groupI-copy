@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
+from django.db.models import *
+from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
 
 class User(AbstractUser):
     """
@@ -24,3 +24,29 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+    
+    
+class Booking(models.Model):
+    Id = AutoField(primary_key=True)
+    Email = EmailField(default="timothy@gmail.com", max_length=30)
+    FirstName = TextField(default="Fren")
+    LastName = TextField(default="Marlon")
+    Phone = models.CharField(default="09776918809", max_length=11)
+    Company = CharField(default="GEG Company", max_length=20)
+    Date = DateTimeField(default="2022-01-01")
+    Mode = TextField(default="Online", max_length=20)
+    Plan = ImageField(default="plan.jpg", upload_to="plan/")
+
+class Service (models.Model):
+    Id = AutoField(primary_key=True)
+    Title = CharField(max_length=50, default= "Service 1")
+    Description = TextField(default= "This is a Service")
+    Image = ImageField(upload_to="service/", default="frontend/src/assets/se-dummy-images/dummy-pic-4-abt-us.jpeg")
+
+class Project (models.Model):
+    Id = AutoField(primary_key=True)
+    Title = CharField(max_length=50)
+    Description = TextField()
+    MainImage = ImageField(default= 'frontend/src/assets/se-dummy-images/dummy-pic-4-abt-us.jpeg',upload_to="project/{0}_MainImage".format(Title))
+    SubImage = ImageField(default='frontend/src/assets/se-dummy-images/dummy-pic-4-abt-us.jpeg',upload_to="project/{0}/subimages".format(Title))
+    #Main = ForeignKey(Project, on_delete=models.CASCADE)

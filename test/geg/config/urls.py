@@ -6,6 +6,9 @@ from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from backend.users import views
+
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -19,6 +22,34 @@ urlpatterns = [
     # User management
     path("users/", include("backend.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    path("backend/user/register/", views.CreateUserView.as_view(), name="register"),
+    path("backend-auth/<str:username>/", views.DisplayUserView.as_view(), name="User"),
+    path("backend-auth/", views.DisplayAllUserView.as_view(), name="all_User"),
+    path("backend-auth/update/<str:username>/", views.UpdateUserView.as_view(), name="update_User"),
+    path("backend-auth/delete/<str:username>/", views.DeleteUserView.as_view(), name="delete_User"),
+    ##path("backend/token/", TokenObtainPairView.as_view(), name="get_token"),
+    ##path("backend/token/refresh/", TokenRefreshView.as_view(), name="refresh"),
+    path("backend-auth/", include("rest_framework.urls")),
+    path("djoser/auth/", include("djoser.urls")),
+    path("djoser/auth/", include("djoser.urls.jwt")),
+    
+    path("backend/Booking/", view=views.DisplayBooking.as_view(), name='Bookings'),
+    path("backend/Booking/create/", view=views.CreateBooking.as_view(), name='CreateBookings'),
+    path("backend/Booking/delete/<int:pk>/", view=views.DeleteBooking.as_view(), name='DeleteBookings'),
+    path("backend/Booking/update/<int:pk>/", view=views.RetrieveUpdateBooking.as_view(), name='UpdateBookings'),
+    
+    path("backend/Project/", view=views.DisplayProject.as_view(), name='Projects'),
+    path("backend/Project/create/", view=views.CreateProject.as_view(), name='CreateProjects'),
+    path("backend/Project/delete/<int:pk>/", view=views.DeleteProject.as_view(), name='DeleteProjects'),
+    path("backend/Project/update/<int:pk>/", view=views.RetrieveUpdateProject.as_view(), name='UpdateProjects'),
+    
+    path("backend/Service/", view=views.DisplayService.as_view(), name='Services'),
+    path("backend/Service/create/", view=views.CreateService.as_view(), name='CreateServices'),
+    path("backend/Service/delete/<int:pk>/", view=views.DeleteService.as_view(), name='DeleteServices'),
+    path("backend/Service/update/<int:pk>/", view=views.RetrieveUpdateService.as_view(), name='RetrieveUpdateServices'),
+    
+    
+    
     # Your stuff: custom urls includes go here
     # ...
     # Media files
