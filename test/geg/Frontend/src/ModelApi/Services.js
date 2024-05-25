@@ -45,7 +45,9 @@ export async function updateService(id, Title, Description, Image) {
     const formData = new FormData();
     formData.append('Title', Title);
     formData.append('Description', Description);
-    formData.append('Image', Image);
+    if (Image) {
+        formData.append('Image', Image);
+    }
 
     await api
     .put(`/backend/Service/update/${id}/`, formData)

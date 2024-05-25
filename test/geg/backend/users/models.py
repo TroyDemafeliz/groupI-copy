@@ -31,14 +31,12 @@ class Booking(models.Model):
     Email = EmailField(default="timothy@gmail.com", max_length=30)
     FirstName = TextField(default="Fren")
     LastName = TextField(default="Marlon")
-    Phone = models.IntegerField(default="09324142132")
+    Phone = models.CharField(default="09776918809", max_length=11)
     Company = CharField(default="GEG Company", max_length=20)
-    Day = TextField(default="04/14", max_length=20)
-    Time = TextField(default="10:00AM - 11:00AM")
+    Date = DateTimeField(default="2022-01-01")
     Mode = TextField(default="Online", max_length=20)
     Plan = ImageField(default="plan.jpg", upload_to="plan/")
-    def __str__(self):
-        return self.bookingEmail
+
 class Service (models.Model):
     Id = AutoField(primary_key=True)
     Title = CharField(max_length=50, default= "Service 1")
@@ -51,3 +49,4 @@ class Project (models.Model):
     Description = TextField()
     MainImage = ImageField(default= 'frontend/src/assets/se-dummy-images/dummy-pic-4-abt-us.jpeg',upload_to="project/{0}_MainImage".format(Title))
     SubImage = ImageField(default='frontend/src/assets/se-dummy-images/dummy-pic-4-abt-us.jpeg',upload_to="project/{0}/subimages".format(Title))
+    #Main = ForeignKey(Project, on_delete=models.CASCADE)

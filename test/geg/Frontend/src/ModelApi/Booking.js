@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue';
 import api from '@/api';
 export const Bookings = ref([])
 export const currentBooking = ref()
-
+export const bookedDates = ref([]);
 
 export async function getBookings() {
     await api
@@ -12,16 +12,29 @@ export async function getBookings() {
         Bookings.value = data
         console.log(Bookings.value)
         console.log(data);
+
+        bookedDates.value = data.map((booking) => new Date(booking.Date));
+        
     })
     .catch((err) => alert(err));
 }
 
-export async function createBooking(Email, Name, Company, Phone, Date, Mode, Plan) {
+export async function createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan) {
+    const formData = new FormData();
+    formData.append('Email', Email);
+    formData.append('FirstName', FirstName);
+    formData.append('LastName', LastName);
+    formData.append('Company', Company);
+    formData.append('Phone', Phone);
+    formData.append('Date', Date);
+    formData.append('Mode', Mode);
+    formData.append('Plan', Plan);
+
     await api
-        .post("backend/Booking/create/", { Email, Name, Company, Phone, Date, Mode, Plan })
+        .post("backend/Booking/create/", formData)
         .then((res) => {
-            if (res.status === 201) alert("Booking created!");
-            else alert("Failed to make Booking.");
+            if (res.status === 201) console.log("Booking created!");
+            else console.log("Failed to make Booking.");
             getBookings();
         })
         .catch((err) => alert(err));
@@ -36,9 +49,18 @@ export async function retrieveBooking(id){
     })
     .catch((err) => alert(err));
 }
-export async function updateBooking(Id, data) {
+export async function updateBooking(Id, /* Email, FirstName, LastName, Company, Phone, */Date, Mode, Plan) {
+    const formData = new FormData();
+    // formData.append('Email', Email);
+    // formData.append('FirstName', FirstName);
+    // formData.append('LastName', LastName);
+    // formData.append('Company', Company);
+    // formData.append('Phone', Phone);
+    formData.append('Date', Date);
+    formData.append('Mode', Mode);
+    formData.append('Plan', Plan);
     await api
-    .put(`/backend/Booking/update/${Id}/`, data)
+    .put(`/backend/Booking/update/${Id}/`, formData)
     .then((res) => {
         if (res.status === 200) alert("Booking updated!");
         else alert("Failed to update Booking.");
@@ -62,7 +84,7 @@ export const useBookings = () => {
     return { Bookings, createBooking, updateBooking, deleteBooking, };
 };
 
-export const useBooking = () => {
-    onMounted(retrieveBooking)
+export const useBooking = (id) => {
+    onMounted(retrieveBooking(id))
     return { Bookings, getBookings, createBooking, updateBooking, deleteBooking, };
 };

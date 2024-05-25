@@ -102,6 +102,19 @@ DJANGO_APPS = [
     'djoser',
     'rest_framework_simplejwt.token_blacklist'
 ]
+
+INSTALLED_APPS = [
+    
+    'corsheaders',
+
+]
+
+MIDDLEWARE = [
+    
+    'corsheaders.middleware.CorsMiddleware',
+    
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
 
@@ -321,6 +334,8 @@ ACCOUNT_FORMS = {"signup": "backend.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "backend.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "backend.users.forms.UserSocialSignupForm"}
+
+
 
 
 # Your stuff...
