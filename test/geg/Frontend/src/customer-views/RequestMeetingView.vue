@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import {createBooking, bookedDates} from '@/ModelApi/Booking';
+import {createBooking} from '@/ModelApi/Booking';
 import { ref } from 'vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import emailjs from '@emailjs/browser';
@@ -104,7 +104,7 @@ import { onMounted } from 'vue';
 export default {
 
   setup() {
-    const booked = bookedDates();
+    // const booked = bookedDates();
     const toast = useToast();
     const activeErrors = ref([]);
     let timeoutIds = {};
