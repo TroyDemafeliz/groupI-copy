@@ -30,8 +30,8 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-import { useAuth } from '@/auth/useAuth';
-import api from '@/api';
+import { getUsers, setUser, useAuth } from '@/auth/useAuth';
+import api, { anon_api } from '@/api';
 import router from '@/router';
 import { ACCESS_TOKEN, REFRESH_TOKEN, USERNAME } from '@/token';
 
@@ -45,7 +45,7 @@ export default{
     const handleSubmit = async () => {
       console.log("Attempting to log in..."); // Log initial attempt
       try {
-        const res = await api.post("/djoser/auth/jwt/create", { username: username.value, password: password.value });
+        const res = await anon_api.post("/djoser/auth/jwt/create", { username: username.value, password: password.value });
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
         localStorage.setItem(USERNAME, username.value)
@@ -54,6 +54,8 @@ export default{
         console.log("Login successful:", isAuthenticated.value); // Log authentication status
         console.log("Access Token:", res.data.access); // Log the access token
         console.log("Refresh Token:", res.data.refresh); // Log the refresh token
+        setUser
+        getUsers
         router.push("/admin-bookings"); // Redirect to the admin bookings page
       } catch (error) {
         console.error("Login Error: ", error);

@@ -6,7 +6,7 @@ import api from '@/api';
 import { ACCESS_TOKEN, REFRESH_TOKEN, USERNAME } from '@/token';
 
 export const isAuthenticated = ref(false);
-export const user = ref()
+export const user = ref([])
 export const users = ref([])
 
 export async function setUser(){
@@ -33,8 +33,8 @@ export async function getUsers(){
 }
 export async function createUser(email, name, password){
   const formData = new FormData();
-  formData.append('email', email);
-  formData.append('username', name);
+  formData.append('username', email);
+  formData.append('name', name);
   formData.append('password', password);
   await api
   .post("djoser/auth/users/", formData)

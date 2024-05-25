@@ -17,13 +17,12 @@
                                     <div type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">{{ password }}</div>
                                 </div>
                                 <div class="mt-3 text-right">
-                                    <button @click="toggle" type="button" data-modal-target="username-modal" data-modal-toggle="username-modal"  class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Edit Name</button>
+                                    <button type="button" @click="toggle(modal)" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Edit Name</button>
                                 </div>
                                 <div class="mt-3 text-right">
-                                    <button @click="toggle" type="button" data-modal-target="password-modal" data-modal-toggle="password-modal"  class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Edit Password</button>
+                                    <button type="button" @click="toggle(modal2)" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Edit Password</button>
                                 </div>
                             </div>
-
                 </div>
                         <!-- Main modal -->
                         <div id="username-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -98,10 +97,25 @@
 </template>
 
 <script>
-import { updatePassword, updateUser, useUser, user } from '@/auth/useAuth';
+import { updatePassword, updateUser, setUser, user } from '@/auth/useAuth';
 import router from '@/router';
+import { Modal } from 'flowbite';
 export default{
+    data() {
+         return{
+            modal: '',
+            modal2: '',
+            user: user 
+        }
+    },
+    methods:{
+      toggle (modal) {
+      modal.toggle()
+      console.log(modal.isVisible)
+    }
+    },
     mounted() {
+        setUser()
         document.getElementById('editUser').addEventListener('submit', (event) => {
             event.preventDefault(); 
             const formData = new FormData(event.target);
@@ -124,44 +138,34 @@ export default{
             } catch (error) {
                 console.log(error)
             }
-
         });
-    },
-setup(){
-    const {user} = useUser
-    const name = user.name
-    const password = user.password
+                const $targetEl = document.getElementById("username-modal");
+                const $targetE2 = document.getElementById("password-modal");
+                const options = {
+                triggerType: 'click',
+                delay: 300,
+                ignoreClickOutsideClass: false,
+                onHide: () => {
+                    console.log('modal has been hidden');
+                },
+                onShow: () => {
+                    console.log('modal has been shown');
+                },
+                onToggle: () => {
+                    console.log('modal has been toggled');
+                },
+            };
 
-    const $targetEl = document.getElementById("password-modal");
-    const options = {
-    triggerType: 'click',
-    delay: 300,
-    ignoreClickOutsideClass: false,
-    onHide: () => {
-        console.log('modal has been hidden');
+            const instanceOptions = {
+            id: "username-modal",
+            override: true
+            };
+            const instanceOptions2 = {
+            id: "password-modal",
+            override: true
+            }
+                this.modal = new Modal($targetEl, options, instanceOptions);
+                this.modal2 = new Modal($targetE2, options, instanceOptions2);
     },
-    onShow: () => {
-        console.log('modal has been shown');
-    },
-    onToggle: () => {
-        console.log('modal has been toggled');
-    },
-};
-
-const instanceOptions = {
-  id: "password-modal",
-  override: true
-};
-    const modal = new modal($targetEl, options, instanceOptions);
-    const toggle = () => {
-      modal.toggle()
-      console.log(modal.isVisible)
-    }
-
-    return{
-        toggle, user, name, password
-    }
-}
-    
 }
 </script>

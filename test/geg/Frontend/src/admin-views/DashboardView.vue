@@ -15,15 +15,15 @@
       </div>
       <div class="flex items-center pr-10">
           <div class="flex items-center ms-3">
-              <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+              <button id="dropdownButton" type="button" @click="show" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
               <span class="sr-only">Open user menu</span>
               <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
               </button>
 
               <!-- Dropdown menu -->
-              <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+              <div v-for="u in user" id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                   <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                    <div> {{ name }} </div>
+                    <div class="font-medium truncate"> {{ u.name }} </div>
                     <div class="font-medium truncate">admin</div>
                   </div>
                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
@@ -86,23 +86,39 @@
 </template>
 <script>
 import { Dropdown } from 'flowbite';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '@/router';
-import { useUser, } from '@/auth/useAuth';
+import { useUser, user, } from '@/auth/useAuth';
 export default{
+   data() {
+         return{
+            route: useRoute(),
+            isAdminProjectsActive: '',
+            isAdminServicesActive: '',
+            dropdown:'',
+            name: ref(user.name)
+        }
+    },
+    methods:{
+      show(){
+      this.dropdown.show()
+      console.log(this.dropdown.isVisible)
+    },
+      Logout() {
+         localStorage.clear()
+         return router.push('/login')
+  },
+      
+    },
+    setup(){
+   const {user} = useUser()
+    return{user}
+    },
 
-    setup() {
-    const {user} = useUser()
-    const name = user.name
-    if(user.name == null){
-    name = user.username
-    }
-    console.log(user)
-    console.log(user.name)
-    const route = useRoute();
-    const isAdminServicesActive = computed(() => route.path.startsWith('/admin-service'));
-    const isAdminProjectsActive = computed(() => route.path.startsWith('/admin-projects'));
+    mounted() {
+    this.isAdminServicesActive = computed(() => this.route.path.startsWith('/admin-service'))
+    this.isAdminProjectsActive = computed(() => this.route.path.startsWith('/admin-projects'))
 
     const $targetEl = document.getElementById('dropdownAvatar');
     const $triggerEl = document.getElementById('dropdownButton');
@@ -122,32 +138,7 @@ export default{
     },
 };
 
-const instanceOptions = {
-  id: 'dropdownAvatar',
-  override: true
-};
-    const dropdown = new Dropdown($targetEl, $triggerEl, options, instanceOptions);
-    const toggle = () => {
-      dropdown.toggle()
-      console.log(dropdown.isVisible)
-    }
-
-    return {
-      isAdminServicesActive,
-      isAdminProjectsActive,
-      user,
-      name,
-      toggle,
-    };
+    this.dropdown = new Dropdown($targetEl, $triggerEl, options);
   },
-  data(){
-    return{}
-  },
-  methods:{
-  Logout() {
-  localStorage.clear()
-  return router.push('/login')
-  }
-},
-} 
+}
 </script>
