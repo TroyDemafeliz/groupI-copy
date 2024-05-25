@@ -10,10 +10,10 @@ import adminBookingsView from '../admin-views/adminBookingsView.vue'
 import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
-import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
+import AdminChangePassword from '../admin-views/adminChangePassword.vue'
 
 
 
@@ -81,17 +81,16 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
-      path: '/admin-services-edit/:id',
-      name: 'admin-edit-service',
-      component: adminEditService,
-      props: true,
-      meta: { requiresAuth: true } 
-    },
-    {
       path: '/admin-services-add',
       name: 'admin-add-service',
 
       component: adminAddService,
+      meta: { requiresAuth: true } 
+    },
+    {
+      path: '/admin-change-password',
+      name: 'admin-change-password',
+      component: AdminChangePassword,
       meta: { requiresAuth: true } 
     },
     {
@@ -124,4 +123,3 @@ router.beforeEach(async(to, from, next) => {
 
 
 export default router 
-

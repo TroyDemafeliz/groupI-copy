@@ -2,7 +2,8 @@ from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.utils.translation import gettext_lazy as _
-
+from django import forms
+from .models import Booking
 from .models import User
 
 
@@ -38,3 +39,13 @@ class UserSocialSignupForm(SocialSignupForm):
     Default fields will be added automatically.
     See UserSignupForm otherwise.
     """
+
+
+class BookingForm(forms.ModelForm):
+    Date = forms.DateTimeField(
+        widget=forms.TextInput(attrs={'placeholder': ''})
+    )
+
+    class Meta:
+        model = Booking
+        fields = '__all__'

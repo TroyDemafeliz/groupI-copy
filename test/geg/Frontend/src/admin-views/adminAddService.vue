@@ -13,7 +13,7 @@
                         <div class="grid grid-cols-6 gap-6">
                               <div class="col-span-6 sm:col-span-6">
                                  <label for="service-img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Picture</label>
-                                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="Image" name="Image" type="file">
+                                 <input accept="image/*" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="Image" name="Image" type="file">
                               </div>
                               <div class="col-span-6 sm:col-span-6">
                                  <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
