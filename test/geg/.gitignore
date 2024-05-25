@@ -271,7 +271,7 @@ tags
 dump.rdb
 
 ### Project template
-
+.backend/users/migrations/*
 .pytest_cache/
 .ipython/
 .env
