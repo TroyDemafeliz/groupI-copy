@@ -63,7 +63,7 @@
                         Schedule appointment
                   </button>
 
-                  <VDatePicker id="selectedDate" v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3" :min-date="new Date()" :disabled-dates="booked"/>
+                  <VDatePicker id="selectedDate" v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3" :min-date="new Date()" :disabled-dates="booked" :allowed-hours="allowedHours" />
 
                   <div class="grid grid-cols-2 gap-2 mt-2">
                         <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
@@ -165,6 +165,11 @@ export default {
   },
  
   methods: {
+
+    allowedHours(hour) {
+      return hour >= 8 && hour <= 17;
+    },
+
     saveDate() {
       this.savedDate = this.selectedDate;
       this.showDatePicker = false;
