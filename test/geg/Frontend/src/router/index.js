@@ -11,9 +11,10 @@ import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
+import adminManageAccount from '../admin-views/adminManageAccount.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
-import AdminChangePassword from '../admin-views/adminChangePassword.vue'
+import adminUserManagement from '@/admin-views/adminUserManagement.vue'
 
 
 
@@ -75,6 +76,12 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
+      path: '/admin-users',
+      name: 'admin-users',
+      component: adminUserManagement,
+      meta: { requiresAuth: true } 
+    },
+    {
       path: '/admin-services',
       name: 'admin-services',
       component: adminServicesView,
@@ -88,9 +95,9 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
-      path: '/admin-change-password',
-      name: 'admin-change-password',
-      component: AdminChangePassword,
+      path: '/admin-account-settings',
+      name: 'admin-account-manage',
+      component: adminManageAccount,
       meta: { requiresAuth: true } 
     },
     {

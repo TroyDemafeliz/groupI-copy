@@ -68,17 +68,11 @@
   </div>
 </template>
 <script>
-import { useServices } from '../ModelApi/Services';
-import { updateService } from '@/ModelApi/Services';
-import router from '@/router';
-import { defineComponent, ref } from 'vue';
+import { useServices} from '../ModelApi/Services';
 
-export default defineComponent({
-  data() {
-    return {
-      currentService: null,
-    };
-  },
+
+export default{
+
 setup(){
   const {Services, setService, deleteService} = useServices()
   const setCurrent = (Service) => {
@@ -94,48 +88,8 @@ setup(){
   return{
     Services,
     setCurrent,
-    deleteCurrentService,
+    deleteCurrentService
   }
-},
-  methods: {
-    editService(service) {
-      this.currentService = service;
-      console.log('Editing service:', service);
-      this.showModal('editServiceModal');
-    },
-    updateService() {
-      const service = this.currentService;
-      const Id = service.Id;
-      const Title = this.currentService.Title;
-      const Description = this.currentService.Description;
-      let Image = this.$refs.servicePicture.files[0];
-
-      if (Image) {
-        updateService(Id, Title, Description, Image)
-          .then(() => {
-            this.closeModal('editServiceModal');
-            window.location.reload();
-          });
-      } else {
-        updateService(Id, Title, Description)
-          .then(() => {
-            this.closeModal('editServiceModal');
-            window.location.reload();
-          });
-      }
-    },
-    showModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.remove('hidden');
-      }
-    },
-    closeModal(modalId){
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.add('hidden');
-      }
-    }
-  }
-});
+}
+};
 </script>

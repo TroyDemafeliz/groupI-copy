@@ -61,7 +61,13 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
-
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "auth/password/reset-password-confirmation/?uid={uid}&token={token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {'user_create': 'backend.users.serializers.UserRegistrationSerializer'},
+    "SET_PASSWORD_RETYPE": True,
+}
 
 
 # DATABASES
@@ -93,6 +99,8 @@ DJANGO_APPS = [
     "django.forms",
     "rest_framework",
     "corsheaders",
+    'djoser',
+    'rest_framework_simplejwt.token_blacklist'
 ]
 
 INSTALLED_APPS = [
@@ -251,9 +259,6 @@ CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
-
-CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
 
 # Name of token in header
 CSRF_COOKIE_NAME = "csrftoken"
