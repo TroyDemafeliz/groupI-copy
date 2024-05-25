@@ -258,7 +258,8 @@ export default defineComponent({
       }
       this.storedMessage = this.meetingMessage;
       const Date = this.formattedDate;
-      const { Id } = booking;
+      const Id = booking;
+      console.log(Id);
       const Mode = (this.currentBooking.Mode === 'others' ? this.storedMessage : this.currentBooking.Mode);
       const Plan = this.$refs.editedPlan.files[0];
 

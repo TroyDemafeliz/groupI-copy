@@ -63,7 +63,7 @@
                         Schedule appointment
                   </button>
 
-                  <VDatePicker id="selectedDate" v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
+                  <VDatePicker id="selectedDate" v-model="selectedDate" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3" :min-date="new Date()" :disabled-dates="booked"/>
 
                   <div class="grid grid-cols-2 gap-2 mt-2">
                         <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
@@ -73,10 +73,10 @@
             </div>
 
             <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">recaptcha</label>
-            <div class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
+            <div id="recaptcha" class="g-recaptcha" data-sitekey="6LcCm9MpAAAAAHxZFYCO4s6DILZRTKeqRpUfjsdk"></div>
 
               <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Proposed Plan:</label>
-              <input @change="handleFileUpload" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="plan" type="file">
+              <input accept="image/*" @change="handleFileUpload" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="plan" type="file">
              
               <button type="submit" class="block mx-auto text-white mt-10 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-20 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">
                 <span v-if="!loading">Submit</span>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import {createBooking} from '@/ModelApi/Booking';
+import {createBooking, bookedDates} from '@/ModelApi/Booking';
 import { ref } from 'vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import emailjs from '@emailjs/browser';
@@ -101,11 +101,10 @@ import imageCompression from 'browser-image-compression';
 import axios from 'axios';
 import { onMounted } from 'vue';
 
-const date = ref(new Date())
-
 export default {
 
   setup() {
+    const booked = bookedDates();
     const toast = useToast();
     const activeErrors = ref([]);
     let timeoutIds = {};
@@ -130,12 +129,12 @@ export default {
       }, 5000); // Set the timeout duration (in milliseconds) here
     }
   };
-    onMounted(() => {
-  if (window.grecaptcha && this.$refs.recaptcha) {
-    window.grecaptcha.ready(() => {
-      window.grecaptcha.render(this.$refs.recaptcha);
-    });
-  }
+  onMounted(() => {
+      if (window.grecaptcha && document.getElementById('recaptcha')) {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.render(document.getElementById('recaptcha'));
+        });
+      }
 });
 
     return { 
@@ -170,6 +169,9 @@ export default {
       this.savedDate = this.selectedDate;
       this.showDatePicker = false;
       console.log('Saved date:', this.savedDate)
+      if (this.selectedDate < new Date()) {
+        this.showToast('Please select a time from the current time onwards.', 'error');
+      }
     }, 
     formatDate(date) {
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -192,7 +194,6 @@ export default {
         } catch (error) {
           this.loading = false;
           console.error('Image compression failed:', error);
-          this.showToast('File uploaded is not an image', 'error');
           throw error;
         }
       },
@@ -267,7 +268,6 @@ export default {
       Plan = this.file;
     
       createBooking(Email, FirstName, LastName, Company, Phone, Date, Mode, Plan)
-      
       this.errorsShown = [];
 
       if (this.file) {
@@ -296,7 +296,12 @@ export default {
         .then(
           () => {
             this.loading = false; 
-            this.showToast('Email sent successfully!', 'success');
+            if (createBooking) {
+              this.showToast('Meeting request sent successfully! Please check your email for your meeting request details.', 'success');
+            }
+            else {
+              this.showToast('Failed to send meeting request. Please try again.', 'error');
+            }
             console.log('SUCCESS!');
             console.log('First Name:', this.FirstName);
             console.log('Last Name:', this.LastName);

@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue';
 import api from '@/api';
 export const Bookings = ref([])
 export const currentBooking = ref()
-
+export const bookedDates = ref([]);
 
 export async function getBookings() {
     await api
@@ -12,6 +12,9 @@ export async function getBookings() {
         Bookings.value = data
         console.log(Bookings.value)
         console.log(data);
+
+        bookedDates.value = data.map((booking) => new Date(booking.Date));
+        
     })
     .catch((err) => alert(err));
 }
@@ -30,8 +33,8 @@ export async function createBooking(Email, FirstName, LastName, Company, Phone, 
     await api
         .post("backend/Booking/create/", formData)
         .then((res) => {
-            if (res.status === 201) alert("Booking created!");
-            else alert("Failed to make Booking.");
+            if (res.status === 201) console.log("Booking created!");
+            else console.log("Failed to make Booking.");
             getBookings();
         })
         .catch((err) => alert(err));
