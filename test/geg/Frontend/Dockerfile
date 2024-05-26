@@ -8,7 +8,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Install dependencies
-COPY package.json ./
+COPY package*.json ./
 RUN npm install --silent
 
 # Copy the rest of the application
