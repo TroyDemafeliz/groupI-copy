@@ -54,7 +54,7 @@
             </tbody>
          </table>
          <!-- Edit Booking modal -->
-         <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+         <div id="editUserModal" v-show="isEditUserModalVisible" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                   <!-- Modal content -->
                   <form id="editBooking" @submit.prevent="saveChanges" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -82,9 +82,7 @@
                                              </svg>
                                              Change date of appointment
                                        </button>
-
                                        <VDatePicker v-model="currentBooking.Date" v-if="showDatePicker" mode="dateTime" hide-time-header class="mt-3 mb-3"  />
-
                                        <div class="grid grid-cols-2 gap-2 mt-2">
                                              <button type="button" @click="saveDate" v-if="showDatePicker" class="text-xs px-2 py-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
                                              <button type="button" @click="discardDate" v-if="showDatePicker" data-modal-hide="timepicker-modal" class="text-xs px-2 py-2 text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Discard</button>
@@ -124,7 +122,7 @@
                   </form>
             </div>
          </div>
-         <div id="viewDetailsModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+         <div v-show="isViewDetailsModalVisible" id="viewDetailsModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                   <!-- Modal content -->
                   <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -198,6 +196,8 @@ import '@vuepic/vue-datepicker/dist/main.css';
 export default defineComponent({
   data() {
     return {
+      isViewDetailsModalVisible: false,
+      isEditUserModalVisible: false,
       currentBooking: null,
       showDatePicker: false,
       selectedDate: null,
@@ -227,11 +227,11 @@ export default defineComponent({
   methods: {
     viewDetails(booking) {
       this.currentBooking = booking;
-      this.showModal('viewDetailsModal');
+      this.isViewDetailsModalVisible = true;
     },
     closeModal() {
-      this.hideModal('viewDetailsModal');
-      this.hideModal('editUserModal');
+      this.isViewDetailsModalVisible = false;
+      this.isEditUserModalVisible = false;
       this.currentBooking = null;
     },
     showModal(modalId) {
@@ -249,7 +249,7 @@ export default defineComponent({
     editBooking(booking) {
       console.log('Editing booking:', booking);
       this.currentBooking = booking;
-      this.showModal('editUserModal');
+      this.isEditUserModalVisible = true;
     },
     updateBooking() {
       const booking = this.currentBooking;
