@@ -46,6 +46,12 @@ export default {
             const Title = formData.get('Title');
             const Description = formData.get('Description'); 
             const Image = formData.get('Image'); 
+
+            if(!Image || Image.size === 0){
+                alert('Please upload an image');
+                return;
+            }
+
             createService(Title, Description, Image); 
         });
     }
