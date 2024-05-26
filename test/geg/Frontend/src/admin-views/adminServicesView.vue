@@ -137,12 +137,5 @@ setup(){
       }
     }
   }
-
-  return{
-    Services,
-    setCurrent,
-    deleteCurrentService
-  }
-}
-};
+});
 </script>
