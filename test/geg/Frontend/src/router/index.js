@@ -10,10 +10,12 @@ import adminBookingsView from '../admin-views/adminBookingsView.vue'
 import adminProjectsView from '../admin-views/adminProjectsView.vue'
 import adminServicesView from '../admin-views/adminServicesView.vue'
 import Login from '../components/Login.vue'
-import adminEditService from '../admin-views/adminEditService.vue'
 import adminAddService from '../admin-views/adminAddService.vue'
+import adminManageAccount from '../admin-views/adminManageAccount.vue'
 import { isAuthenticated, useAuth } from '@/auth/useAuth'
 import NotFound from '../router/NotFound.vue'
+import adminUserManagement from '@/admin-views/adminUserManagement.vue'
+import AdminChangePassword from '../admin-views/adminChangePassword.vue'
 
 
 
@@ -75,16 +77,15 @@ const router = createRouter({
       meta: { requiresAuth: true } 
     },
     {
-      path: '/admin-services',
-      name: 'admin-services',
-      component: adminServicesView,
+      path: '/admin-users',
+      name: 'admin-users',
+      component: adminUserManagement,
       meta: { requiresAuth: true } 
     },
     {
-      path: '/admin-services-edit',
-      name: 'admin-edit-service',
-      component: adminEditService,
-      props: true,
+      path: '/admin-services',
+      name: 'admin-services',
+      component: adminServicesView,
       meta: { requiresAuth: true } 
     },
     {
@@ -92,6 +93,12 @@ const router = createRouter({
       name: 'admin-add-service',
 
       component: adminAddService,
+      meta: { requiresAuth: true } 
+    },
+    {
+      path: '/admin-account-settings',
+      name: 'admin-account-manage',
+      component: adminManageAccount,
       meta: { requiresAuth: true } 
     },
     {
@@ -124,4 +131,3 @@ router.beforeEach(async(to, from, next) => {
 
 
 export default router 
-

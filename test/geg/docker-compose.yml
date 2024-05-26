@@ -1,5 +1,3 @@
-version: "3"
-
 volumes:
   geg_local_postgres_data: {}
   geg_local_postgres_data_backups: {}

@@ -61,7 +61,13 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
-
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "auth/password/reset-password-confirmation/?uid={uid}&token={token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {'user_create': 'backend.users.serializers.UserRegistrationSerializer'},
+    "SET_PASSWORD_RETYPE": True,
+}
 
 
 # DATABASES
@@ -93,7 +99,22 @@ DJANGO_APPS = [
     "django.forms",
     "rest_framework",
     "corsheaders",
+    'djoser',
+    'rest_framework_simplejwt.token_blacklist'
 ]
+
+INSTALLED_APPS = [
+    
+    'corsheaders',
+
+]
+
+MIDDLEWARE = [
+    
+    'corsheaders.middleware.CorsMiddleware',
+    
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
 
@@ -239,9 +260,6 @@ SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
 
-CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
-
 # Name of token in header
 CSRF_COOKIE_NAME = "csrftoken"
 
@@ -316,6 +334,8 @@ ACCOUNT_FORMS = {"signup": "backend.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "backend.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "backend.users.forms.UserSocialSignupForm"}
+
+
 
 
 # Your stuff...
