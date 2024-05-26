@@ -22,4 +22,5 @@ services:
       - key: DEBUG
         value: 'False'
       - key: ALLOWED_HOSTS
-        value: gegbuilders-alphabeta.vercel.app, group-i-copy-d1aqrstkf-troydemafelizs-projects.vercel.app, group-i-copy-a19jxyi76-troydemafelizs-projects.vercel.app
+        value: gegbuilders-alphabeta.vercel.app, group-i-copy-d1aqrstkf-troydemafelizs-projects.vercel.app, group-i-copy-a19jxyi76-troydemafelizs-projects.vercel.app, 
+        group-i-copy-igxw89xt3-troydemafelizs-projects.vercel.app
