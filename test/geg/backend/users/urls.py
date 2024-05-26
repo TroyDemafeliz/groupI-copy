@@ -6,6 +6,7 @@ from django.conf import settings
 from .views import user_detail_view
 from .views import user_redirect_view
 from .views import user_update_view
+from .views import UpdatePassword
 
 
 app_name = "users"
