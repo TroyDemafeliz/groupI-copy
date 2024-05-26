@@ -104,7 +104,6 @@ import { onMounted } from 'vue';
 export default {
 
   setup() {
-    const booked = bookedDates();
     const toast = useToast();
     const activeErrors = ref([]);
     let timeoutIds = {};
@@ -129,12 +128,27 @@ export default {
       }, 5000); // Set the timeout duration (in milliseconds) here
     }
   };
+
+  const loadRecaptchaScript = () => {
+      const script = document.createElement('script');
+      script.src = 'https://www.google.com/recaptcha/api.js';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    };
+
   onMounted(() => {
-      if (window.grecaptcha && document.getElementById('recaptcha')) {
+  loadRecaptchaScript();
+  watch(
+    () => document.getElementById('recaptcha'),
+    (newEl) => {
+      if (window.grecaptcha && newEl) {
         window.grecaptcha.ready(() => {
-          window.grecaptcha.render(document.getElementById('recaptcha'));
+          window.grecaptcha.render(newEl);
         });
       }
+    }
+  ); // This closing parenthesis was missing
 });
 
     return { 
