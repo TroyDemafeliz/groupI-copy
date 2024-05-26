@@ -1,7 +1,7 @@
 # Build stage using Node.js
-FROM node:lts-alpine as build
+FROM node:lts-alpine
 
-# Set working directory
+# Set working directory 
 WORKDIR /app
 
 # Correctly setting the PATH
