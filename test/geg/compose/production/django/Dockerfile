@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev
 
 # Requirements are installed here to ensure they will be cached.
-COPY ../../../requirements/${BUILD_ENVIRONMENT}.txt /requirements.txt
+COPY requirements /requirements
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
-  -r /requirements.txt
+  -r /requirements/${BUILD_ENVIRONMENT}.txt
 
 
 # Python 'run' stage
