@@ -2,11 +2,11 @@ import axios from "axios";
 import { ACCESS_TOKEN } from "@/token";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000"
+  baseURL: "https://groupi-0hep.onrender.com"
 });
 
 export const anon_api = axios.create({
-  baseURL: "http://localhost:8000"
+  baseURL: "https://groupi-0hep.onrender.com"
 });
 
 
