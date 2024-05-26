@@ -5,7 +5,7 @@ set -o pipefail
 set -o nounset
 
 # Source the .env file
-if [ -f .env ]; then
+if [ -f test/geg/backend/.env ]; then
     source .env
 fi
 
