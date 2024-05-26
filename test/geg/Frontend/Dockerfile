@@ -18,4 +18,4 @@ RUN npm run build
 
 EXPOSE 5173
 
-CMD ["npm", "run", "start:dev", "--" ,"--host"]
+CMD ["npm", "run", "dev", "--" ,"--host"]
