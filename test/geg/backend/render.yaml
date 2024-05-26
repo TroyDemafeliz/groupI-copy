@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: backend-geg
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --no-input
+      python manage.py migrate
+    startCommand: python manage.py runserver
+    envVars:
+      - key: SECRET_KEY
+        value: thisisasecretkey
+      - key: DB_HOST
+        value: pg-e179d8e0-1be3-447c-b362-4cb4f49b9c21-db1251097756-choreo-org.i.aivencloud.com
+      - key: DB_PORT
+        value: '23137'
+      - key: DB_USER
+        value: avnadmin
+      - key: DB_NAME
+        value: defaultdb
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: https://group-i-copy-oa5v561sn-troydemafelizs-projects.vercel.app/
