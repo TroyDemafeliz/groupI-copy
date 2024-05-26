@@ -46,7 +46,7 @@
                         <a href="#" @click.prevent="editBooking(Booking)" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-black dark:text-blue-500 hover:underline"><br><br>Edit Booking</a>
                      </div>
                      <div>
-                        <a href="#" type="button" @click="deleteBooking(currentBooking.Id)" data-modal-show="editUserModal" class="font-medium text-red-geg hover:underline">Cancel Booking</a>
+                        <a href="#" type="button" @click.prevent="deleteBooking(Booking)" class="font-medium text-red-geg hover:underline">Cancel Booking</a>
                      </div>
                   </div>
                   </td>
@@ -258,7 +258,7 @@ export default defineComponent({
       }
       this.storedMessage = this.meetingMessage;
       const Date = this.formattedDate;
-      const Id = booking;
+      const Id = booking.Id;
       console.log(Id);
       const Mode = (this.currentBooking.Mode === 'others' ? this.storedMessage : this.currentBooking.Mode);
       const Plan = this.$refs.editedPlan.files[0];
@@ -274,7 +274,9 @@ export default defineComponent({
             console.error('Error updating booking:', error);
          });
     },
-    deleteBooking(id) {
+    deleteBooking(booking) {
+      this.currentBooking = booking;
+      const id = this.currentBooking.Id;
       if (confirm("Are you sure you want to delete this booking?")) {
         deleteBooking(id)
           .then(response => {
