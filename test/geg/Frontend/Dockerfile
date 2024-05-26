@@ -1,5 +1,5 @@
 # Build stage using Node.js
-FROM node:lts-alpine
+FROM node:lts-alpine as build
 
 # Set working directory 
 WORKDIR /app
@@ -18,18 +18,19 @@ COPY . .
 RUN npm run build
 
 # Production stage using Nginx
-FROM nginx:1.21
-
-# Update and install wget, clean up to keep the image clean
-RUN apt-get update && \
-    apt-get install -y wget && \
-    rm -rf /var/lib/apt/lists/*
+FROM nginx:1.21-alpine
 
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy nginx configuration
-COPY --from=build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf:ro
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy static assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
