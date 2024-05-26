@@ -14,6 +14,8 @@ RUN npm install --silent
 # Copy the rest of the application
 COPY . .
 
+RUN npm run build
+
 EXPOSE 5173
 
-CMD ["npm", "run", "build", "--" ,"--host"]
+CMD ["npm", "run", "start:dev", "--" ,"--host"]
