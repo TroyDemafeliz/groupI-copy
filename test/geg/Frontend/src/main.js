@@ -13,7 +13,13 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import Toast from "vue-toastification";
 
 const app = createApp(App)
-
+const cors = require('cors');
+const corsOptions ={
+    origin:'https://groupi-0hep.onrender.com', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions))
 const options = {
     position: "top-right",
     timeout: 5000,
