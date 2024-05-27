@@ -81,11 +81,11 @@ DJOSER = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PWD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": "defaultdb",
+        "USER": "avnadmin",
+        "PASSWORD": "AVNS__VNHkGIKChz5fRuFSiq",
+        "HOST": "pg-e179d8e0-1be3-447c-b362-4cb4f49b9c21-db1251097756-choreo-org.i.aivencloud.com",
+        "PORT": "23137",
     }
 }
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD

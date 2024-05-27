@@ -18,7 +18,7 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
-    command: /start
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
 
   postgres:
     build:
